@@ -1,6 +1,38 @@
 # @mrhenry/stylelint-mrhenry-prop-order
 
-Our preferred order of CSS properties.
+Mr. Henry's preferred order for CSS properties.
+
+This package does not group properties.
+It only sorts them within a "imaginary sections".
+
+Acts as a separator between sections :
+- ignored declarations
+- empty lines
+- comments
+
+Ignored declarations :
+- custom properties
+- vendor prefixed CSS
+
+```css
+.foo
+  a: 0; /* section : 1 */
+  b: 0; /* section : 1 */
+
+  c: 0; /* section : 2 */
+  d: 0; /* section : 2 */
+  /* a comment */
+  e: 0; /* section : 3 */
+  f: 0; /* section : 3 */
+  --a: 0; /* ignored */
+  --b: 0; /* ignored */
+  -webkit-foo: 0; /* ignored */
+}
+```
+
+## List of properties :
+
+The list is sourced from [`@webref/css`](https://www.npmjs.com/package/@webref/css).
 
 ## To update properties :
 
