@@ -143,5 +143,65 @@ testRule({
 			endLine: 4,
 			endColumn: 9
 		},
+		{
+			code: `
+.class {
+	--c: 0;
+	--a: 3;
+	--b: 1;
+	border-bottom-color: red;
+	border: 1px solid green;
+
+	/* section*/
+	margin: 0;
+	margin-left: 10px;
+	margin-inline: 5px;
+
+	width: 10px;
+	height: 5px;
+}
+			`,
+			fixed: `
+.class {
+	--c: 0;
+	--a: 3;
+	--b: 1;
+	border: 1px solid green;
+	border-bottom-color: red;
+
+	/* section*/
+	margin: 0;
+	margin-inline: 5px;
+	margin-left: 10px;
+
+	height: 5px;
+	width: 10px;
+}
+			`,
+			description: "shorthand after longhand",
+			warnings: [
+				{
+					message: rule.messages.expected('border'),
+					line: 7,
+					column: 2,
+					endLine: 7,
+					endColumn: 8
+				},
+				{
+					message: rule.messages.expected('margin-inline'),
+					line: 12,
+					column: 2,
+					endLine: 12,
+					endColumn: 15
+				},
+				{
+					message: rule.messages.expected('height'),
+					line: 15,
+					column: 2,
+					endLine: 15,
+					endColumn: 8
+				}
+			]
+		},
 	]
 });

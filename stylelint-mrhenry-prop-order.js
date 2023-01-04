@@ -26,6 +26,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			}
 
 			if (!rule.nodes.length) {
+				/* c8 ignore next */
 				return;
 			}
 
@@ -34,9 +35,12 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				if (
 					rule.nodes[i].type === 'decl' &&
 					!rule.nodes[i].variable &&
-					orderSet.has(rule.nodes[i].prop.toLowerCase()) &&
-					(rule.nodes[i].raws?.before?.match(/\n/g) || []).length < 2
+					orderSet.has(rule.nodes[i].prop.toLowerCase())
 				) {
+					if ((rule.nodes[i].raws?.before?.match(/\n/g) || []).length >= 2) {
+						declarationsSections.push([])
+					}
+
 					declarationsSections.at(-1).push(rule.nodes[i]);
 
 					continue;
@@ -55,6 +59,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				});
 
 				const firstNodeIndex = Math.min.apply(Math, section.map((x) => rule.index(x)));
+				const originalFirstNode = rule.nodes[firstNodeIndex];
 
 				section.forEach((decl, index) => {
 					const desiredIndex = firstNodeIndex + index;
@@ -79,6 +84,13 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						});
 					}
 				});
+
+				const finalFirstNode = rule.nodes[firstNodeIndex];
+				if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
+					const originalRawBefore = originalFirstNode.raws.before;
+					originalFirstNode.raws.before = finalFirstNode.raws.before;
+					finalFirstNode.raws.before = originalRawBefore;
+				}
 			});
 		});
 	};
