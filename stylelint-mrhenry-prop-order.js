@@ -1,6 +1,6 @@
 // Abbreviated example
 const stylelint = require("stylelint");
-const order = require('./order.mjs');
+const order = require('./order.js');
 
 const ruleName = "plugin/stylelint-mrhenry-prop-order";
 const messages = stylelint.utils.ruleMessages(ruleName, {

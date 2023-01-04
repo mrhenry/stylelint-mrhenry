@@ -29,4 +29,4 @@ for (const [shortname, data] of Object.entries(parsedFiles)) {
 const propertyNames = Array.from(properties);
 propertyNames.sort((a, b) => a.localeCompare(b));
 
-await fs.writeFile('./order.mjs', `module.exports = ${JSON.stringify(propertyNames, null, '\t')}`)
+await fs.writeFile('./order.js', `module.exports = ${JSON.stringify(propertyNames, null, '\t')}`)
