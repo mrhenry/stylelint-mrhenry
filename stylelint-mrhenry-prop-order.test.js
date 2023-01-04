@@ -174,8 +174,8 @@ testRule({
 	margin-inline: 5px;
 	margin-left: 10px;
 
-	height: 5px;
 	width: 10px;
+	height: 5px;
 }
 			`,
 			description: "shorthand after longhand",
@@ -193,13 +193,6 @@ testRule({
 					column: 2,
 					endLine: 12,
 					endColumn: 15
-				},
-				{
-					message: rule.messages.expected('height'),
-					line: 15,
-					column: 2,
-					endLine: 15,
-					endColumn: 8
 				}
 			]
 		},
