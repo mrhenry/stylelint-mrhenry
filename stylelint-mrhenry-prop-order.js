@@ -77,6 +77,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 				
 				let currentIndex = rule.index(next);
+				decl = null;
 				for (let i = currentIndex; i < rule.nodes.length; i++) {
 					if (rule.nodes[i].type === 'decl' && !rule.nodes[i].variable) {
 						decl = rule.nodes[i];
@@ -88,7 +89,6 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 			}
-
 		});
 	};
 };
