@@ -1,6 +1,7 @@
 import css from '@webref/css';
-import fs from 'fs/promises';
+import * as order from './order.js';
 
+const existingProperties = new Set(order.default);
 const properties = new Set();
 
 const parsedFiles = await css.listAll();
@@ -29,4 +30,17 @@ for (const [shortname, data] of Object.entries(parsedFiles)) {
 const propertyNames = Array.from(properties);
 propertyNames.sort((a, b) => a.localeCompare(b));
 
-await fs.writeFile('./order.js', `module.exports = ${JSON.stringify(propertyNames, null, '\t')}`)
+let hasMissingProperties;
+for (let i = 0; i < propertyNames.length; i++) {
+	const property = propertyNames[i];
+	if (existingProperties.has(property)) {
+		continue;
+	}
+
+	console.warn(`missing property : "${property}"`);
+	hasMissingProperties = true;
+}
+
+if (hasMissingProperties) {
+	process.exit(1);
+}

@@ -44,7 +44,7 @@ testRule({
 	--bar: 0;
 }`,
 			description: "shorthand after longhand but separated by custom properties",
-		}
+		},
 	],
 
 	reject: [
@@ -77,6 +77,26 @@ testRule({
 			column: 2,
 			endLine: 2,
 			endColumn: 13
+		},
+		{
+			code: `@keyframes FOO {
+	0% {
+		margin-left: 10px;
+		margin: 0;
+	}
+}`,
+			fixed: `@keyframes FOO {
+	0% {
+		margin: 0;
+		margin-left: 10px;
+	}
+}`,
+			description: "shorthand after longhand",
+			message: rule.messages.expected('margin', 'margin-left'),
+			line: 3,
+			column: 3,
+			endLine: 3,
+			endColumn: 14
 		},
 	]
 });

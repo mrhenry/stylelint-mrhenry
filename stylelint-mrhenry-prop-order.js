@@ -16,6 +16,15 @@ const meta = {
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
 		postcssRoot.walkRules((rule) => {
+			let parent = rule.parent;
+			while (parent) {
+				if (parent.type === 'atrule' && parent.name.toLowerCase() === 'font-face') {
+					return;
+				}
+
+				parent = parent.parent
+			}
+
 			if (!rule.nodes || !rule.nodes.length) {
 				return;
 			}
