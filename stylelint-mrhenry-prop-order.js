@@ -1,11 +1,11 @@
-// Abbreviated example
 const stylelint = require("stylelint");
 const order = require('./order.js');
+const orderSet = new Set(order);
 
 const ruleName = "plugin/stylelint-mrhenry-prop-order";
 const messages = stylelint.utils.ruleMessages(ruleName, {
-	expected: (shouldBeFirst, shouldBeSecond) => {
-		return `Expected ${shouldBeFirst} to appear before ${shouldBeSecond}`;
+	expected: (name) => {
+		return `Expected ${name} to appear at a different position.`;
 	}
 });
 
@@ -25,79 +25,73 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				parent = parent.parent
 			}
 
-			if (!rule.nodes || !rule.nodes.length) {
+			if (!rule.nodes.length) {
+				/* c8 ignore next */
 				return;
 			}
 
-			let decl;
+			let declarationsSections = [[]]
 			for (let i = 0; i < rule.nodes.length; i++) {
-				if (rule.nodes[i].type === 'decl' && !rule.nodes[i].variable) {
-					decl = rule.nodes[i];
-					break;
-				}
-			}
-
-			if (!decl) {
-				return;
-			}
-
-			while (decl) {
-				const next = decl.next();
-				if (!next) {
-					break;
-				}
-
 				if (
-					next.type === 'decl' &&
-					!next.variable && 
-					!((next.raws?.before?.match(/\n/g) || []).length >= 2)
+					rule.nodes[i].type === 'decl' &&
+					!rule.nodes[i].variable &&
+					orderSet.has(rule.nodes[i].prop.toLowerCase())
 				) {
-					const declPropIndex = order.indexOf(decl.prop.toLowerCase());
-					const nextPropIndex = order.indexOf(next.prop.toLowerCase());
-					if (declPropIndex === -1 || nextPropIndex === -1) {
-						decl = next;
-						continue;
+					if ((rule.nodes[i].raws?.before?.match(/\n/g) || []).length >= 2) {
+						declarationsSections.push([])
 					}
 
-					if (declPropIndex <= nextPropIndex) {
-						decl = next;
-						continue;
-					}
+					declarationsSections.at(-1).push(rule.nodes[i]);
 
-					if (context.fix) {
-						next.after(decl);
-
-						decl = next;
-						continue;
-					}
-
-					stylelint.utils.report({
-						message: messages.expected(next.prop, decl.prop),
-						node: decl,
-						index: 0,
-						endIndex: decl.prop.length,
-						result: postcssResult,
-						ruleName,
-					});
-
-					decl = next;
 					continue;
 				}
 
-				
-				let currentIndex = rule.index(next);
-				decl = null;
-				for (let i = currentIndex; i < rule.nodes.length; i++) {
-					if (rule.nodes[i].type === 'decl' && !rule.nodes[i].variable) {
-						decl = rule.nodes[i];
-						break;
-					}
-				}
-
-				if (!decl) {
-					return;
-				}
+				declarationsSections.push([])
 			}
+
+			declarationsSections = declarationsSections.filter((x) => {
+				return x.length > 1
+			})
+
+			declarationsSections.forEach((section) => {
+				section.sort((a, b) => {
+					return order.indexOf(a.prop.toLowerCase()) - order.indexOf(b.prop.toLowerCase());
+				});
+
+				const firstNodeIndex = Math.min.apply(Math, section.map((x) => rule.index(x)));
+				const originalFirstNode = rule.nodes[firstNodeIndex];
+
+				section.forEach((decl, index) => {
+					const desiredIndex = firstNodeIndex + index;
+					if (rule.index(decl) === desiredIndex) {
+						return;
+					}
+
+					if (context.fix) {
+						rule.insertBefore(desiredIndex, decl)
+
+						return;
+					}
+
+					if (index < section.length - 1) {
+						stylelint.utils.report({
+							message: messages.expected(decl.prop),
+							node: decl,
+							index: 0,
+							endIndex: decl.prop.length,
+							result: postcssResult,
+							ruleName,
+						});
+					}
+				});
+
+				const finalFirstNode = rule.nodes[firstNodeIndex];
+				if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
+					const originalRawBefore = originalFirstNode.raws.before;
+					originalFirstNode.raws.before = finalFirstNode.raws.before;
+					finalFirstNode.raws.before = originalRawBefore;
+				}
+			});
 		});
 	};
 };
