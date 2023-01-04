@@ -8,6 +8,11 @@
   },
   "author": "Mr. Henry",
   "license": "MIT",
+  "files": [
+    "order.js",
+    "stylelint-mrhenry-prop-order.js",
+    "LICENSE"
+  ],
   "jest": {
     "preset": "jest-preset-stylelint"
   },
