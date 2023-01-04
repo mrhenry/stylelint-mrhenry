@@ -1,0 +1,27 @@
+{
+  "name": "@mrhenry/stylelint-mrhenry-prop-order",
+  "version": "1.0.0",
+  "description": "",
+  "main": "styelint-mrhenry-prop-order.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Mr. Henry",
+  "license": "MIT",
+  "jest": {
+    "preset": "jest-preset-stylelint"
+  },
+  "keywords": [
+    "stylelint",
+    "stylelint-plugin"
+  ],
+  "peerDependencies": {
+    "stylelint": "^14.16.1"
+  },
+  "devDependencies": {
+    "@webref/css": "^6.1.1",
+    "jest": "^29.3.1",
+    "jest-preset-stylelint": "^6.0.0",
+    "stylelint": "^14.16.1"
+  }
+}
