@@ -1,8 +1,8 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-prop-order",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "styelint-mrhenry-prop-order.js",
+  "main": "stylelint-mrhenry-prop-order.js",
   "scripts": {
     "test": "npm run test:jest && npm run test:properties-list",
     "test:jest": "c8 --100 jest",
