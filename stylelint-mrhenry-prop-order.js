@@ -11,7 +11,6 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 
 const meta = {
 	url: "https://github.com/mrhenry/stylelint-mrhenry-prop-order"
-	// deprecated: true,
 };
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
@@ -23,7 +22,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 			let decl;
 			for (let i = 0; i < rule.nodes.length; i++) {
-				if (rule.nodes[i].type === 'decl') {
+				if (rule.nodes[i].type === 'decl' && !rule.nodes[i].variable) {
 					decl = rule.nodes[i];
 					break;
 				}
@@ -39,12 +38,11 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					break;
 				}
 
-				if (next.type === 'decl') {
-					if ((next.raws?.before?.match(/\n/g) || []).length >= 2) {
-						decl = next;
-						continue;
-					}
-
+				if (
+					next.type === 'decl' &&
+					!next.variable && 
+					!((next.raws?.before?.match(/\n/g) || []).length >= 2)
+				) {
 					const declPropIndex = order.indexOf(decl.prop.toLowerCase());
 					const nextPropIndex = order.indexOf(next.prop.toLowerCase());
 					if (declPropIndex === -1 || nextPropIndex === -1) {
@@ -80,7 +78,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				
 				let currentIndex = rule.index(next);
 				for (let i = currentIndex; i < rule.nodes.length; i++) {
-					if (rule.nodes[i].type === 'decl') {
+					if (rule.nodes[i].type === 'decl' && !rule.nodes[i].variable) {
 						decl = rule.nodes[i];
 						break;
 					}
