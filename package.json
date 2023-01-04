@@ -1,7 +1,7 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-prop-order",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
+  "description": "Mr. Henry's preferred order for CSS properties",
   "main": "stylelint-mrhenry-prop-order.js",
   "scripts": {
     "test": "npm run test:jest && npm run test:properties-list",
@@ -10,6 +10,11 @@
   },
   "author": "Mr. Henry",
   "license": "MIT",
+  "homepage": "https://github.com/mrhenry/stylelint-mrhenry-prop-order",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrhenry/stylelint-mrhenry-prop-order.git"
+  },
   "files": [
     "order.js",
     "stylelint-mrhenry-prop-order.js",
