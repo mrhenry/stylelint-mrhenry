@@ -4,7 +4,9 @@
   "description": "",
   "main": "styelint-mrhenry-prop-order.js",
   "scripts": {
-    "test": "c8 --100 jest"
+    "test": "npm run test:jest && npm run test:properties-list",
+    "test:jest": "c8 --100 jest",
+    "test:properties-list": "node verify-properties-list.mjs"
   },
   "author": "Mr. Henry",
   "license": "MIT",
