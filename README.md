@@ -1,4 +1,6 @@
-# @mrhenry/stylelint-mrhenry-prop-order
+# [@mrhenry/stylelint-mrhenry-prop-order](https://www.npmjs.com/package/@mrhenry/stylelint-mrhenry-prop-order) [<img src="https://wp.assets.sh/uploads/sites/2963/2021/09/mrhenry-gezicht-small.png" alt="Mr. Henry's logo." width="90" height="90" align="right">](https://www.mrhenry.be/)
+
+[![version](https://img.shields.io/npm/v/@mrhenry/stylelint-mrhenry-prop-order.svg)](https://www.npmjs.com/package/@mrhenry/stylelint-mrhenry-prop-order)
 
 Mr. Henry's preferred order for CSS properties.
 
@@ -15,7 +17,7 @@ Ignored declarations :
 - vendor prefixed CSS
 
 ```css
-.foo
+.foo {
   a: 0; /* section : 1 */
   b: 0; /* section : 1 */
 
@@ -33,6 +35,7 @@ Ignored declarations :
 ## List of properties :
 
 The list is sourced from [`@webref/css`](https://www.npmjs.com/package/@webref/css).
+
 
 ## To update properties :
 
