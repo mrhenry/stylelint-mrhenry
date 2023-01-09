@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-prop-order",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Mr. Henry's preferred order for CSS properties",
   "main": "stylelint-mrhenry-prop-order.js",
   "scripts": {
@@ -18,7 +18,8 @@
   "files": [
     "order.js",
     "stylelint-mrhenry-prop-order.js",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "jest": {
     "preset": "jest-preset-stylelint"

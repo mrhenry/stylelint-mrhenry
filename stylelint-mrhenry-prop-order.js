@@ -30,24 +30,39 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				return;
 			}
 
+			// Comments after a node, not one a new line should be kept together with that node.
+			// color: red; /* my color */
+			let matchedComments = new Map();
+			rule.each((node) => {
+				if (node.type === 'comment' && !node.raws?.before?.match(/\n/g)) {
+					const comment = node;
+					const prev = comment.prev();
+
+					if (prev) {
+						matchedComments.set(comment, prev);
+						comment.remove();
+					}
+				}
+			});
+
 			let declarationsSections = [[]]
-			for (let i = 0; i < rule.nodes.length; i++) {
+			rule.each((node) => {
 				if (
-					rule.nodes[i].type === 'decl' &&
-					!rule.nodes[i].variable &&
-					orderSet.has(rule.nodes[i].prop.toLowerCase())
+					node.type === 'decl' &&
+					!node.variable &&
+					orderSet.has(node.prop.toLowerCase())
 				) {
-					if ((rule.nodes[i].raws?.before?.match(/\n/g) || []).length >= 2) {
+					if ((node.raws?.before?.match(/\n/g) || []).length >= 2) {
 						declarationsSections.push([])
 					}
 
-					declarationsSections.at(-1).push(rule.nodes[i]);
+					declarationsSections.at(-1).push(node);
 
-					continue;
+					return;
 				}
 
 				declarationsSections.push([])
-			}
+			})
 
 			declarationsSections = declarationsSections.filter((x) => {
 				return x.length > 1
@@ -92,6 +107,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					finalFirstNode.raws.before = originalRawBefore;
 				}
 			});
+
+			for (const [comment, prev] of matchedComments) {
+				rule.insertAfter(prev, comment)
+			}
 		});
 	};
 };
