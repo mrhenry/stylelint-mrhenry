@@ -203,5 +203,52 @@ testRule({
 				}
 			]
 		},
+		{
+			code: `.class {
+	font-weight: 500;
+	font-size: 0.875rem; /* 14px */
+	padding-top: 0.8125rem;
+	line-height: 0.875rem; /* 14px */
+	text-align: left;
+}`,
+			fixed: `.class {
+	font-size: 0.875rem; /* 14px */
+	font-weight: 500;
+	line-height: 0.875rem; /* 14px */
+	padding-top: 0.8125rem;
+	text-align: left;
+}`,
+			description: "shorthand after longhand",
+			warnings: [
+				{
+					message: rule.messages.expected('font-size'),
+					line: 3,
+					column: 2,
+					endLine: 3,
+					endColumn: 11
+				},
+				{
+					message: rule.messages.expected('font-weight'),
+					line: 2,
+					column: 2,
+					endLine: 2,
+					endColumn: 13
+				},
+				{
+					message: rule.messages.expected('line-height'),
+					line: 5,
+					column: 2,
+					endLine: 5,
+					endColumn: 13
+				},
+				{
+					message: rule.messages.expected('padding-top'),
+					line: 4,
+					column: 2,
+					endLine: 4,
+					endColumn: 13
+				}
+			]
+		},
 	]
 });

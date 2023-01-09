@@ -13,16 +13,21 @@ const meta = {
 	url: "https://github.com/mrhenry/stylelint-mrhenry-prop-order"
 };
 
+const ignoredAtRules = [
+	'font-face',
+	'property'
+];
+
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
 		postcssRoot.walkRules((rule) => {
 			let parent = rule.parent;
 			while (parent) {
-				if (parent.type === 'atrule' && parent.name.toLowerCase() === 'font-face') {
+				if (parent.type === 'atrule' && ignoredAtRules.includes(parent.name.toLowerCase())) {
 					return;
 				}
 
-				parent = parent.parent
+				parent = parent.parent;
 			}
 
 			if (!rule.nodes.length) {
@@ -30,28 +35,43 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				return;
 			}
 
-			let declarationsSections = [[]]
-			for (let i = 0; i < rule.nodes.length; i++) {
+			// Comments after a node, not one a new line should be kept together with that node.
+			// color: red; /* my color */
+			let matchedComments = new Map();
+			rule.each((node) => {
+				if (node.type === 'comment' && !node.raws?.before?.match(/\n/g)) {
+					const comment = node;
+					const prev = comment.prev();
+
+					if (prev) {
+						matchedComments.set(comment, prev);
+						comment.remove();
+					}
+				}
+			});
+
+			let declarationsSections = [[]];
+			rule.each((node) => {
 				if (
-					rule.nodes[i].type === 'decl' &&
-					!rule.nodes[i].variable &&
-					orderSet.has(rule.nodes[i].prop.toLowerCase())
+					node.type === 'decl' &&
+					!node.variable &&
+					orderSet.has(node.prop.toLowerCase())
 				) {
-					if ((rule.nodes[i].raws?.before?.match(/\n/g) || []).length >= 2) {
-						declarationsSections.push([])
+					if ((node.raws?.before?.match(/\n/g) || []).length >= 2) {
+						declarationsSections.push([]);
 					}
 
-					declarationsSections.at(-1).push(rule.nodes[i]);
+					declarationsSections.at(-1).push(node);
 
-					continue;
+					return;
 				}
 
-				declarationsSections.push([])
-			}
+				declarationsSections.push([]);
+			});
 
 			declarationsSections = declarationsSections.filter((x) => {
-				return x.length > 1
-			})
+				return x.length > 1;
+			});
 
 			declarationsSections.forEach((section) => {
 				section.sort((a, b) => {
@@ -68,8 +88,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					}
 
 					if (context.fix) {
-						rule.insertBefore(desiredIndex, decl)
-
+						rule.insertBefore(desiredIndex, decl);
 						return;
 					}
 
@@ -92,6 +111,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					finalFirstNode.raws.before = originalRawBefore;
 				}
 			});
+
+			for (const [comment, prev] of matchedComments) {
+				rule.insertAfter(prev, comment);
+			}
 		});
 	};
 };
