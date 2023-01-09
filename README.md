@@ -5,7 +5,7 @@
 Mr. Henry's preferred order for CSS properties.
 
 This package does not group properties.
-It only sorts them within a "imaginary sections".
+It only sorts them within "imaginary sections".
 
 Acts as a separator between sections :
 - ignored declarations

@@ -13,16 +13,21 @@ const meta = {
 	url: "https://github.com/mrhenry/stylelint-mrhenry-prop-order"
 };
 
+const ignoredAtRules = [
+	'font-face',
+	'property'
+];
+
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
 		postcssRoot.walkRules((rule) => {
 			let parent = rule.parent;
 			while (parent) {
-				if (parent.type === 'atrule' && parent.name.toLowerCase() === 'font-face') {
+				if (parent.type === 'atrule' && ignoredAtRules.includes(parent.name.toLowerCase())) {
 					return;
 				}
 
-				parent = parent.parent
+				parent = parent.parent;
 			}
 
 			if (!rule.nodes.length) {
@@ -45,7 +50,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				}
 			});
 
-			let declarationsSections = [[]]
+			let declarationsSections = [[]];
 			rule.each((node) => {
 				if (
 					node.type === 'decl' &&
@@ -53,7 +58,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					orderSet.has(node.prop.toLowerCase())
 				) {
 					if ((node.raws?.before?.match(/\n/g) || []).length >= 2) {
-						declarationsSections.push([])
+						declarationsSections.push([]);
 					}
 
 					declarationsSections.at(-1).push(node);
@@ -61,12 +66,12 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
-				declarationsSections.push([])
-			})
+				declarationsSections.push([]);
+			});
 
 			declarationsSections = declarationsSections.filter((x) => {
-				return x.length > 1
-			})
+				return x.length > 1;
+			});
 
 			declarationsSections.forEach((section) => {
 				section.sort((a, b) => {
@@ -83,8 +88,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					}
 
 					if (context.fix) {
-						rule.insertBefore(desiredIndex, decl)
-
+						rule.insertBefore(desiredIndex, decl);
 						return;
 					}
 
@@ -109,7 +113,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			});
 
 			for (const [comment, prev] of matchedComments) {
-				rule.insertAfter(prev, comment)
+				rule.insertAfter(prev, comment);
 			}
 		});
 	};
