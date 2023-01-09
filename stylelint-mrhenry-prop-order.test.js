@@ -157,8 +157,8 @@ testRule({
 	margin-left: 10px;
 	margin-inline: 5px;
 
-	width: 10px;
 	height: 5px;
+	width: 10px;
 }
 			`,
 			fixed: `
@@ -193,6 +193,13 @@ testRule({
 					column: 2,
 					endLine: 12,
 					endColumn: 15
+				},
+				{
+					message: rule.messages.expected('width'),
+					line: 15,
+					column: 2,
+					endLine: 15,
+					endColumn: 7
 				}
 			]
 		},

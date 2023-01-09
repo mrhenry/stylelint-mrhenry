@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.4
+
+- Add new properties:
+  - `link-parameters`
+  - `overflow-clip-margin-block`
+  - `overflow-clip-margin-block-end`
+  - `overflow-clip-margin-block-start`
+  - `overflow-clip-margin-bottom`
+  - `overflow-clip-margin-inline`
+  - `overflow-clip-margin-inline-end`
+  - `overflow-clip-margin-inline-start`
+  - `overflow-clip-margin-left`
+  - `overflow-clip-margin-right`
+  - `overflow-clip-margin-top`
+
 ## 1.0.3
 
 - Order `inline` before `block`.
