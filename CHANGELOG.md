@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Preserve comments after a declaration.
+
 ## 1.0.4
 
 - Add new properties:
