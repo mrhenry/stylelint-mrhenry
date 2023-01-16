@@ -351,6 +351,8 @@ module.exports = [
 	"offset-rotate",
 	"opacity",
 	"order",
+	"layout-order",
+	"reading-order",
 	"orphans",
 	"outline",
 	"outline-color",
