@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.7
+
+- Add new properties:
+  - `anchor-default`
+
 ## 1.0.6
 
 - Add new properties:

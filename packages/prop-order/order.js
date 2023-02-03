@@ -6,6 +6,7 @@ module.exports = [
 	"align-tracks",
 	"alignment-baseline",
 	"all",
+	"anchor-default",
 	"anchor-name",
 	"anchor-scroll",
 	"animation",
