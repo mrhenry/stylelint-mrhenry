@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.8
+
+Add support for `stylelint` `15.0.0`
+
+- Add new properties:
+  - `animation-range-start`
+  - `animation-range-end`
+- Removed unknown properties:
+  - `animation-delay-start`
+  - `animation-delay-end`
+
 ## 1.0.7
 
 - Add new properties:
