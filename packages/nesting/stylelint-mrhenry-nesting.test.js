@@ -1,8 +1,8 @@
 // my-plugin.test.js
-const { rule, ruleName } = require("./stylelint-mrhenry-invalid-of-type-selectors");
+const { rule, ruleName } = require("./stylelint-mrhenry-nesting");
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.js"],
+	plugins: ["./stylelint-mrhenry-nesting.js"],
 	ruleName,
 	config: true,
 
@@ -146,7 +146,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.js"],
+	plugins: ["./stylelint-mrhenry-nesting.js"],
 	ruleName,
 	config: true,
 	fix: true,
