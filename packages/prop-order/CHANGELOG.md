@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.10
+
+- Re-order `border-*` properties (again)
+
 ## 1.0.9
 
 - Re-order `border-*` properties
