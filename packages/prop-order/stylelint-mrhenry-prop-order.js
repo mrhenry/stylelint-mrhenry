@@ -112,8 +112,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				}
 			});
 
-			for (const [comment, prev] of matchedComments) {
-				rule.insertAfter(prev, comment);
+			if (context.fix) {
+				for (const [comment, prev] of matchedComments) {
+					rule.insertAfter(prev, comment);
+				}
 			}
 		});
 	};

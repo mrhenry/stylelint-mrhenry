@@ -1,22 +1,25 @@
 {
-  "name": "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors",
-  "version": "1.0.2",
-  "description": "Warn when :first-of-type is used with class selectors",
-  "main": "stylelint-mrhenry-invalid-of-type-selectors.js",
+  "name": "@mrhenry/stylelint-mrhenry-nesting",
+  "version": "1.0.0",
+  "description": "Mr. Henry's preferred way of writing nested CSS",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "stylelint-mrhenry-nesting.js",
   "scripts": {
     "test": "npm run test:jest",
     "test:jest": "c8 --100 jest"
   },
   "author": "Mr. Henry",
   "license": "MIT",
-  "homepage": "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/invalid-of-type-selectors#readme",
+  "homepage": "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/nesting#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mrhenry/stylelint-mrhenry.git",
-    "directory": "packages/invalid-of-type-selectors"
+    "directory": "packages/nesting"
   },
   "files": [
-    "stylelint-mrhenry-invalid-of-type-selectors.js",
+    "stylelint-mrhenry-nesting.js",
     "LICENSE",
     "README.md"
   ],
