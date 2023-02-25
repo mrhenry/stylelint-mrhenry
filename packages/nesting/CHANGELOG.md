@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- Avoid unneeded `:is()` wrapping in auto fix
+
 ## 1.0.2
 
 - Fix at-rule detection

@@ -180,6 +180,21 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 };
 
 function fixSelector(rule, selectorsAST, selectorAST) {
+	if (
+		selectorAST.nodes?.length === 1 &&
+		selectorAST.nodes?.[0].type === 'pseudo'
+	) {
+		selectorAST.replaceWith(selectorParser.selector({
+			nodes: [
+				selectorParser.nesting(),
+				selectorAST.nodes[0]
+			]
+		}))
+
+		rule.selector = selectorsAST.toString();
+		return;
+	}
+
 	selectorAST.replaceWith(selectorParser.selector({
 		nodes: [
 			selectorParser.nesting(),
@@ -191,6 +206,7 @@ function fixSelector(rule, selectorsAST, selectorAST) {
 			}),
 		]
 	}))
+
 	rule.selector = selectorsAST.toString();
 }
 

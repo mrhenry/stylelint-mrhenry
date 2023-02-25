@@ -188,5 +188,15 @@ testRule({
 			endLine: 1,
 			endColumn: 21
 		},
+		{
+			code: ".bar { :hover { color: magenta; } }",
+			fixed: ".bar { &:hover { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 14
+		},
 	]
 });
