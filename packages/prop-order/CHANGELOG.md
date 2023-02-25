@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.9
+
+- Re-order `border-*` properties
+- Group `width` and `*-width` properties
+- Group `height` and `*-height` properties
+- Add new properties:
+  - `border-block-end-radius`
+  - `border-block-start-radius`
+  - `border-bottom-radius`
+  - `border-inline-end-radius`
+  - `border-inline-start-radius`
+  - `border-left-radius`
+  - `border-right-radius`
+  - `border-top-radius`
+  - `text-autospace`
+  - `text-spacing-trim`
+
 ## 1.0.8
 
 Add support for `stylelint` `15.0.0`
