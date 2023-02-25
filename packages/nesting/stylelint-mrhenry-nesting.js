@@ -41,6 +41,20 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				return;
 			}
 
+			let rulesDepth = 0;
+			let parent = atrule.parent;
+			while (parent) {
+				if (parent.type === 'rule') {
+					rulesDepth++;
+				}
+
+				parent = parent.parent;
+			}
+
+			if (rulesDepth === 0) {
+				return;
+			}
+
 			stylelint.utils.report({
 				message: messages.rejectedAtRule(name),
 				node: atrule,

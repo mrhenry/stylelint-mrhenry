@@ -16,6 +16,10 @@ testRule({
 			description: "Nested conditional media rule"
 		},
 		{
+			code: "@media print { div { color: green; } }",
+			description: "Regular conditional media rule"
+		},
+		{
 			code: "div { @supports (display: grid) { color: green; } }",
 			description: "Nested conditional supports rule"
 		},
