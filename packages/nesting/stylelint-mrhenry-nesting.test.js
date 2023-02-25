@@ -20,6 +20,10 @@ testRule({
 			description: "Regular conditional media rule"
 		},
 		{
+			code: "@custom-selector :--foo bar;",
+			description: "Regular conditional media rule"
+		},
+		{
 			code: "div { @supports (display: grid) { color: green; } }",
 			description: "Nested conditional supports rule"
 		},
