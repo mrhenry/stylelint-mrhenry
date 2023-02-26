@@ -39,6 +39,22 @@ testRule({
 			code: "div { &:not(.foo), &:is(.bar) { color: green; } }",
 			description: "Functional pseudo class selector"
 		},
+		{
+			code: "div { &:is(body.theme-red *) { color: red } }",
+			description: "Alternative to multiple &, in pseudo functions",
+		},
+		{
+			code: "div { &:is(body.theme-red &) { color: red } }",
+			description: "Multiple &, in pseudo functions",
+		},
+		{
+			code: "div { &:is(&&) { color: red } }",
+			description: "Multiple &, in pseudo functions",
+		},
+		{
+			code: "div { &:is(& + &) { color: red } }",
+			description: "Multiple &, in pseudo functions",
+		},
 	],
 
 	reject: [
@@ -97,13 +113,31 @@ testRule({
 			endColumn: 18
 		},
 		{
-			code: "div { &:not(&) { color: red } }",
-			description: "Multiple &, in pseudo functions",
-			message: rule.messages.rejectedMustContainOnlyOneAmpersand(),
+			code: "div { && { color: red } }",
+			description: "Multiple & top level",
+			message: rule.messages.rejectedMustEndWithPseudo(),
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 15
+			endColumn: 9
+		},
+		{
+			code: "div { & + & { color: red } }",
+			description: "Multiple & top level",
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
+			line: 1,
+			column: 7,
+			endLine: 1,
+			endColumn: 12
+		},
+		{
+			code: "div { & &:focus { color: red } }",
+			description: "Multiple & top level",
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
+			line: 1,
+			column: 7,
+			endLine: 1,
+			endColumn: 16
 		},
 		{
 			code: "div { & > bar + .bar { color: red } }",

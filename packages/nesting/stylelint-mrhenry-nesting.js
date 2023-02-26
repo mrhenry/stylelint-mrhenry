@@ -12,9 +12,6 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 	rejectedMustEndWithPseudo: () => {
 		return `Nested selectors must end with a pseudo selectors.`;
 	},
-	rejectedMustContainOnlyOneAmpersand: () => {
-		return `Nested selectors must only contain a single "&".`;
-	},
 	rejectedNestingDepth: () => {
 		return `Nested rules must be limited to 1 level deep.`;
 	},
@@ -104,19 +101,6 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					selectorAST.walkNesting(() => {
 						nestingCounter++;
 					});
-
-					if (nestingCounter > 1) {
-						stylelint.utils.report({
-							message: messages.rejectedMustContainOnlyOneAmpersand(),
-							node: rule,
-							index: 0,
-							endIndex: rule.selector.length,
-							result: postcssResult,
-							ruleName,
-						});
-
-						return;
-					}
 				}
 
 				if (selectorAST.nodes?.[0]?.type !== 'nesting') {
