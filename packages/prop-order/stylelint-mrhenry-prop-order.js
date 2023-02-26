@@ -2,7 +2,7 @@ const stylelint = require("stylelint");
 const order = require('./order.js');
 const orderSet = new Set(order);
 
-const ruleName = "plugin/stylelint-mrhenry-prop-order";
+const ruleName = "@mrhenry/stylelint-mrhenry-prop-order";
 const messages = stylelint.utils.ruleMessages(ruleName, {
 	expected: (name) => {
 		return `Expected ${name} to appear at a different position.`;

@@ -1,7 +1,7 @@
 const stylelint = require("stylelint");
 const selectorParser = require('postcss-selector-parser');
 
-const ruleName = "plugin/stylelint-mrhenry-invalid-of-type-selectors";
+const ruleName = "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors";
 const messages = stylelint.utils.ruleMessages(ruleName, {
 	expected: (name) => {
 		return `Expected a type selector with ${name}.`;
