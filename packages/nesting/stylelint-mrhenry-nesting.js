@@ -125,6 +125,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					});
 				}
 
+				// .foo { .bar & {} }
 				if (
 					context.fix &&
 					nestingCounter === 1 &&
@@ -135,6 +136,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
+				// .foo { :focus& {} }
 				if (
 					context.fix &&
 					selectorAST.nodes.length === 2 &&
@@ -155,6 +157,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
+				// .foo { .bar {} }
 				if (selectorAST.nodes[0]?.type !== 'nesting') {
 					if (context.fix) {
 						fixSelector(rule, selectorsAST, selectorAST);
@@ -173,6 +176,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
+				// .foo { & + .bar {} }
 				if (selectorAST.nodes.length !== 2) {
 					if (context.fix) {
 						selectorAST.nodes[0]?.remove();
@@ -192,6 +196,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
+				// .foo { &.bar {} }
 				if (selectorAST.nodes[1]?.type !== 'pseudo') {
 					if (context.fix) {
 						selectorAST.nodes[0]?.remove();
