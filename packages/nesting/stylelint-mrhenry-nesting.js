@@ -26,6 +26,8 @@ const meta = {
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
+		const ignoreAtRulesOptions = secondaryOptionObject?.ignoreAtRules ?? [];
+
 		postcssRoot.walkAtRules((atrule) => {
 			let name = atrule.name.toLowerCase();
 			if (
@@ -36,6 +38,20 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			) {
 				// always allowed
 				return;
+			}
+
+			for (const ignoreAtRulesOption of ignoreAtRulesOptions) {
+				if (ignoreAtRulesOption instanceof RegExp) {
+					if (ignoreAtRulesOption.test(name)) {
+						// ignored by regexp match
+						return;
+					}
+				} else {
+					if (name === ignoreAtRulesOption) {
+						// ignored by direct match
+						return;
+					}
+				}
 			}
 
 			let rulesDepth = 0;

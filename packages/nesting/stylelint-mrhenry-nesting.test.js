@@ -21,7 +21,7 @@ testRule({
 		},
 		{
 			code: "@custom-selector :--foo bar;",
-			description: "Regular conditional media rule"
+			description: "Regular at rule"
 		},
 		{
 			code: "div { @supports (display: grid) { color: green; } }",
@@ -319,6 +319,35 @@ testRule({
 			column: 8,
 			endLine: 1,
 			endColumn: 24
+		},
+	]
+});
+
+testRule({
+	plugins: ["./stylelint-mrhenry-nesting.js"],
+	ruleName,
+	config: [true, { ignoreAtRules: ['unknown', /^YOUR-/i] }],
+
+	accept: [
+		{
+			code: "div { @unknown foo; }",
+			description: "Ignore unknown at rule by string"
+		},
+		{
+			code: "div { @yOuR-rule foo; }",
+			description: "Ignore unknown at rule by regexp"
+		},
+	],
+
+	reject: [
+		{
+			code: "div { @not-yOuR-rule foo; }",
+			description: "@custom-selector",
+			message: rule.messages.rejectedAtRule('not-your-rule'),
+			line: 1,
+			column: 7,
+			endLine: 1,
+			endColumn: 20
 		},
 	]
 });
