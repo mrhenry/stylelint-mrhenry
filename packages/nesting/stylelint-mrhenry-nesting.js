@@ -12,9 +12,6 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 	rejectedMustEndWithPseudo: () => {
 		return `Nested selectors must end with a pseudo selectors.`;
 	},
-	rejectedMustContainOnlyOneAmpersand: () => {
-		return `Nested selectors must only contain a single "&".`;
-	},
 	rejectedNestingDepth: () => {
 		return `Nested rules must be limited to 1 level deep.`;
 	},
@@ -29,6 +26,12 @@ const meta = {
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
+		if (!primaryOption) {
+			return;
+		}
+		
+		const ignoreAtRulesOptions = secondaryOptionObject?.ignoreAtRules ?? [];
+
 		postcssRoot.walkAtRules((atrule) => {
 			let name = atrule.name.toLowerCase();
 			if (
@@ -39,6 +42,20 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			) {
 				// always allowed
 				return;
+			}
+
+			for (const ignoreAtRulesOption of ignoreAtRulesOptions) {
+				if (ignoreAtRulesOption instanceof RegExp) {
+					if (ignoreAtRulesOption.test(name)) {
+						// ignored by regexp match
+						return;
+					}
+				} else {
+					if (name === ignoreAtRulesOption) {
+						// ignored by direct match
+						return;
+					}
+				}
 			}
 
 			let rulesDepth = 0;
@@ -97,30 +114,49 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 			for (let i = 0; i < selectorsAST.nodes.length; i++) {
 				const selectorAST = selectorsAST.nodes[i];
+				if (!selectorAST.nodes || !selectorAST.nodes.length) {
+					continue;
+				}
 
 				let nestingCounter = 0;
 				{
-					let nestingCounter = 0;
 					selectorAST.walkNesting(() => {
 						nestingCounter++;
 					});
-
-					if (nestingCounter > 1) {
-						stylelint.utils.report({
-							message: messages.rejectedMustContainOnlyOneAmpersand(),
-							node: rule,
-							index: 0,
-							endIndex: rule.selector.length,
-							result: postcssResult,
-							ruleName,
-						});
-
-						return;
-					}
 				}
 
-				if (selectorAST.nodes?.[0]?.type !== 'nesting') {
-					if (context.fix && nestingCounter === 0) {
+				if (
+					context.fix &&
+					nestingCounter === 1 &&
+					selectorAST.nodes[selectorAST.nodes.length - 1]?.type === 'nesting' &&
+					selectorAST.nodes[selectorAST.nodes.length - 2]?.type === 'combinator'
+				) {
+					fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
+					return;
+				}
+
+				if (
+					context.fix &&
+					selectorAST.nodes.length === 2 &&
+					selectorAST.nodes[0]?.type === 'pseudo' &&
+					selectorParser.isPseudoClass(selectorAST.nodes[0]) &&
+					selectorAST.nodes[1]?.type === 'nesting'
+				) {
+					const a = selectorAST.nodes[0];
+					const b = selectorAST.nodes[1];
+
+					selectorAST.replaceWith(selectorParser.selector({
+						nodes: [
+							b,
+							a,
+						]
+					}))
+					rule.selector = selectorsAST.toString();
+					return;
+				}
+
+				if (selectorAST.nodes[0]?.type !== 'nesting') {
+					if (context.fix) {
 						fixSelector(rule, selectorsAST, selectorAST);
 						return;
 					}
@@ -137,9 +173,9 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
-				if (selectorAST.nodes?.length !== 2) {
+				if (selectorAST.nodes.length !== 2) {
 					if (context.fix) {
-						selectorAST.nodes?.[0]?.remove();
+						selectorAST.nodes[0]?.remove();
 						fixSelector(rule, selectorsAST, selectorAST);
 						return;
 					}
@@ -156,9 +192,9 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
-				if (selectorAST.nodes?.[1]?.type !== 'pseudo') {
+				if (selectorAST.nodes[1]?.type !== 'pseudo') {
 					if (context.fix) {
-						selectorAST.nodes?.[0]?.remove();
+						selectorAST.nodes[0]?.remove();
 						fixSelector(rule, selectorsAST, selectorAST);
 						return;
 					}
@@ -181,8 +217,8 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 function fixSelector(rule, selectorsAST, selectorAST) {
 	if (
-		selectorAST.nodes?.length === 1 &&
-		selectorAST.nodes?.[0].type === 'pseudo'
+		selectorAST.nodes.length === 1 &&
+		selectorAST.nodes[0].type === 'pseudo'
 	) {
 		selectorAST.replaceWith(selectorParser.selector({
 			nodes: [
@@ -195,6 +231,23 @@ function fixSelector(rule, selectorsAST, selectorAST) {
 		return;
 	}
 
+	selectorAST.replaceWith(selectorParser.selector({
+		nodes: [
+			selectorParser.nesting(),
+			selectorParser.pseudo({
+				value: ':is',
+				nodes: [
+					selectorAST
+				]
+			}),
+		]
+	}))
+
+	rule.selector = selectorsAST.toString();
+}
+
+function fixSelector_AncestorPattern(rule, selectorsAST, selectorAST) {
+	selectorAST.nodes[selectorAST.nodes.length - 1].replaceWith(selectorParser.universal());
 	selectorAST.replaceWith(selectorParser.selector({
 		nodes: [
 			selectorParser.nesting(),

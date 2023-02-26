@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-nesting",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Mr. Henry's preferred way of writing nested CSS",
   "publishConfig": {
     "access": "public"

@@ -35,8 +35,16 @@ This style of CSS aims to be expressive and readable.
 		/* when ".element" has an attribute "data-theme" with value "red" */
 	}
 
+	&:is(body.some-modifier *) {
+		/* when ".element" is a child of <body class="some-modifier"> */
+	}
+
 	&:has(img) {
 		/* when ".element" has a child element of type "img" */
+	}
+
+	@media (prefers-color-scheme: dark) {
+		/* when ".element" is shown in a dark mode context */
 	}
 }
 ```
@@ -51,15 +59,6 @@ This style of CSS aims to be expressive and readable.
 	}
 }
 
-/* valid, the nested is a filter or a condition */
-.foo {
-	&:is(.bar) {
-		color: green;
-	}
-}
-```
-
-```css
 /* invalid, the nested selector is not a "filter" on the elements matched by the parent */
 .foo {
 	+ :focus {
@@ -67,20 +66,9 @@ This style of CSS aims to be expressive and readable.
 	}
 }
 
-/* valid, the nested is a filter or a condition */
+/* invalid, "@custom-selector" is not a conditional at-rule */
 .foo {
-	&:focus {
-		color: green;
-	}
-}
-```
-
-```css
-/* valid, the nested is a filter or a condition */
-.foo {
-	@media (prefers-color-scheme: dark) {
-		color: green;
-	}
+	@custom-selector :--foo .bar;
 }
 ```
 
@@ -97,5 +85,35 @@ module.exports = {
 	rules: {
 		"@mrhenry/stylelint-mrhenry-nesting": true,
 	},
+}
+```
+
+## Optional secondary options
+
+### `ignoreAtRules: [/regex/, "string"]`
+
+Given:
+
+```json
+["/^custom-/i", "mixins"]
+```
+
+The following patterns are _not_ considered problems:
+
+```css
+.foo {
+	@custom-selector :--bar .bar;
+}
+```
+
+```css
+.foo {
+	@CUSTOM-MEDIA --bar (min-width: 320px);
+}
+```
+
+```css
+.foo {
+	@mixins bar;
 }
 ```

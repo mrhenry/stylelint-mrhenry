@@ -46,3 +46,18 @@ testRule({
 		},
 	]
 });
+
+testRule({
+	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.js"],
+	ruleName,
+	config: false,
+
+	accept: [
+		{
+			code: ".class:last-of-type {}",
+			description: "Only a type selector"
+		}
+	],
+
+	reject: []
+});
