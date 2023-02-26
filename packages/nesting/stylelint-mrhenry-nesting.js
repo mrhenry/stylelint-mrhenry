@@ -97,14 +97,13 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 				let nestingCounter = 0;
 				{
-					let nestingCounter = 0;
 					selectorAST.walkNesting(() => {
 						nestingCounter++;
 					});
 				}
 
 				if (selectorAST.nodes?.[0]?.type !== 'nesting') {
-					if (context.fix && nestingCounter === 0) {
+					if (context.fix) {
 						fixSelector(rule, selectorsAST, selectorAST);
 						return;
 					}

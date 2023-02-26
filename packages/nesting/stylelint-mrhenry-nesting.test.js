@@ -236,5 +236,35 @@ testRule({
 			endLine: 1,
 			endColumn: 14
 		},
+		{
+			code: ".bar { body.theme-red & { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red &) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 24
+		},
+		{
+			code: ".bar { body.theme-red .bar { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red .bar) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 27
+		},
+		{
+			code: ".bar { body.theme-red * { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red *) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 24
+		},
 	]
 });
