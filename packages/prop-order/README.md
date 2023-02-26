@@ -2,33 +2,72 @@
 
 [![version](https://img.shields.io/npm/v/@mrhenry/stylelint-mrhenry-prop-order.svg)](https://www.npmjs.com/package/@mrhenry/stylelint-mrhenry-prop-order)
 
-Mr. Henry's preferred order for CSS properties.
+Specify a strict order for CSS properties.
 
-This package does not group properties.
-It only sorts them within "imaginary sections".
+```css
+/* valid */
+.foo {
+	width: 100px;
+	height: 20px;
+}
 
-Acts as a separator between sections :
-- ignored declarations
+/* invalid */
+.foo {
+	height: 20px; /* we prefer width before height */
+	width: 100px;
+}
+```
+
+```css
+/* valid */
+.foo {
+	margin: 20px;
+	margin-top: 10px;
+}
+
+/* invalid */
+.foo {
+	margin-top: 10px; /* longhand before a shorthand */
+	margin: 20px;
+}
+```
+
+This package doesn't create groups of properties.
+But it will respect patterns that are often used to group properties:
 - empty lines
 - comments
-
-Ignored declarations :
 - custom properties
 - vendor prefixed CSS
 
 ```css
 .foo {
-  a: 0; /* section : 1 */
-  b: 0; /* section : 1 */
+	a: 0; /* section : 1 */
+	b: 0; /* section : 1 */
 
-  c: 0; /* section : 2 */
-  d: 0; /* section : 2 */
-  /* a comment */
-  e: 0; /* section : 3 */
-  f: 0; /* section : 3 */
-  --a: 0; /* ignored */
-  --b: 0; /* ignored */
-  -webkit-foo: 0; /* ignored */
+	c: 0; /* section : 2 */
+	d: 0; /* section : 2 */
+	/* a comment */
+	e: 0; /* section : 3 */
+	f: 0; /* section : 3 */
+	--a: 0; /* ignored */
+	--b: 0; /* ignored */
+	-webkit-foo: 0; /* ignored */
+}
+```
+
+## Usage
+
+`npm install --save-dev @mrhenry/stylelint-mrhenry-prop-order`
+
+```js
+// stylelint.config.js
+module.exports = {
+	plugins: [
+		"@mrhenry/stylelint-mrhenry-prop-order",
+	],
+	rules: {
+		"@mrhenry/stylelint-mrhenry-prop-order": true,
+	},
 }
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Warn when :first-of-type is used with class selectors",
   "main": "stylelint-mrhenry-invalid-of-type-selectors.js",
   "scripts": {

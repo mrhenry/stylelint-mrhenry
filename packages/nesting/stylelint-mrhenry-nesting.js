@@ -1,7 +1,7 @@
 const stylelint = require("stylelint");
 const selectorParser = require('postcss-selector-parser');
 
-const ruleName = "plugin/stylelint-mrhenry-nesting";
+const ruleName = "@mrhenry/stylelint-mrhenry-nesting";
 const messages = stylelint.utils.ruleMessages(ruleName, {
 	rejectedAtRule: (name) => {
 		return `Nested at-rules with name "${name}" is not allowed.`;

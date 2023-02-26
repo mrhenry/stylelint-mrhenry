@@ -2,6 +2,20 @@
 
 [![version](https://img.shields.io/npm/v/@mrhenry/stylelint-mrhenry-nesting.svg)](https://www.npmjs.com/package/@mrhenry/stylelint-mrhenry-nesting)
 
+Specify a strict coding style for CSS nesting.
+
+```css
+/* valid, the nested selector is a "filter" for "focus" */
+.element {
+	&:focus {}
+}
+
+/* invalid, the nested selector is not a "filter" on the elements matched by the parent */
+.foo {
+	> .bar {}
+}
+```
+
 Use CSS nesting only for conditional styling.
 This style of CSS aims to be expressive and readable.
 
@@ -9,6 +23,7 @@ This style of CSS aims to be expressive and readable.
 - every nested selector must start with `&`
 - only a single pseudo after `&`
 
+**Valid CSS :**
 
 ```css
 .element {
@@ -26,8 +41,7 @@ This style of CSS aims to be expressive and readable.
 }
 ```
 
---------
-
+**Invalid CSS :**
 
 ```css
 /* invalid, the nested selector is not a "filter" on the elements matched by the parent */
@@ -70,3 +84,18 @@ This style of CSS aims to be expressive and readable.
 }
 ```
 
+## Usage
+
+`npm install --save-dev @mrhenry/stylelint-mrhenry-nesting`
+
+```js
+// stylelint.config.js
+module.exports = {
+	plugins: [
+		"@mrhenry/stylelint-mrhenry-nesting",
+	],
+	rules: {
+		"@mrhenry/stylelint-mrhenry-nesting": true,
+	},
+}
+```

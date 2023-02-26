@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+Change rule name to `@mrhenry/stylelint-mrhenry-nesting`
+
 ## 1.0.3
 
 - Avoid unneeded `:is()` wrapping in auto fix

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+Change rule name to `@mrhenry/stylelint-mrhenry-prop-order`
+
 ## 1.0.10
 
 - Re-order `border-*` properties (again)

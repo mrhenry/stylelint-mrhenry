@@ -2,14 +2,31 @@
 
 [![version](https://img.shields.io/npm/v/@mrhenry/stylelint-mrhenry-invalid-of-type-selectors.svg)](https://www.npmjs.com/package/@mrhenry/stylelint-mrhenry-invalid-of-type-selectors)
 
-Warn when `:first-of-type` and similar selectors are used in selectors that do not match at least one type.
-This rule is not fully accurate and will have false negatives (`foo .bar:first-of-type`), but it is accurate enough to create awareness around the general issue.
+Disallow ambiguous `*-of-type` selectors.
 
 ```css
-/* invalid, the selector isn't a type selector */
-.foo:first-of-type {}
-
 /* valid, the selector is a type selector */
 strong:first-of-type {}
+
+/* invalid, the selector isn't a type selector */
+.foo:first-of-type {}
 ```
 
+Warns when `:first-of-type` and similar selectors are used in selectors that do not match at least one type.
+This rule is not fully accurate and will have false negatives (`foo .bar:first-of-type`), but it is accurate enough to create awareness around the general issue.
+
+## Usage
+
+`npm install --save-dev @mrhenry/stylelint-mrhenry-invalid-of-type-selectors`
+
+```js
+// stylelint.config.js
+module.exports = {
+	plugins: [
+		"@mrhenry/stylelint-mrhenry-invalid-of-type-selectors",
+	],
+	rules: {
+		"@mrhenry/stylelint-mrhenry-invalid-of-type-selectors": true,
+	},
+}
+```
