@@ -92,10 +92,25 @@ module.exports = {
 
 ### `ignoreAtRules: [/regex/, "string"]`
 
+```js
+// stylelint.config.js
+module.exports = {
+	plugins: [
+		"@mrhenry/stylelint-mrhenry-nesting",
+	],
+	rules: {
+		"@mrhenry/stylelint-mrhenry-nesting": [
+			true,
+			{ ignoreAtRules: ["mixin"] }
+		],
+	},
+}
+```
+
 Given:
 
-```json
-["/^custom-/i", "mixins"]
+```js
+[/^custom-/i, "mixin"]
 ```
 
 The following patterns are _not_ considered problems:
@@ -114,6 +129,6 @@ The following patterns are _not_ considered problems:
 
 ```css
 .foo {
-	@mixins bar;
+	@mixin bar;
 }
 ```
