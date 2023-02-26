@@ -1,8 +1,12 @@
 # Changelog
 
+## 2.0.1
+
+- Fix plugin option `false`
+
 ## 2.0.0
 
-Change rule name to `@mrhenry/stylelint-mrhenry-prop-order`
+- Change rule name to `@mrhenry/stylelint-mrhenry-prop-order`
 
 ## 1.0.10
 

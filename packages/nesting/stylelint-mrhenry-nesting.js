@@ -26,6 +26,10 @@ const meta = {
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
+		if (!primaryOption) {
+			return;
+		}
+		
 		const ignoreAtRulesOptions = secondaryOptionObject?.ignoreAtRules ?? [];
 
 		postcssRoot.walkAtRules((atrule) => {

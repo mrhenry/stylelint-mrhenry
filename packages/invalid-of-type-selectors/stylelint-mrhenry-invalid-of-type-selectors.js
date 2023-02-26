@@ -21,6 +21,10 @@ const ofTypeSelectors = [
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	return (postcssRoot, postcssResult) => {
+		if (!primaryOption) {
+			return;
+		}
+		
 		postcssRoot.walkRules((rule) => {
 			{
 				const lowerCaseSelector = rule.selector.toLowerCase();

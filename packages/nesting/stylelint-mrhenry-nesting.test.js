@@ -351,3 +351,22 @@ testRule({
 		},
 	]
 });
+
+testRule({
+	plugins: ["./stylelint-mrhenry-nesting.js"],
+	ruleName,
+	config: [false],
+
+	accept: [
+		{
+			code: "div { @unknown foo; }",
+			description: "Ignore unknown at rule by string"
+		},
+		{
+			code: "div { @yOuR-rule foo; }",
+			description: "Ignore unknown at rule by regexp"
+		},
+	],
+
+	reject: []
+});

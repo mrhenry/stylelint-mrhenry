@@ -5,6 +5,7 @@
 - Allow multiple `&` as long as the general pattern remains (e.g. `&:is(.bar &)`)
 - Add `ignoreAtRules` plugin option so that non-standard things like `@mixins` can be allowed.
 - Improve auto fixing.
+- Fix plugin option `false`
 
 ## 2.0.0
 

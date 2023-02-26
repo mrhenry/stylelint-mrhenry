@@ -252,3 +252,18 @@ testRule({
 		},
 	]
 });
+
+testRule({
+	plugins: ["./stylelint-mrhenry-prop-order.js"],
+	ruleName,
+	config: false,
+
+	accept: [
+		{
+			code: ".class { margin-left: 10px; margin: 0; }",
+			description: "shorthand after longhand",
+		}
+	],
+
+	reject: []
+});
