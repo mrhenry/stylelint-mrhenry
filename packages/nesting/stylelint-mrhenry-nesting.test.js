@@ -55,6 +55,10 @@ testRule({
 			code: "div { &:is(& + &) { color: red } }",
 			description: "Multiple &, in pseudo functions",
 		},
+		{
+			code: "div { { color: red; } }",
+			description: "empty selector",
+		},
 	],
 
 	reject: [
@@ -238,13 +242,63 @@ testRule({
 		},
 		{
 			code: ".bar { body.theme-red & { color: magenta; } }",
-			fixed: ".bar { &:is(body.theme-red &) { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red *) { color: magenta; } }",
 			description: "Incorrect shape",
 			message: rule.messages.rejectedMustStartWithAmpersand(),
 			line: 1,
 			column: 8,
 			endLine: 1,
 			endColumn: 24
+		},
+		{
+			code: ".bar { body.theme-red > & { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red > *) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 26
+		},
+		{
+			code: ".bar { body.theme-red + & { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red + *) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 26
+		},
+		{
+			code: ".bar { body.theme-red ~ & { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red ~ *) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 26
+		},
+		{
+			code: ".bar { body.theme-red& { color: magenta; } }",
+			fixed: ".bar { &:is(body.theme-red&) { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 23
+		},
+		{
+			code: ".bar { :focus& { color: magenta; } }",
+			fixed: ".bar { &:focus { color: magenta; } }",
+			description: "Incorrect shape",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 15
 		},
 		{
 			code: ".bar { body.theme-red .bar { color: magenta; } }",
