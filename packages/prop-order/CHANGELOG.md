@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.2
+
+- Add new properties:
+  - `white-space-collapse`
+- Removed unknown properties:
+  - `text-space-collapse`
+
 ## 2.0.1
 
 - Fix plugin option `false`
