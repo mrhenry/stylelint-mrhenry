@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.3
+
+- Add new properties:
+  - `box-shadow-color`
+  - `box-shadow-offset`
+  - `box-shadow-blur`
+  - `box-shadow-spread`
+  - `box-shadow-position`
+
 ## 2.0.2
 
 - Add new properties:
