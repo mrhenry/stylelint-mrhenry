@@ -137,7 +137,15 @@ module.exports = [
 	"border-image-source",
 	"border-image-width",
 	"box-decoration-break",
+
+	// <<'box-shadow-color'>>? &amp;&amp; [ <<'box-shadow-offset'>> [ <<'box-shadow-blur'>> <<'box-shadow-spread'>>? ]? ] &amp;&amp; <<'box-shadow-position'>>?
 	"box-shadow",
+	"box-shadow-color",
+	"box-shadow-offset",
+	"box-shadow-blur",
+	"box-shadow-spread",
+	"box-shadow-position",
+	
 	"box-sizing",
 	"box-snap",
 	"break-before",
