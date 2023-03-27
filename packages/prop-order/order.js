@@ -599,7 +599,7 @@ module.exports = [
 	"white-space",
 	"white-space-collapse",
 	"text-wrap",
-	"text-space-trim",
+	"white-space-trim",
 	"widows",
 	"width",
 	"min-width",

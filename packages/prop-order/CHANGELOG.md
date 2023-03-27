@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.4
+
+- Add new properties:
+  - `white-space-trim`
+- Removed unknown properties:
+  - `text-space-trim`
+
 ## 2.0.3
 
 - Add new properties:
