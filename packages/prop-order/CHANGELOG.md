@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.5
+
+- Add new properties:
+  - `overlay`
+  - `text-box-edge`
+  - `text-box-trim`
+- Removed unknown properties:
+  - `leading-trim`
+  - `text-edge`
+
 ## 2.0.4
 
 - Add new properties:
