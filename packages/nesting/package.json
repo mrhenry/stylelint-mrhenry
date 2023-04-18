@@ -37,6 +37,6 @@
     "stylelint": "^14.16.1 || ^15.0.0"
   },
   "devDependencies": {
-    "stylelint": "^15.4.0"
+    "stylelint": "^15.5.0"
   }
 }
