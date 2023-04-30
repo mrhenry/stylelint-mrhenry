@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.6
+
+- Add new properties:
+  - `scroll-timeline-attachment`
+  - `view-timeline-attachment`
+
 ## 2.0.5
 
 - Add new properties:
