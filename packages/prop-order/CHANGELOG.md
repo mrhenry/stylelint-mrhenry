@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.7
+
+- Remove unknown properties:
+  - `scroll-start`
+  - `scroll-start-block`
+  - `scroll-start-inline`
+  - `scroll-start-target`
+  - `scroll-start-x`
+  - `scroll-start-y`
+
 ## 2.0.6
 
 - Add new properties:
