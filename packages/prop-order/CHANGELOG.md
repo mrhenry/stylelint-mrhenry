@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.8
+
+- Add new properties
+  - `scroll-start`
+  - `scroll-start-block`
+  - `scroll-start-inline`
+  - `scroll-start-target`
+  - `scroll-start-target-block`
+  - `scroll-start-target-inline`
+  - `scroll-start-target-x`
+  - `scroll-start-target-y`
+  - `scroll-start-x`
+  - `scroll-start-y`
+
 ## 2.0.7
 
 - Remove unknown properties:
