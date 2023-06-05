@@ -21,7 +21,8 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 });
 
 const meta = {
-	url: "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/nesting"
+	url: "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/nesting",
+	fixable: true,
 };
 
 const ruleFunction = (primaryOption, secondaryOptionObject, context) => {

@@ -10,7 +10,8 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 });
 
 const meta = {
-	url: "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/prop-order"
+	url: "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/prop-order",
+	fixable: true,
 };
 
 const ignoredAtRules = [
