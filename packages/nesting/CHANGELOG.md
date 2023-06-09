@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+
+- Add support for relative selectors by transforming `.foo { > img {} }` into `.foo { &:has(> img) {} }`
+
 ## 2.1.0
 
 - Allow multiple `&` as long as the general pattern remains (e.g. `&:is(.bar &)`)

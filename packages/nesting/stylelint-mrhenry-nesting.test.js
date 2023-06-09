@@ -320,6 +320,47 @@ testRule({
 			endLine: 1,
 			endColumn: 24
 		},
+		{
+			code: ".bar { > img { color: magenta; } }",
+			fixed: ".bar { &:has(> img) { color: magenta; } }",
+			description: "Relative selector",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 13
+		},
+		{
+			code: ".bar { ~ img { color: magenta; } + img { color: magenta; } }",
+			fixed: ".bar { &:has(~ img) { color: magenta; } &:has(+ img) { color: magenta; } }",
+			description: "Relative selector",
+			warnings: [
+				{
+					message: rule.messages.rejectedMustStartWithAmpersand(),
+					line: 1,
+					column: 8,
+					endLine: 1,
+					endColumn: 13
+				},
+				{
+					message: rule.messages.rejectedMustStartWithAmpersand(),
+					line: 1,
+					column: 34,
+					endLine: 1,
+					endColumn: 39
+				}
+			]
+		},
+		{
+			code: ".bar { /* foo */  img { color: magenta; } }",
+			fixed: ".bar { /* foo */  &:is(img) { color: magenta; } }",
+			description: "Relative selector",
+			message: rule.messages.rejectedMustStartWithAmpersand(),
+			line: 1,
+			column: 19,
+			endLine: 1,
+			endColumn: 22
+		},
 	]
 });
 

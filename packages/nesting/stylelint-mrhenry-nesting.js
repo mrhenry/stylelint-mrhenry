@@ -112,6 +112,12 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			}
 
 			const selectorsAST = selectorParser().astSync(rule.selector);
+			const firstCompoundOrSelf = getFirstCompoundOrSelf(selectorsAST);
+
+			isRelativeSelector = false;
+			if (firstCompoundOrSelf.nodes[0]?.type === 'combinator') {
+				isRelativeSelector = true;
+			}
 
 			for (let i = 0; i < selectorsAST.nodes.length; i++) {
 				const selectorAST = selectorsAST.nodes[i];
@@ -241,7 +247,7 @@ function fixSelector(rule, selectorsAST, selectorAST) {
 		nodes: [
 			selectorParser.nesting(),
 			selectorParser.pseudo({
-				value: ':is',
+				value: isRelativeSelector ? ':has' : ':is',
 				nodes: [
 					selectorAST
 				]
@@ -274,3 +280,17 @@ ruleFunction.messages = messages;
 ruleFunction.meta = meta;
 
 module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+
+function getFirstCompoundOrSelf(x) {
+	if (!x.nodes) {
+		return x;
+	}
+
+	for (let i = 0; i < x.nodes.length; i++) {
+		if (x.nodes[i].type !== 'selector') {
+			return x;
+		}
+	}
+
+	return x.nodes[0];
+}
