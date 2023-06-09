@@ -1,8 +1,17 @@
 # Changelog
 
+## 2.0.9
+
+- Add new properties:
+  - `position-fallback-bounds`
+  - `timeline-scope`
+- Remove unknown properties:
+  - `scroll-timeline-attachment`
+  - `view-timeline-attachment`
+
 ## 2.0.8
 
-- Add new properties
+- Add new properties:
   - `scroll-start`
   - `scroll-start-block`
   - `scroll-start-inline`
