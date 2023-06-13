@@ -221,6 +221,16 @@ testRule({
 			endColumn: 25
 		},
 		{
+			code: ".bar { && { color: magenta; } }",
+			fixed: ".bar { &:is(&) { color: magenta; } }",
+			description: "Must end with pseudo",
+			message: rule.messages.rejectedMustEndWithPseudo(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 10
+		},
+		{
 			code: ".bar { &:hover:focus { color: magenta; } }",
 			fixed: ".bar { &:is(:hover:focus) { color: magenta; } }",
 			description: "Incorrect shape",
@@ -360,6 +370,47 @@ testRule({
 			column: 19,
 			endLine: 1,
 			endColumn: 22
+		},
+		{
+			code: ".bar { & + & { color: magenta; } }",
+			fixed: ".bar { &:is(* + &) { color: magenta; } }",
+			description: "Relative selector",
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 13
+		},
+		{
+			code: ".bar { &.foo + & { color: magenta; } }",
+			fixed: ".bar { &:is(.foo + &) { color: magenta; } }",
+			description: "Relative selector",
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 17
+		},
+		{
+			code: ".bar { &.foo, &.bar { color: magenta; } }",
+			fixed: ".bar { &:is(.foo),&:is(.bar) { color: magenta; } }",
+			description: "Relative selector",
+			warnings: [
+				{
+					message: rule.messages.rejectedMustEndWithPseudo(),
+					line: 1,
+					column: 8,
+					endLine: 1,
+					endColumn: 20
+				},
+				{
+					message: rule.messages.rejectedMustEndWithPseudo(),
+					line: 1,
+					column: 8,
+					endLine: 1,
+					endColumn: 20
+				}
+			]
 		},
 	]
 });

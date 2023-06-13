@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- Fix `.foo { & + .bar {} }` becoming `.foo { &:is( + .bar) {} }`, it will now resolve to `.foo { &:is(* + .bar) {} }`
+
 ## 2.2.0
 
 - Add support for relative selectors by transforming `.foo { > img {} }` into `.foo { &:has(> img) {} }`

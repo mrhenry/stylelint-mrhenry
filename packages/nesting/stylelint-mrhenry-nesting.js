@@ -140,7 +140,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					selectorAST.nodes[selectorAST.nodes.length - 2]?.type === 'combinator'
 				) {
 					fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
-					return;
+					continue;
 				}
 
 				// .foo { :focus& {} }
@@ -161,14 +161,14 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						]
 					}))
 					rule.selector = selectorsAST.toString();
-					return;
+					continue;
 				}
 
 				// .foo { .bar {} }
 				if (selectorAST.nodes[0]?.type !== 'nesting') {
 					if (context.fix) {
 						fixSelector(rule, selectorsAST, selectorAST);
-						return;
+						continue;
 					}
 
 					stylelint.utils.report({
@@ -180,15 +180,25 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						ruleName,
 					});
 
-					return;
+					continue;
 				}
 
 				// .foo { & + .bar {} }
 				if (selectorAST.nodes.length !== 2) {
 					if (context.fix) {
-						selectorAST.nodes[0]?.remove();
-						fixSelector(rule, selectorsAST, selectorAST);
-						return;
+
+						const firstPart = selectorAST.nodes[0];
+						const afterFirstPart = selectorAST.nodes[0]?.next();
+
+						if (firstPart && afterFirstPart?.type === 'combinator') {
+							selectorAST.nodes[0]?.replaceWith(selectorParser.universal())
+							fixSelector(rule, selectorsAST, selectorAST);
+						} else {
+							selectorAST.nodes[0]?.remove();
+							fixSelector(rule, selectorsAST, selectorAST);
+						}
+						
+						continue;
 					}
 
 					stylelint.utils.report({
@@ -200,7 +210,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						ruleName,
 					});
 
-					return;
+					continue;
 				}
 
 				// .foo { &.bar {} }
@@ -208,7 +218,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					if (context.fix) {
 						selectorAST.nodes[0]?.remove();
 						fixSelector(rule, selectorsAST, selectorAST);
-						return;
+						continue;
 					}
 
 					stylelint.utils.report({
@@ -220,7 +230,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						ruleName,
 					});
 
-					return;
+					continue;
 				}
 			}
 		});
