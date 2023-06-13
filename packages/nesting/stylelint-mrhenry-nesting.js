@@ -191,7 +191,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 						const afterFirstPart = selectorAST.nodes[0]?.next();
 
 						if (firstPart && afterFirstPart?.type === 'combinator') {
-							selectorAST.nodes[0]?.replaceWith(selectorParser.universal())
+							selectorAST.nodes[0]?.replaceWith(selectorParser.nesting())
 							fixSelector(rule, selectorsAST, selectorAST);
 						} else {
 							selectorAST.nodes[0]?.remove();

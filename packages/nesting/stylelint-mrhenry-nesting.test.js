@@ -373,7 +373,7 @@ testRule({
 		},
 		{
 			code: ".bar { & + & { color: magenta; } }",
-			fixed: ".bar { &:is(* + &) { color: magenta; } }",
+			fixed: ".bar { &:is(& + &) { color: magenta; } }",
 			description: "Relative selector",
 			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
 			line: 1,
