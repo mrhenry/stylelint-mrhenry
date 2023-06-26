@@ -16,7 +16,7 @@
     "c8": "^8.0.0",
     "jest": "^29.4.3",
     "jest-preset-stylelint": "^6.1.0",
-    "stylelint": "^15.8.0"
+    "stylelint": "^15.9.0"
   },
   "volta": {
     "node": "20.2.0",
