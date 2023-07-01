@@ -12,7 +12,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@webref/css": "^6.5.8",
+    "@webref/css": "^6.6.0",
     "c8": "^8.0.0",
     "jest": "^29.4.3",
     "jest-preset-stylelint": "^6.1.0",
