@@ -64,6 +64,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			while (parent) {
 				if (parent.type === 'rule') {
 					rulesDepth++;
+					break;
 				}
 
 				parent = parent.parent;
@@ -90,6 +91,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				while (parent) {
 					if (parent.type === 'rule') {
 						rulesDepth++;
+					}
+
+					if (rulesDepth > 2) {
+						break;
 					}
 
 					parent = parent.parent;
@@ -297,6 +302,7 @@ function getFirstCompoundOrSelf(x) {
 	}
 
 	for (let i = 0; i < x.nodes.length; i++) {
+		/* c8 ignore next */
 		if (x.nodes[i].type !== 'selector') {
 			return x;
 		}

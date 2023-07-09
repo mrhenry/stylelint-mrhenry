@@ -1,8 +1,7 @@
-// my-plugin.test.js
 const { rule, ruleName } = require("./stylelint-mrhenry-invalid-of-type-selectors");
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.js"],
+	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.cjs"],
 	ruleName,
 	config: true,
 
@@ -48,7 +47,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.js"],
+	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.cjs"],
 	ruleName,
 	config: false,
 

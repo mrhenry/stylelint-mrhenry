@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+- Use `.cjs` files extensions.
+
 ## 2.0.1
 
 - Fix plugin option `false`

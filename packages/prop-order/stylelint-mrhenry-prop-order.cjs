@@ -1,5 +1,5 @@
 const stylelint = require("stylelint");
-const order = require('./order.js');
+const order = require('./order.cjs');
 const orderSet = new Set(order);
 
 const ruleName = "@mrhenry/stylelint-mrhenry-prop-order";
@@ -35,8 +35,8 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				parent = parent.parent;
 			}
 
+			/* c8 ignore next */
 			if (!rule.nodes.length) {
-				/* c8 ignore next */
 				return;
 			}
 

@@ -1,8 +1,7 @@
-// my-plugin.test.js
 const { rule, ruleName } = require("./stylelint-mrhenry-prop-order");
 
 testRule({
-	plugins: ["./stylelint-mrhenry-prop-order.js"],
+	plugins: ["./stylelint-mrhenry-prop-order.cjs"],
 	ruleName,
 	config: true,
 	fix: true,
@@ -254,7 +253,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-prop-order.js"],
+	plugins: ["./stylelint-mrhenry-prop-order.cjs"],
 	ruleName,
 	config: false,
 

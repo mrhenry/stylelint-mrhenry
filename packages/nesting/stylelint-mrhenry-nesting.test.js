@@ -1,8 +1,7 @@
-// my-plugin.test.js
 const { rule, ruleName } = require("./stylelint-mrhenry-nesting");
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.js"],
+	plugins: ["./stylelint-mrhenry-nesting.cjs"],
 	ruleName,
 	config: true,
 
@@ -192,7 +191,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.js"],
+	plugins: ["./stylelint-mrhenry-nesting.cjs"],
 	ruleName,
 	config: true,
 	fix: true,
@@ -416,7 +415,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.js"],
+	plugins: ["./stylelint-mrhenry-nesting.cjs"],
 	ruleName,
 	config: [true, { ignoreAtRules: ['unknown', /^YOUR-/i] }],
 
@@ -445,7 +444,7 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.js"],
+	plugins: ["./stylelint-mrhenry-nesting.cjs"],
 	ruleName,
 	config: [false],
 

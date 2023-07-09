@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.10
+
+- Use `.cjs` files extensions.
+
 ## 2.0.9
 
 - Add new properties:

@@ -1,25 +1,24 @@
 {
-  "name": "@mrhenry/stylelint-mrhenry-nesting",
-  "version": "2.2.3",
-  "description": "Mr. Henry's preferred way of writing nested CSS",
-  "publishConfig": {
-    "access": "public"
-  },
-  "main": "stylelint-mrhenry-nesting.cjs",
+  "name": "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown",
+  "version": "1.0.0",
+  "description": "Warn when unknown attribute selectors are used",
+  "main": "stylelint-mrhenry-attribute-selector-no-unknown.cjs",
   "scripts": {
+    "build": "node ./build.mjs",
     "test": "npm run test:jest",
     "test:jest": "c8 --100 jest"
   },
   "author": "Mr. Henry",
   "license": "MIT",
-  "homepage": "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/nesting#readme",
+  "homepage": "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/attribute-selector-no-unknown#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mrhenry/stylelint-mrhenry.git",
-    "directory": "packages/nesting"
+    "directory": "packages/attribute-selector-no-unknown"
   },
   "files": [
-    "stylelint-mrhenry-nesting.js",
+    "stylelint-mrhenry-attribute-selector-no-unknown.cjs",
+    "data.cjs",
     "LICENSE",
     "README.md"
   ],

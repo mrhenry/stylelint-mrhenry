@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.3
+
+- Use `.cjs` files extensions.
+
 ## 2.2.2
 
 - Fix `.foo { & + .bar {} }` becoming `.foo { &:is( + .bar) {} }`, it will now resolve to `.foo { &:is(& + .bar) {} }`

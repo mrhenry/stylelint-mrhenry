@@ -1,5 +1,5 @@
 import css from '@webref/css';
-import * as order from './order.js';
+import * as order from './order.cjs';
 
 const existingProperties = new Set(order.default);
 const properties = new Set();
