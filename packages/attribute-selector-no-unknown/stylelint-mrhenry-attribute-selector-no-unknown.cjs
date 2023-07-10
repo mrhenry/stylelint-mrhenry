@@ -53,36 +53,9 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return;
 				}
 
-				let tagName = findTagNameInCompound(node);
+				const tagName = findTagNameInCompound(node);
 				if (!tagName) {
-					// If there is no tag name we assume that only global attributes are allowed.
-					// Any non-global attributes are invalid.
-					stylelint.utils.report({
-						message: messages.expected,
-						messageArgs: [attribute],
-						node: rule,
-						index: node.sourceIndex,
-						endIndex: node.sourceIndex + attribute.length,
-						result: postcssResult,
-						ruleName,
-					});
-
-					return;
-				}
-
-				if (tagName.includes('-')) {
-					// If the tag name is a custom element
-					// we assume that only global and "data-" prefixed attributes are allowed.
-					stylelint.utils.report({
-						message: messages.expected,
-						messageArgs: [attribute, tagName],
-						node: rule,
-						index: node.sourceIndex,
-						endIndex: node.sourceIndex + attribute.length,
-						result: postcssResult,
-						ruleName,
-					});
-
+					// Without a tagname we assime that any attribute is allowed.
 					return;
 				}
 

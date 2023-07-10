@@ -56,6 +56,32 @@ testRule({
 		{
 			code: ':is([id]) {}',
 		},
+		{
+			code: '[name] {}',
+		},
+		{
+			code: '[href] {}',
+		},
+		{
+			code: "[name] {}",
+			description: "Non-global attribute selector",
+		},
+		{
+			code: "[href] {}",
+			description: "Non-global attribute selector",
+		},
+		{
+			code: "a [href] {}",
+			description: "Non-global attribute selector",
+		},
+		{
+			code: "[href] a {}",
+			description: "Non-global attribute selector",
+		},
+		{
+			code: "a::before[href] {}",
+			description: "Non-global attribute selector",
+		},
 	],
 
 	reject: [
@@ -88,7 +114,7 @@ testRule({
 		},
 		{
 			code: "button[href] {}",
-			description: "Non-global attribute selector on a standard element",
+			description: "Non-global attribute selector on an unexpected standard element",
 			message: rule.messages.expected('href', 'button'),
 			line: 1,
 			column: 7,
@@ -103,51 +129,6 @@ testRule({
 			column: 4,
 			endLine: 1,
 			endColumn: 8
-		},
-		{
-			code: "[name] {}",
-			description: "Non-global attribute selector",
-			message: rule.messages.expected('name'),
-			line: 1,
-			column: 1,
-			endLine: 1,
-			endColumn: 5
-		},
-		{
-			code: "[href] {}",
-			description: "Non-global attribute selector",
-			message: rule.messages.expected('href'),
-			line: 1,
-			column: 1,
-			endLine: 1,
-			endColumn: 5
-		},
-		{
-			code: "a [href] {}",
-			description: "Non-global attribute selector",
-			message: rule.messages.expected('href'),
-			line: 1,
-			column: 3,
-			endLine: 1,
-			endColumn: 7
-		},
-		{
-			code: "[href] a {}",
-			description: "Non-global attribute selector",
-			message: rule.messages.expected('href'),
-			line: 1,
-			column: 1,
-			endLine: 1,
-			endColumn: 5
-		},
-		{
-			code: "a::before[href] {}",
-			description: "Non-global attribute selector",
-			message: rule.messages.expected('href'),
-			line: 1,
-			column: 10,
-			endLine: 1,
-			endColumn: 14
 		},
 	]
 });

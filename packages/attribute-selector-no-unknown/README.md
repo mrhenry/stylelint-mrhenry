@@ -5,20 +5,25 @@
 Disallow unknown attribute selectors.
 
 ```css
-/* valid, the `name` attribute is allowed on button elements */
+/* valid, the `name` attribute is allowed on button elements. */
 button[name] {}
 
-/* valid, the `data-foo` attribute has a `data-*` prefix */
-[data-foo] {}
-
-/* invalid, the `name` attribute is not a global attribute */
+/* valid, the `name` attribute is not a global attribute, but used without a type selector. */
 [name] {}
 
-/* invalid, the `href` attribute is not a global attribute and is not allowed on button elements */
+/* invalid, the `href` attribute is not allowed on button elements. */
 button[href] {}
 ```
 
-Warns when attribute selectors are used that are not global or not allowed on the given element.
+```css
+/* valid, the `data-foo` attribute has a `data-*` prefix. */
+[data-foo] {}
+
+/* invalid, `foo` attribute doesn't exist. */
+[foo] {}
+```
+
+Warns when attribute selectors are used that are not allowed on the given element.
 
 While it is valid and allowed to use any attribute name on any element, it is not recommended to do so.
 
