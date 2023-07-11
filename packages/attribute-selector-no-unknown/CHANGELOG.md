@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+Fix list of all now attributes.
+
 ## 1.0.1
 
 Allow lone attribute selectors. e.g `[href]` is allowed.

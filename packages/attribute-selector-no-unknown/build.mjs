@@ -16,14 +16,18 @@ const htmlAttributes = new Set();
 for (const element of htmlElements) {
 	if (!htmlElementAttributes[element] || !htmlElementAttributes[element].length) continue;
 
-	htmlAttributes.add(...(htmlElementAttributes[element].filter(x => !!x)));
+	for (const attribute of htmlElementAttributes[element]) {
+		htmlAttributes.add(attribute);
+	}
 }
 
 const svgAttributes = new Set();
 for (const element of svgElements) {
 	if (!svgElementAttributes[element] || !svgElementAttributes[element].length) continue;
 
-	svgAttributes.add(...(svgElementAttributes[element].filter(x => !!x)));
+	for (const attribute of svgElementAttributes[element]) {
+		svgAttributes.add(attribute);
+	}
 }
 
 const globalAttributes = Array.from(new Set([

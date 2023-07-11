@@ -63,6 +63,12 @@ testRule({
 			code: '[href] {}',
 		},
 		{
+			code: '[readonly] {}',
+		},
+		{
+			code: '[selected] {}',
+		},
+		{
 			code: "[name] {}",
 			description: "Non-global attribute selector",
 		},
