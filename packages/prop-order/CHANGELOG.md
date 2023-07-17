@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.11
+
+- Remove unknown properties:
+  - `anchor-scroll`
+
 ## 2.0.10
 
 - Use `.cjs` files extensions.
