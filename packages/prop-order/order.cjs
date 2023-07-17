@@ -8,7 +8,6 @@ module.exports = [
 	"all",
 	"anchor-default",
 	"anchor-name",
-	"anchor-scroll",
 	"animation",
 	"animation-composition",
 	"animation-delay",
