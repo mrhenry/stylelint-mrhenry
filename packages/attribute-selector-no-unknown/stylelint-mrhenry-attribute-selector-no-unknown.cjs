@@ -30,6 +30,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 		
 			const selectorAST = selectorParser().astSync(rule.selector);
 			selectorAST.walkAttributes((node) => {
+				if (!node.attribute) {
+					return;
+				}
+
 				const attribute = node.attribute;
 
 				// "data-" prefixed attributes are user defined and always allowed.

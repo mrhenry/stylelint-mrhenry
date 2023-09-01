@@ -69,6 +69,9 @@ testRule({
 			code: '[selected] {}',
 		},
 		{
+			code: '[] {}',
+		},
+		{
 			code: "[name] {}",
 			description: "Non-global attribute selector",
 		},

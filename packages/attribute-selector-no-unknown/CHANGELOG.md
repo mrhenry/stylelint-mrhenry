@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+Fix an exception on empty attributes `[]`
+
 ## 1.0.2
 
 Fix list of all now attributes.
