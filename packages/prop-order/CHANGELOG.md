@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.12
+
+- Add new properties:
+  - `font-synthesis-position`
+  - `text-wrap-mode`
+  - `text-wrap-style`
+  - `transition-behavior`
+  - `word-space-transform`
+- Remove unknown properties:
+  - `word-boundary-detection`
+  - `word-boundary-expansion`
+
 ## 2.0.11
 
 - Remove unknown properties:
