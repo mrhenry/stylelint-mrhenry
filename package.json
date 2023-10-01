@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@webref/css": "^6.7.1",
+    "@webref/css": "^6.8.0",
     "aria-attributes": "^2.0.1",
     "c8": "^8.0.1",
     "html-element-attributes": "^3.2.0",
