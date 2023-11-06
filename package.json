@@ -16,7 +16,7 @@
     "@webref/css": "^6.8.3",
     "aria-attributes": "^2.0.1",
     "c8": "^8.0.1",
-    "html-element-attributes": "^3.2.0",
+    "html-element-attributes": "^3.3.0",
     "jest": "^29.7.0",
     "jest-preset-stylelint": "^6.3.2",
     "stylelint": "^15.11.0",
