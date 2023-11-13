@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.13
+
+- Add new properties:
+  - `field-sizing`
+- Remove unknown properties:
+  - `align-tracks`
+  - `justify-tracks`
+
 ## 2.0.12
 
 - Add new properties:
