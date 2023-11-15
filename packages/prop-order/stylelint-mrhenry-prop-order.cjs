@@ -25,8 +25,12 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			return;
 		}
 		
-		postcssRoot.walkRules((rule) => {
-			let parent = rule.parent;
+		postcssRoot.walk((container) => {
+			if (container.type !== 'atrule' && container.type !== 'rule') {
+				return;
+			}
+
+			let parent = container;
 			while (parent) {
 				if (parent.type === 'atrule' && ignoredAtRules.includes(parent.name.toLowerCase())) {
 					return;
@@ -36,14 +40,14 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			}
 
 			/* c8 ignore next */
-			if (!rule.nodes.length) {
+			if (!container.nodes.length) {
 				return;
 			}
 
 			// Comments after a node, not one a new line should be kept together with that node.
 			// color: red; /* my color */
 			let matchedComments = new Map();
-			rule.each((node) => {
+			container.each((node) => {
 				if (node.type === 'comment' && !node.raws?.before?.match(/\n/g)) {
 					const comment = node;
 					const prev = comment.prev();
@@ -56,7 +60,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			});
 
 			let declarationsSections = [[]];
-			rule.each((node) => {
+			container.each((node) => {
 				if (
 					node.type === 'decl' &&
 					!node.variable &&
@@ -83,17 +87,17 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					return order.indexOf(a.prop.toLowerCase()) - order.indexOf(b.prop.toLowerCase());
 				});
 
-				const firstNodeIndex = Math.min.apply(Math, section.map((x) => rule.index(x)));
-				const originalFirstNode = rule.nodes[firstNodeIndex];
+				const firstNodeIndex = Math.min.apply(Math, section.map((x) => container.index(x)));
+				const originalFirstNode = container.nodes[firstNodeIndex];
 
 				section.forEach((decl, index) => {
 					const desiredIndex = firstNodeIndex + index;
-					if (rule.index(decl) === desiredIndex) {
+					if (container.index(decl) === desiredIndex) {
 						return;
 					}
 
 					if (context.fix) {
-						rule.insertBefore(desiredIndex, decl);
+						container.insertBefore(desiredIndex, decl);
 						return;
 					}
 
@@ -109,7 +113,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 					}
 				});
 
-				const finalFirstNode = rule.nodes[firstNodeIndex];
+				const finalFirstNode = container.nodes[firstNodeIndex];
 				if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
 					const originalRawBefore = originalFirstNode.raws.before;
 					originalFirstNode.raws.before = finalFirstNode.raws.before;
@@ -119,7 +123,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 
 			if (context.fix) {
 				for (const [comment, prev] of matchedComments) {
-					rule.insertAfter(prev, comment);
+					container.insertAfter(prev, comment);
 				}
 			}
 		});

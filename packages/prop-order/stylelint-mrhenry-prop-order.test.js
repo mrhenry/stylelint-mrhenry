@@ -12,6 +12,9 @@ testRule({
 			description: "longhand after shorthand"
 		},
 		{
+			code: "@media screen { margin {} padding {} }",
+		},
+		{
 			code: ".class {}",
 			description: "empty rule"
 		},
@@ -60,6 +63,16 @@ testRule({
 			column: 29,
 			endLine: 1,
 			endColumn: 35
+		},
+		{
+			code: "@media screen { margin-left: 10px; margin: 0; }",
+			fixed: "@media screen { margin: 0; margin-left: 10px; }",
+			description: "shorthand after longhand",
+			message: rule.messages.expected('margin'),
+			line: 1,
+			column: 36,
+			endLine: 1,
+			endColumn: 42
 		},
 		{
 			code: ".class { margin-left: 5px; margin: 0; margin-bottom: 10px; }",

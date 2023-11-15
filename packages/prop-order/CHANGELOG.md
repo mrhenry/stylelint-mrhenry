@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.14
+
+- Fix sorting of nested properties
+
 ## 2.0.13
 
 - Add new properties:
