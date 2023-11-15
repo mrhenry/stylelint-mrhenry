@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.15
+
+- Fix exception on `atrule`'s without nodes
+
 ## 2.0.14
 
 - Fix sorting of nested properties

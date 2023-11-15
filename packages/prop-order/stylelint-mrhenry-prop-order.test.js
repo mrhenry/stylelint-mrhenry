@@ -15,6 +15,9 @@ testRule({
 			code: "@media screen { margin {} padding {} }",
 		},
 		{
+			code: "@import 'foo.css';",
+		},
+		{
 			code: ".class {}",
 			description: "empty rule"
 		},

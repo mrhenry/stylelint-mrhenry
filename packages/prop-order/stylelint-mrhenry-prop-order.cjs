@@ -30,6 +30,10 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				return;
 			}
 
+			if (!container.nodes?.length) {
+				return;
+			}
+
 			let parent = container;
 			while (parent) {
 				if (parent.type === 'atrule' && ignoredAtRules.includes(parent.name.toLowerCase())) {
@@ -40,10 +44,6 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			}
 
 			/* c8 ignore next */
-			if (!container.nodes.length) {
-				return;
-			}
-
 			// Comments after a node, not one a new line should be kept together with that node.
 			// color: red; /* my color */
 			let matchedComments = new Map();
