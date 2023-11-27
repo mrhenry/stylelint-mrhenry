@@ -23,6 +23,10 @@ for (const [shortname, data] of Object.entries(parsedFiles)) {
 			continue;
 		}
 
+		if (property.name.startsWith('tbd-') || property.name.includes('-tbd-') || property.name.endsWith('-tbd')) {
+			continue;
+		}
+
 		properties.add(property.name);
 	}
 }

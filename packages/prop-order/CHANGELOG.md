@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.16
+
+- Add new properties:
+  - `inset-area`
+
 ## 2.0.15
 
 - Fix exception on `atrule`'s without nodes

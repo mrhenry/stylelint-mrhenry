@@ -299,6 +299,7 @@ module.exports = [
 	"inset-block",
 	"inset-block-start",
 	"inset-block-end",
+	"inset-area",
 	"isolation",
 	"justify-content",
 	"justify-items",
