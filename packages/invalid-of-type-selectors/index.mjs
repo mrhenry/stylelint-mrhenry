@@ -1,5 +1,5 @@
-const stylelint = require("stylelint");
-const selectorParser = require('postcss-selector-parser');
+import stylelint from 'stylelint';
+import selectorParser from 'postcss-selector-parser';
 
 const ruleName = "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors";
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -77,4 +77,4 @@ ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 ruleFunction.meta = meta;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default stylelint.createPlugin(ruleName, ruleFunction);

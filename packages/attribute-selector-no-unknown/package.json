@@ -1,12 +1,11 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Warn when unknown attribute selectors are used",
-  "main": "stylelint-mrhenry-attribute-selector-no-unknown.cjs",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "build": "node ./build.mjs",
-    "test": "npm run test:jest",
-    "test:jest": "c8 --100 jest"
+    "test": "c8 --100 node --test"
   },
   "author": "Mr. Henry",
   "license": "MIT",
@@ -17,14 +16,11 @@
     "directory": "packages/attribute-selector-no-unknown"
   },
   "files": [
-    "stylelint-mrhenry-attribute-selector-no-unknown.cjs",
-    "data.cjs",
+    "index.mjs",
+    "data.mjs",
     "LICENSE",
     "README.md"
   ],
-  "jest": {
-    "preset": "jest-preset-stylelint"
-  },
   "keywords": [
     "stylelint",
     "stylelint-plugin"
@@ -33,9 +29,9 @@
     "postcss-selector-parser": "^6.0.11"
   },
   "peerDependencies": {
-    "stylelint": "^14.16.1 || ^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^15.11.0"
+    "stylelint": "^16.0.2"
   }
 }

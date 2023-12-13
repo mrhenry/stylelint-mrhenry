@@ -1,4 +1,4 @@
-module.exports = [
+export const order = [
 	"accent-color",
 	"align-content",
 	"align-items",

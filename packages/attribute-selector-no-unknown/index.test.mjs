@@ -1,8 +1,13 @@
-const { rule, ruleName } = require("./stylelint-mrhenry-attribute-selector-no-unknown");
+import { testRule } from 'stylelint-test-rule-node';
+import plugin from './index.mjs';
+
+const rule = plugin.rule;
+
+testRule({ plugins: ["./index.mjs"], ruleName: rule.ruleName, config: null, accept: [{ code: "", description: "empty rule" }] });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-attribute-selector-no-unknown.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: true,
 
 	accept: [
@@ -143,8 +148,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-attribute-selector-no-unknown.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: false,
 
 	accept: [

@@ -1,14 +1,14 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-nesting",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "Mr. Henry's preferred way of writing nested CSS",
   "publishConfig": {
     "access": "public"
   },
-  "main": "stylelint-mrhenry-nesting.cjs",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "test": "npm run test:jest",
-    "test:jest": "c8 --100 jest"
+    "test": "c8 --100 node --test"
   },
   "author": "Mr. Henry",
   "license": "MIT",
@@ -19,13 +19,10 @@
     "directory": "packages/nesting"
   },
   "files": [
-    "stylelint-mrhenry-nesting.js",
+    "index.mjs",
     "LICENSE",
     "README.md"
   ],
-  "jest": {
-    "preset": "jest-preset-stylelint"
-  },
   "keywords": [
     "stylelint",
     "stylelint-plugin"
@@ -34,9 +31,9 @@
     "postcss-selector-parser": "^6.0.11"
   },
   "peerDependencies": {
-    "stylelint": "^14.16.1 || ^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^15.11.0"
+    "stylelint": "^16.0.2"
   }
 }

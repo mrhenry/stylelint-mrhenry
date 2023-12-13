@@ -1,6 +1,6 @@
-const stylelint = require("stylelint");
-const selectorParser = require('postcss-selector-parser');
-const data = require('./data.cjs');
+import stylelint from 'stylelint';
+import selectorParser from 'postcss-selector-parser';
+import { data } from './data.mjs';
 
 const ruleName = "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown";
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -122,4 +122,4 @@ ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 ruleFunction.meta = meta;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default stylelint.createPlugin(ruleName, ruleFunction);

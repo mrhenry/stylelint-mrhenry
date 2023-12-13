@@ -1,5 +1,6 @@
-const stylelint = require("stylelint");
-const order = require('./order.cjs');
+import stylelint from 'stylelint';
+import { order } from './order.mjs';
+
 const orderSet = new Set(order);
 
 const ruleName = "@mrhenry/stylelint-mrhenry-prop-order";
@@ -134,4 +135,4 @@ ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 ruleFunction.meta = meta;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default stylelint.createPlugin(ruleName, ruleFunction);

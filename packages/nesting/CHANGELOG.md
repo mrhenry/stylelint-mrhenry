@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0
+
+ - Migrate to `stylelint` `v16.0.0`
+
 ## 2.2.3
 
 - Use `.cjs` files extensions.

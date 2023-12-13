@@ -1,5 +1,5 @@
-const stylelint = require("stylelint");
-const selectorParser = require('postcss-selector-parser');
+import stylelint from 'stylelint';
+import selectorParser from 'postcss-selector-parser';
 
 const ruleName = "@mrhenry/stylelint-mrhenry-nesting";
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -119,7 +119,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 			const selectorsAST = selectorParser().astSync(rule.selector);
 			const firstCompoundOrSelf = getFirstCompoundOrSelf(selectorsAST);
 
-			isRelativeSelector = false;
+			let isRelativeSelector = false;
 			if (firstCompoundOrSelf.nodes[0]?.type === 'combinator') {
 				isRelativeSelector = true;
 			}
@@ -172,7 +172,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				// .foo { .bar {} }
 				if (selectorAST.nodes[0]?.type !== 'nesting') {
 					if (context.fix) {
-						fixSelector(rule, selectorsAST, selectorAST);
+						fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector);
 						continue;
 					}
 
@@ -242,7 +242,7 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 	};
 };
 
-function fixSelector(rule, selectorsAST, selectorAST) {
+function fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector) {
 	if (
 		selectorAST.nodes.length === 1 &&
 		selectorAST.nodes[0].type === 'pseudo'
@@ -294,17 +294,22 @@ ruleFunction.ruleName = ruleName;
 ruleFunction.messages = messages;
 ruleFunction.meta = meta;
 
-module.exports = stylelint.createPlugin(ruleName, ruleFunction);
+export default stylelint.createPlugin(ruleName, ruleFunction);
 
 function getFirstCompoundOrSelf(x) {
+	/* c8 ignore next */
 	if (!x.nodes) {
+		/* c8 ignore next */
 		return x;
+		/* c8 ignore next */
 	}
 
 	for (let i = 0; i < x.nodes.length; i++) {
 		/* c8 ignore next */
 		if (x.nodes[i].type !== 'selector') {
+			/* c8 ignore next */
 			return x;
+			/* c8 ignore next */
 		}
 	}
 

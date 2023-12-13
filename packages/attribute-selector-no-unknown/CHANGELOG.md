@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+ - Migrate to `stylelint` `v16.0.0`
+
 ## 1.0.4
 
 Update list of known attributes.
