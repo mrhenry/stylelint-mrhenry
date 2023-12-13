@@ -1,8 +1,13 @@
-const { rule, ruleName } = require("./stylelint-mrhenry-prop-order");
+import { testRule } from 'stylelint-test-rule-node';
+import plugin from './index.mjs';
+
+const rule = plugin.rule;
+
+testRule({ plugins: ["./index.mjs"], ruleName: rule.ruleName, config: null, accept: [{ code: "", description: "empty rule" }] });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-prop-order.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: true,
 	fix: true,
 
@@ -53,6 +58,13 @@ testRule({
 	--bar: 0;
 }`,
 			description: "shorthand after longhand but separated by custom properties",
+		},
+		{
+			code: `@font-face {
+	margin-left: 10px;
+	margin: 0;
+}`,
+			description: "shorthand after longhand in ignored at-rule",
 		},
 	],
 
@@ -269,8 +281,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-prop-order.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: false,
 
 	accept: [

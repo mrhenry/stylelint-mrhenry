@@ -1,11 +1,11 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-prop-order",
-  "version": "2.0.16",
+  "version": "3.0.0",
   "description": "Mr. Henry's preferred order for CSS properties",
-  "main": "stylelint-mrhenry-prop-order.cjs",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "test": "npm run test:jest && npm run test:properties-list",
-    "test:jest": "c8 --100 jest",
+    "test": "c8 --100 node --test && npm run test:properties-list",
     "test:properties-list": "node verify-properties-list.mjs"
   },
   "author": "Mr. Henry",
@@ -17,22 +17,19 @@
     "directory": "packages/prop-order"
   },
   "files": [
-    "order.cjs",
-    "stylelint-mrhenry-prop-order.cjs",
+    "order.mjs",
+    "index.mjs",
     "LICENSE",
     "README.md"
   ],
-  "jest": {
-    "preset": "jest-preset-stylelint"
-  },
   "keywords": [
     "stylelint",
     "stylelint-plugin"
   ],
   "peerDependencies": {
-    "stylelint": "^14.16.1 || ^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^15.11.0"
+    "stylelint": "^16.0.2"
   }
 }

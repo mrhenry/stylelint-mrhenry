@@ -1,8 +1,13 @@
-const { rule, ruleName } = require("./stylelint-mrhenry-invalid-of-type-selectors");
+import { testRule } from 'stylelint-test-rule-node';
+import plugin from './index.mjs';
+
+const rule = plugin.rule;
+
+testRule({ plugins: ["./index.mjs"], ruleName: rule.ruleName, config: null, accept: [{ code: "", description: "empty rule" }] });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: true,
 
 	accept: [
@@ -47,8 +52,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-invalid-of-type-selectors.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: false,
 
 	accept: [

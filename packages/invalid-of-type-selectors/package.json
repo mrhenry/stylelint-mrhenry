@@ -1,11 +1,11 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Warn when :first-of-type is used with class selectors",
-  "main": "stylelint-mrhenry-invalid-of-type-selectors.cjs",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "test": "npm run test:jest",
-    "test:jest": "c8 --100 jest"
+    "test": "c8 --100 node --test"
   },
   "author": "Mr. Henry",
   "license": "MIT",
@@ -16,13 +16,10 @@
     "directory": "packages/invalid-of-type-selectors"
   },
   "files": [
-    "stylelint-mrhenry-invalid-of-type-selectors.cjs",
+    "index.mjs",
     "LICENSE",
     "README.md"
   ],
-  "jest": {
-    "preset": "jest-preset-stylelint"
-  },
   "keywords": [
     "stylelint",
     "stylelint-plugin"
@@ -31,9 +28,9 @@
     "postcss-selector-parser": "^6.0.11"
   },
   "peerDependencies": {
-    "stylelint": "^14.16.1 || ^15.0.0"
+    "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^15.11.0"
+    "stylelint": "^16.0.2"
   }
 }

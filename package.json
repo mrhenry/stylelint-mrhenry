@@ -17,9 +17,8 @@
     "aria-attributes": "^2.0.1",
     "c8": "^8.0.1",
     "html-element-attributes": "^3.3.0",
-    "jest": "^29.7.0",
-    "jest-preset-stylelint": "^6.3.2",
-    "stylelint": "^15.11.0",
+    "stylelint-test-rule-node": "^0.2.1",
+    "stylelint": "^16.0.2",
     "svg-element-attributes": "^2.1.0"
   },
   "volta": {

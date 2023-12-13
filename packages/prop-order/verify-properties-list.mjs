@@ -1,7 +1,7 @@
 import css from '@webref/css';
-import * as order from './order.cjs';
+import { order } from './order.mjs';
 
-const existingProperties = new Set(order.default);
+const existingProperties = new Set(order);
 const properties = new Set();
 
 const parsedFiles = await css.listAll();

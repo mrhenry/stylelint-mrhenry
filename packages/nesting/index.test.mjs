@@ -1,8 +1,13 @@
-const { rule, ruleName } = require("./stylelint-mrhenry-nesting");
+import { testRule } from 'stylelint-test-rule-node';
+import plugin from './index.mjs';
+
+const rule = plugin.rule;
+
+testRule({ plugins: ["./index.mjs"], ruleName: rule.ruleName, config: null, accept: [{ code: "", description: "empty rule" }] });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: true,
 
 	accept: [
@@ -191,8 +196,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: true,
 	fix: true,
 
@@ -415,8 +420,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: [true, { ignoreAtRules: ['unknown', /^YOUR-/i] }],
 
 	accept: [
@@ -444,8 +449,8 @@ testRule({
 });
 
 testRule({
-	plugins: ["./stylelint-mrhenry-nesting.cjs"],
-	ruleName,
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: [false],
 
 	accept: [
