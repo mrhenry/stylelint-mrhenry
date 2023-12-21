@@ -25,13 +25,29 @@ const meta = {
 	fixable: true,
 };
 
-const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
+/** @type {import('stylelint').Rule<true|null, Array<string | RegExp>>} */
+const ruleFunction = (primaryOption, secondaryOption, context) => {
 	return (postcssRoot, postcssResult) => {
-		if (!primaryOption) {
-			return;
-		}
+		const validPrimary = stylelint.utils.validateOptions(postcssResult, ruleName, {
+			actual: primaryOption,
+			possible: [true]
+		});
+
+		/* c8 ignore next */
+		if (!validPrimary) return;
+
+		const validSecondary = stylelint.utils.validateOptions(postcssResult, ruleName, {
+			actual: secondaryOption,
+			possible: {
+				ignoreAtRules: [isString, isRegExp],
+			},
+			optional: true,
+		});
+
+		/* c8 ignore next */
+		if (!validSecondary) return;
 		
-		const ignoreAtRulesOptions = secondaryOptionObject?.ignoreAtRules ?? [];
+		const ignoreAtRulesOptions = secondaryOption?.ignoreAtRules ?? [];
 
 		postcssRoot.walkAtRules((atrule) => {
 			let name = atrule.name.toLowerCase();
@@ -39,7 +55,8 @@ const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
 				name === 'media' ||
 				name === 'supports' ||
 				name === 'container' ||
-				name === 'scope'
+				name === 'scope' ||
+				name === 'starting-style'
 			) {
 				// always allowed
 				return;
@@ -314,4 +331,12 @@ function getFirstCompoundOrSelf(x) {
 	}
 
 	return x.nodes[0];
+}
+
+function isRegExp(value) {
+	return value instanceof RegExp;
+}
+
+function isString(value) {
+	return typeof value === 'string' || value instanceof String;
 }

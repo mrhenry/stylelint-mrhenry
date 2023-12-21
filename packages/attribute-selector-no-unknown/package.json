@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Warn when unknown attribute selectors are used",
   "type": "module",
   "main": "index.mjs",

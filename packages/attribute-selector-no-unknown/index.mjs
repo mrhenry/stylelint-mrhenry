@@ -17,11 +17,16 @@ const meta = {
 	url: "https://github.com/mrhenry/stylelint-mrhenry/tree/main/packages/attribute-selector-no-unknown"
 };
 
-const ruleFunction = (primaryOption, secondaryOptionObject, context) => {
+/** @type {import('stylelint').Rule<true|null>} */
+const ruleFunction = (primaryOption, secondaryOption, context) => {
 	return (postcssRoot, postcssResult) => {
-		if (!primaryOption) {
-			return;
-		}
+		const validPrimary = stylelint.utils.validateOptions(postcssResult, ruleName, {
+			actual: primaryOption,
+			possible: [true]
+		});
+
+		/* c8 ignore next */
+		if (!validPrimary) return;
 		
 		postcssRoot.walkRules((rule) => {
 			if (!rule.selector.includes('[')) {

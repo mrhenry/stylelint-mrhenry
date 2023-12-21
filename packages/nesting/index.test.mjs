@@ -451,7 +451,7 @@ testRule({
 testRule({
 	plugins: ["./index.mjs"],
 	ruleName: rule.ruleName,
-	config: [false],
+	config: [null],
 
 	accept: [
 		{

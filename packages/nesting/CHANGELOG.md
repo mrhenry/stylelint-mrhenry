@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+
+- Add type annotations
+- Allow nesting `@starting-style {}`
+
 ## 3.0.0
 
  - Migrate to `stylelint` `v16.0.0`
