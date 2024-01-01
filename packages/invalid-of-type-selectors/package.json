@@ -25,12 +25,12 @@
     "stylelint-plugin"
   ],
   "dependencies": {
-    "postcss-selector-parser": "^6.0.11"
+    "postcss-selector-parser": "^6.0.15"
   },
   "peerDependencies": {
     "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^16.0.2"
+    "stylelint": "^16.1.0"
   }
 }

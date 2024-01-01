@@ -30,6 +30,6 @@
     "stylelint": "^16.0.0"
   },
   "devDependencies": {
-    "stylelint": "^16.0.2"
+    "stylelint": "^16.1.0"
   }
 }
