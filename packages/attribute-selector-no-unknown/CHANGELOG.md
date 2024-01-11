@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.1.0
+
+- Add `globalAttributes` secondary option
+- Add `attributesByTagName` secondary option
+
+```js
+{
+	globalAttributes: ['attr-foo'],
+	attributesByTagName: {
+		'elem-foo': ['attr-bar', 'attr-baz']
+	}
+}
+```
+
 ## 2.0.1
 
 - Add type annotations

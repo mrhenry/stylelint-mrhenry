@@ -150,6 +150,63 @@ testRule({
 testRule({
 	plugins: ["./index.mjs"],
 	ruleName: rule.ruleName,
+	config: [true, {
+		globalAttributes: ['attr-foo'],
+		attributesByTagName: {
+			'elem-foo': ['attr-bar', 'attr-baz'],
+			'elem-bar': ['attr-bar-2'],
+		}
+	}],
+
+	accept: [
+		{
+			code: '[attr-foo] {}',
+		},
+		{
+			code: 'div[attr-foo] {}',
+		},
+		{
+			code: 'summary[attr-foo] {}',
+		},
+		{
+			code: 'elem-foo[attr-bar] {}',
+		},
+		{
+			code: 'elem-foo[attr-baz] {}',
+		},
+		{
+			code: '[attr-bar] {}',
+		},
+		{
+			code: 'elem-bar[attr-bar-2] {}',
+		},
+	],
+
+	reject: [
+		{
+			code: "div[attr-bar] {}",
+			description: "Non-global attribute selector with an unexpected tag name",
+			message: rule.messages.expected('attr-bar', 'div'),
+			line: 1,
+			column: 4,
+			endLine: 1,
+			endColumn: 12
+		},
+		{
+			code: "elem-bar[attr-bar] {}",
+			description: "Non-global attribute selector with an unexpected tag name",
+			message: rule.messages.expected('attr-bar', 'elem-bar'),
+			line: 1,
+			column: 9,
+			endLine: 1,
+			endColumn: 17
+		},
+	]
+});
+
+testRule({
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
 	config: null,
 
 	accept: [
