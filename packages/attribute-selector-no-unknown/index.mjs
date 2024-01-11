@@ -1,6 +1,7 @@
 import stylelint from 'stylelint';
 import selectorParser from 'postcss-selector-parser';
 import { data } from './data.mjs';
+import { isRecordOfStringArrays, isString } from './validate-options.mjs';
 
 const ruleName = "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown";
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -27,7 +28,34 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 		/* c8 ignore next */
 		if (!validPrimary) return;
-		
+
+		const validSecondary = stylelint.utils.validateOptions(postcssResult, ruleName, {
+			actual: secondaryOption,
+			possible: {
+				globalAttributes: [isString],
+				attributesByTagName: isRecordOfStringArrays,
+			},
+			optional: true,
+		});
+
+		/* c8 ignore next */
+		if (!validSecondary) return;
+
+		const userData = {
+			/** @type {Set<string>} */
+			globalAttributes: new Set(secondaryOption?.globalAttributes ?? []),
+			/** @type {Map<string, string[]>} */
+			attributesByTagName: new Map(Object.entries(secondaryOption?.attributesByTagName ?? {})),
+			/** @type {Set<string>} */
+			allAttributes: new Set(secondaryOption?.globalAttributes ?? []),
+		}
+
+		for (const attributes of userData.attributesByTagName.values()) {
+			for (const attribute of attributes) {
+				userData.allAttributes.add(attribute);
+			}
+		}
+
 		postcssRoot.walkRules((rule) => {
 			if (!rule.selector.includes('[')) {
 				return;
@@ -46,8 +74,12 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 				// Global attributes are always allowed.
 				if (data.globalAttributes.has(attribute)) return;
+				if (userData.globalAttributes.has(attribute)) return;
 
-				if (!data.allAttributes.has(attribute)) {
+				if (
+					!data.allAttributes.has(attribute) &&
+					!userData.allAttributes.has(attribute)
+				) {
 					// An unknown attribute that doesn't start with "data-" is always invalid.
 					stylelint.utils.report({
 						message: messages.expected,
@@ -64,12 +96,15 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 				const tagName = findTagNameInCompound(node);
 				if (!tagName) {
-					// Without a tagname we assime that any attribute is allowed.
+					// Without a tagname we assume that any attribute is allowed.
 					return;
 				}
 
 				const attributesByTagName = data.attributesByTagName.get(tagName);
 				if (attributesByTagName && attributesByTagName.includes(attribute)) return;
+
+				const userAttributesByTagName = userData.attributesByTagName.get(tagName);
+				if (userAttributesByTagName && userAttributesByTagName.includes(attribute)) return;
 
 				// If the tag name is a standard element
 				// we assume that only attributes that are valid for that tag are allowed.
