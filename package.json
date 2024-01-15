@@ -15,7 +15,7 @@
   "devDependencies": {
     "@webref/css": "^6.10.1",
     "aria-attributes": "^2.0.1",
-    "c8": "^9.0.0",
+    "c8": "^9.1.0",
     "html-element-attributes": "^3.3.0",
     "stylelint-test-rule-node": "^0.2.1",
     "stylelint": "^16.1.0",
