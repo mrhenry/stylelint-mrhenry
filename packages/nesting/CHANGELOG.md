@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+- Add warnings for mixed specificity in nesting
+
 ## 3.0.1
 
 - Add type annotations
