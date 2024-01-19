@@ -1,5 +1,6 @@
 import stylelint from 'stylelint';
 import selectorParser from 'postcss-selector-parser';
+import { compare, selectorSpecificity } from '@csstools/selector-specificity';
 
 const ruleName = "@mrhenry/stylelint-mrhenry-nesting";
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -17,6 +18,9 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 	},
 	rejectedNestingSelectorIncorrectShape: () => {
 		return `Nested selectors must be compound selectors, starting with "&" and followed by a single pseudo selector.`;
+	},
+	rejectedMixedSpecificity: () => {
+		return `Each selector of a list in a nested context take the specificity of the most specific list item. This can lead to unexpected results.`;
 	},
 });
 
@@ -96,6 +100,39 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 				node: atrule,
 				index: 0,
 				endIndex: atrule.name.length,
+				result: postcssResult,
+				ruleName,
+			});
+		});
+
+		postcssRoot.walkRules((rule) => {
+			const containsBlocks = rule.nodes && rule.nodes.some((node) => node.type === 'rule' || node.type === 'atrule');
+			if (!containsBlocks) {
+				return;
+			}
+
+			const selectorAST = selectorParser().astSync(rule.selector);
+			if (selectorAST.nodes?.length < 2) {
+				return;
+			}
+
+			const specificities = selectorAST.nodes.map((node) => {
+				return selectorSpecificity(node);
+			});
+
+			const specificitiesAreEqual = specificities.every((specificity) => {
+				return compare(specificity, specificities[0]) === 0;
+			});
+
+			if (specificitiesAreEqual) {
+				return;
+			}
+
+			stylelint.utils.report({
+				message: messages.rejectedMixedSpecificity(),
+				node: rule,
+				index: 0,
+				endIndex: rule.selector.length,
 				result: postcssResult,
 				ruleName,
 			});

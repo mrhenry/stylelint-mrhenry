@@ -63,6 +63,10 @@ testRule({
 			code: "div { { color: red; } }",
 			description: "empty selector",
 		},
+		{
+			code: ":where(div), :where(.foo) { &:hover { color: green; } }",
+			description: "Mixed specificity",
+		},
 	],
 
 	reject: [
@@ -191,6 +195,24 @@ testRule({
 			column: 7,
 			endLine: 1,
 			endColumn: 22
+		},
+		{
+			code: "div, .foo { @media screen { color: green; } }",
+			description: "Mixed specificity",
+			message: rule.messages.rejectedMixedSpecificity(),
+			line: 1,
+			column: 1,
+			endLine: 1,
+			endColumn: 10
+		},
+		{
+			code: "div, .foo { &:hover { color: green; } }",
+			description: "Mixed specificity",
+			message: rule.messages.rejectedMixedSpecificity(),
+			line: 1,
+			column: 1,
+			endLine: 1,
+			endColumn: 10
 		},
 	]
 });
