@@ -65,7 +65,11 @@ testRule({
 		},
 		{
 			code: ":where(div), :where(.foo) { &:hover { color: green; } }",
-			description: "Mixed specificity",
+			description: "Mixed specificity, but each wrapped with :where()",
+		},
+		{
+			code: ":is(div, .foo) { &:hover { color: green; } }",
+			description: "Mixed specificity, but wrapped with :is()",
 		},
 	],
 
