@@ -254,6 +254,7 @@ export const order = [
 	"font-variant-position",
 	"font-variation-settings",
 	"font-weight",
+	"font-width",
 	"footnote-display",
 	"footnote-policy",
 	"forced-color-adjust",
@@ -433,8 +434,10 @@ export const order = [
 	"place-self",
 	"pointer-events",
 	"position",
-	"position-fallback",
 	"position-fallback-bounds",
+	"position-try-final",
+	"position-try-options",
+	"position-try-order",
 	"print-color-adjust",
 	"quotes",
 	"r",
@@ -636,5 +639,6 @@ export const order = [
 	"writing-mode",
 	"x",
 	"y",
-	"z-index"
+	"z-index",
+	"zoom"
 ]
