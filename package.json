@@ -13,12 +13,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@webref/css": "^6.10.3",
+    "@webref/css": "^6.11.0",
     "aria-attributes": "^2.0.1",
     "c8": "^9.1.0",
     "html-element-attributes": "^3.3.0",
     "stylelint-test-rule-node": "^0.2.1",
-    "stylelint": "^16.1.0",
+    "stylelint": "^16.2.1",
     "svg-element-attributes": "^2.1.0"
   },
   "volta": {
