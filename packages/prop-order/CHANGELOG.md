@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.2
+
+- Add new properties:
+  - `font-width`
+  - `position-try-final`
+  - `position-try-options`
+  - `position-try-order`
+  - `zoom`
+- Remove unknown properties:
+  - `position-fallback`
+
 ## 3.0.1
 
 - Add type annotations
