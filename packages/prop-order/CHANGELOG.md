@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.3
+
+- Add new properties:
+  - `view-transition-class`
+- Remove unknown properties:
+  - `position-try-final`
+
 ## 3.0.2
 
 - Add new properties:
