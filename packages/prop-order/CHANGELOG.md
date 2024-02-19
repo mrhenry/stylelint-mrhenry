@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.4
+
+- Add new properties:
+  - `caret-animation`
+  - `position-animation`
+  - `position-try`
+  - `reading-order-items`
+- Remove unknown properties:
+  - `layout-order`
+  - `reading-order`
+
 ## 3.0.3
 
 - Add new properties:
