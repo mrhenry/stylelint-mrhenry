@@ -201,6 +201,7 @@ export const order = [
 	"direction",
 	"display",
 	"dominant-baseline",
+	"dynamic-range-limit",
 	"empty-cells",
 	"field-sizing",
 	"fill",
