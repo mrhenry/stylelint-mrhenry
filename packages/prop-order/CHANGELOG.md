@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.5
+
+- Add new properties:
+  - `dynamic-range-limit`
+
 ## 3.0.4
 
 - Add new properties:
