@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.6
+
+- Remove unknown properties:
+  - `position-fallback-bounds`
+
 ## 3.0.5
 
 - Add new properties:
