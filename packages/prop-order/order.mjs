@@ -435,7 +435,6 @@ export const order = [
 	"pointer-events",
 	"position",
 	"position-animation",
-	"position-fallback-bounds",
 	"position-try",
 	"position-try-options",
 	"position-try-order",
