@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.7
+
+- Add new properties:
+  - `anchor-scope`
+- Remove unknown properties:
+  - `position-animation`
+
 ## 3.0.6
 
 - Remove unknown properties:
