@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.8
+
+- Add new properties:
+  - `position-anchor`
+- Remove unknown properties:
+  - `anchor-default`
+
 ## 3.0.7
 
 - Add new properties:
