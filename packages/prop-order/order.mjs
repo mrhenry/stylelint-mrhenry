@@ -438,6 +438,7 @@ export const order = [
 	"position-try",
 	"position-try-options",
 	"position-try-order",
+	"position-visibility",
 	"print-color-adjust",
 	"quotes",
 	"r",

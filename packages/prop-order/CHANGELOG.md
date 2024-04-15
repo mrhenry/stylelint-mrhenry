@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.9
+
+- Add new properties:
+  - `position-visibility`
+
 ## 3.0.8
 
 - Add new properties:
