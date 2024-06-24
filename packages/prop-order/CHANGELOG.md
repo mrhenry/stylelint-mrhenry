@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.10
+
+- Add new properties:
+  - `reading-flow`
+- Remove unknown properties:
+  - `reading-order-items`
+
 ## 3.0.9
 
 - Add new properties:
