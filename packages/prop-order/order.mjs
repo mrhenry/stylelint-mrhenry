@@ -442,7 +442,7 @@ export const order = [
 	"print-color-adjust",
 	"quotes",
 	"r",
-	"reading-order-items",
+	"reading-flow",
 	"region-fragment",
 	"resize",
 	"rest",
