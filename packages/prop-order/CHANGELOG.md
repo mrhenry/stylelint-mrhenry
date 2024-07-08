@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.11
+
+- Add new properties:
+  - `position-try-fallbacks`
+  - `scroll-marker-group`
+- Remove unknown properties:
+  - `position-try-options`
+  - `scroll-start-target-block`
+  - `scroll-start-target-inline`
+  - `scroll-start-target-x`
+  - `scroll-start-target-y`
+
 ## 3.0.10
 
 - Add new properties:
