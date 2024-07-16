@@ -49,8 +49,7 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 				parent = parent.parent;
 			}
 
-			/* c8 ignore next */
-			// Comments after a node, not one a new line should be kept together with that node.
+			// Comments after a node, not on a new line should be kept together with that node.
 			// color: red; /* my color */
 			let matchedComments = new Map();
 			container.each((node) => {
@@ -60,13 +59,16 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 					if (prev) {
 						matchedComments.set(comment, prev);
-						comment.remove();
 					}
 				}
 			});
 
 			let declarationsSections = [[]];
 			container.each((node) => {
+				if (matchedComments.has(node)) {
+					return;
+				}
+
 				if (
 					node.type === 'decl' &&
 					!node.variable &&
@@ -89,46 +91,52 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 			});
 
 			declarationsSections.forEach((section) => {
-				section.sort((a, b) => {
+				const sortedSection = [...section];
+				sortedSection.sort((a, b) => {
 					return order.indexOf(a.prop.toLowerCase()) - order.indexOf(b.prop.toLowerCase());
 				});
 
 				const firstNodeIndex = Math.min.apply(Math, section.map((x) => container.index(x)));
 				const originalFirstNode = container.nodes[firstNodeIndex];
 
-				section.forEach((decl, index) => {
-					const desiredIndex = firstNodeIndex + index;
-					if (container.index(decl) === desiredIndex) {
+				if (!context.fix) {
+					sortedSection.forEach((decl, index) => {
+						const oldIndex = section.indexOf(decl);
+						if (index === oldIndex) {
+							return;
+						}
+
+						if (index < section.length - 1) {
+							stylelint.utils.report({
+								message: messages.expected(decl.prop),
+								node: decl,
+								index: 0,
+								endIndex: decl.prop.length,
+								result: postcssResult,
+								ruleName,
+							});
+						}
+					});
+				}
+
+				if (context.fix) {
+					sortedSection.reverse().forEach((decl) => {
+						container.insertBefore(firstNodeIndex, decl);
 						return;
+					});
+					
+					const finalFirstNode = container.nodes[firstNodeIndex];
+					if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
+						const originalRawBefore = originalFirstNode.raws.before;
+						originalFirstNode.raws.before = finalFirstNode.raws.before;
+						finalFirstNode.raws.before = originalRawBefore;
 					}
-
-					if (context.fix) {
-						container.insertBefore(desiredIndex, decl);
-						return;
-					}
-
-					if (index < section.length - 1) {
-						stylelint.utils.report({
-							message: messages.expected(decl.prop),
-							node: decl,
-							index: 0,
-							endIndex: decl.prop.length,
-							result: postcssResult,
-							ruleName,
-						});
-					}
-				});
-
-				const finalFirstNode = container.nodes[firstNodeIndex];
-				if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
-					const originalRawBefore = originalFirstNode.raws.before;
-					originalFirstNode.raws.before = finalFirstNode.raws.before;
-					finalFirstNode.raws.before = originalRawBefore;
 				}
 			});
 
 			if (context.fix) {
 				for (const [comment, prev] of matchedComments) {
+					comment.remove();
 					container.insertAfter(prev, comment);
 				}
 			}
