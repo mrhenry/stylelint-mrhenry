@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.12
+
+- Fix unexpected mutations when `disable` comments are set.
+
 ## 3.0.11
 
 - Add new properties:

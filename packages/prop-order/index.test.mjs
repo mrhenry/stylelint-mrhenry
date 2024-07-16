@@ -72,7 +72,7 @@ testRule({
 		{
 			code: ".class { margin-left: 10px; margin: 0; }",
 			fixed: ".class { margin: 0; margin-left: 10px; }",
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (1)",
 			message: rule.messages.expected('margin'),
 			line: 1,
 			column: 29,
@@ -82,7 +82,7 @@ testRule({
 		{
 			code: "@media screen { margin-left: 10px; margin: 0; }",
 			fixed: "@media screen { margin: 0; margin-left: 10px; }",
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (2)",
 			message: rule.messages.expected('margin'),
 			line: 1,
 			column: 36,
@@ -92,7 +92,7 @@ testRule({
 		{
 			code: ".class { margin-left: 5px; margin: 0; margin-bottom: 10px; }",
 			fixed: ".class { margin: 0; margin-bottom: 10px; margin-left: 5px; }",
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (3)",
 			warnings: [
 				{
 					message: rule.messages.expected('margin'),
@@ -123,7 +123,7 @@ testRule({
 	--foo: 0;
 	--bar: 0;
 }`,
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (4)",
 			message: rule.messages.expected('margin'),
 			line: 3,
 			column: 2,
@@ -143,7 +143,7 @@ testRule({
 	margin: 0;
 	margin-left: 10px;
 }`,
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (5)",
 			message: rule.messages.expected('margin'),
 			line: 5,
 			column: 2,
@@ -163,7 +163,7 @@ testRule({
 		margin-left: 10px;
 	}
 }`,
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (5)",
 			message: rule.messages.expected('margin'),
 			line: 4,
 			column: 3,
@@ -205,7 +205,7 @@ testRule({
 	height: 5px;
 }
 			`,
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (7)",
 			warnings: [
 				{
 					message: rule.messages.expected('border'),
@@ -245,7 +245,7 @@ testRule({
 	padding-top: 0.8125rem;
 	text-align: left;
 }`,
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (8)",
 			warnings: [
 				{
 					message: rule.messages.expected('font-size'),
@@ -274,7 +274,7 @@ testRule({
 					column: 2,
 					endLine: 4,
 					endColumn: 13
-				}
+				},
 			]
 		},
 	]
@@ -288,7 +288,7 @@ testRule({
 	accept: [
 		{
 			code: ".class { margin-left: 10px; margin: 0; }",
-			description: "shorthand after longhand",
+			description: "shorthand after longhand (9)",
 		}
 	],
 
