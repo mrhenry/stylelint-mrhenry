@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.0.13
+
+- Add new properties:
+  - `interpolate-size`
+  - `position-area`
+- Remove unknown properties:
+  - `inset-area`
+  - `masonry-auto-flow`
+  - `scroll-start`
+  - `scroll-start-block`
+  - `scroll-start-inline`
+  - `scroll-start-x`
+  - `scroll-start-y`
+
 ## 3.0.12
 
 - Fix unexpected mutations when `disable` comments are set.
