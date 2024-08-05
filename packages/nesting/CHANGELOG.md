@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.1
+
+- Update `@csstools/selector-specificity` to `v4.0.0`
+
 ## 3.1.0
 
 - Add warnings for mixed specificity in nesting
