@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.14
+
+- Fix the order of some shorthands and longhands
+
 ## 3.0.13
 
 - Add new properties:

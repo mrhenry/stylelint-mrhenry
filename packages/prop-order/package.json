@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-prop-order",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "description": "Mr. Henry's preferred order for CSS properties",
   "type": "module",
   "main": "index.mjs",
@@ -30,6 +30,7 @@
     "stylelint": "^16.0.0"
   },
   "devDependencies": {
+    "css-tree": "^2.3.1",
     "stylelint": "^16.7.0"
   }
 }

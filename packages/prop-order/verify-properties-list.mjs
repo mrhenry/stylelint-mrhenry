@@ -1,8 +1,13 @@
 import css from '@webref/css';
+import { definitionSyntax } from 'css-tree';
+
 import { order } from './order.mjs';
 
 const existingProperties = new Set(order);
 const properties = new Set();
+
+const constituentPropertiesGraph = [];
+const logicalPropertyGroups = new Map();
 
 const parsedFiles = await css.listAll();
 for (const [shortname, data] of Object.entries(parsedFiles)) {
@@ -28,6 +33,23 @@ for (const [shortname, data] of Object.entries(parsedFiles)) {
 		}
 
 		properties.add(property.name);
+
+		if (property.logicalPropertyGroup) {
+			const group = logicalPropertyGroups.get(property.logicalPropertyGroup) ?? new Set();
+			group.add(property.name);
+			logicalPropertyGroups.set(property.logicalPropertyGroup, group);
+		}
+
+		if (property.value || property.newValues) {
+			const ast = definitionSyntax.parse(property.value || property.newValues);
+			definitionSyntax.walk(ast, {
+				enter(node) {
+					if (node.type === 'Property') {
+						constituentPropertiesGraph.push([node.name, property.name]);
+					}
+				}
+			});
+		}
 	}
 }
 
@@ -68,5 +90,31 @@ for (const [shortname, data] of Object.entries(parsedFiles)) {
 
 	if (hasUnknownProperties) {
 		process.exit(1);
+	}
+}
+
+{ 
+	for (let i = 0; i < constituentPropertiesGraph.length; i++) {
+		const [a, b] = constituentPropertiesGraph[i];
+
+		for (const [groupName, group] of logicalPropertyGroups) {
+			if (group.has(a) && group.has(b)) {
+				const removed = constituentPropertiesGraph.splice(i, 1);
+				i--;
+			}
+		}
+	}
+
+	for (let i = 0; i < order.length; i++) {
+		const thisProp = constituentPropertiesGraph.find((x) => x[0] === order[i]);
+		if (!thisProp) {
+			continue;
+		}
+
+		const shorthand = order.findIndex((x) => x === thisProp[1]);
+
+		if (i < shorthand) {
+			console.warn(`property ordered before a corresponding shorthand : "${thisProp[0]}" must come after "${thisProp[1]}"`);
+		}
 	}
 }
