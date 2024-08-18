@@ -1,8 +1,9 @@
 # Changelog
 
-## 2.1.0
+## 2.1.1
 
 - Add support for the `writingsuggestions` attribute
+- Set minimum Stylelint version to `16.8.2`
 
 ## 2.1.0
 

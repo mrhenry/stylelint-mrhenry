@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2
+
+- Set minimum Stylelint version to `16.8.2`
+
 ## 3.0.1
 
 - Add type annotations

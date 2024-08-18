@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-invalid-of-type-selectors",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Warn when :first-of-type is used with class selectors",
   "type": "module",
   "main": "index.mjs",
@@ -28,9 +28,9 @@
     "postcss-selector-parser": "^6.1.1"
   },
   "peerDependencies": {
-    "stylelint": "^16.0.0"
+    "stylelint": "^16.8.2"
   },
   "devDependencies": {
-    "stylelint": "^16.7.0"
+    "stylelint": "^16.8.2"
   }
 }

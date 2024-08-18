@@ -1,6 +1,11 @@
 # Changelog
 
-### 3.1.1
+## 3.1.2
+
+- Improved support for auto fixes
+- Set minimum Stylelint version to `16.8.2`
+
+## 3.1.1
 
 - Update `@csstools/selector-specificity` to `v4.0.0`
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.15
+
+- Improved support for auto fixes
+- Set minimum Stylelint version to `16.8.2`
+
 ## 3.0.14
 
 - Fix the order of some shorthands and longhands
