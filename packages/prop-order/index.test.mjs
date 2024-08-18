@@ -73,21 +73,27 @@ testRule({
 			code: ".class { margin-left: 10px; margin: 0; }",
 			fixed: ".class { margin: 0; margin-left: 10px; }",
 			description: "shorthand after longhand (1)",
-			message: rule.messages.expected('margin'),
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
 			line: 1,
-			column: 29,
+			column: 10,
 			endLine: 1,
-			endColumn: 35
+			endColumn: 39
 		},
 		{
 			code: "@media screen { margin-left: 10px; margin: 0; }",
 			fixed: "@media screen { margin: 0; margin-left: 10px; }",
 			description: "shorthand after longhand (2)",
-			message: rule.messages.expected('margin'),
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
 			line: 1,
-			column: 36,
+			column: 17,
 			endLine: 1,
-			endColumn: 42
+			endColumn: 46
 		},
 		{
 			code: ".class { margin-left: 5px; margin: 0; margin-bottom: 10px; }",
@@ -95,18 +101,14 @@ testRule({
 			description: "shorthand after longhand (3)",
 			warnings: [
 				{
-					message: rule.messages.expected('margin'),
+					message: rule.messages.expected(
+						['margin-left', 'margin', 'margin-bottom'],
+						['margin', 'margin-bottom', 'margin-left'],
+					),
 					line: 1,
-					column: 28,
+					column: 10,
 					endLine: 1,
-					endColumn: 34
-				},
-				{
-					message: rule.messages.expected('margin-bottom'),
-					line: 1,
-					column: 39,
-					endLine: 1,
-					endColumn: 52
+					endColumn: 59
 				}
 			]
 		},
@@ -124,11 +126,14 @@ testRule({
 	--bar: 0;
 }`,
 			description: "shorthand after longhand (4)",
-			message: rule.messages.expected('margin'),
-			line: 3,
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 2,
 			column: 2,
 			endLine: 3,
-			endColumn: 8
+			endColumn: 12
 		},
 		{
 			code: `.class {
@@ -144,11 +149,14 @@ testRule({
 	margin-left: 10px;
 }`,
 			description: "shorthand after longhand (5)",
-			message: rule.messages.expected('margin'),
-			line: 5,
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 4,
 			column: 2,
 			endLine: 5,
-			endColumn: 8
+			endColumn: 12
 		},
 		{
 			code: `@keyframes FOO {
@@ -164,11 +172,14 @@ testRule({
 	}
 }`,
 			description: "shorthand after longhand (5)",
-			message: rule.messages.expected('margin'),
-			line: 4,
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 3,
 			column: 3,
 			endLine: 4,
-			endColumn: 9
+			endColumn: 13
 		},
 		{
 			code: `
@@ -176,15 +187,15 @@ testRule({
 	--c: 0;
 	--a: 3;
 	--b: 1;
-	border-bottom-color: red;
+	border-bottom-color: red; /* border-color */
 	border: 1px solid green;
 
 	/* section*/
-	margin: 0;
+	margin: 0; /* reset */
 	margin-left: 10px;
-	margin-inline: 5px;
+	margin-inline: 5px; /* logical */
 
-	height: 5px;
+	height: 5px; /* size */
 	width: 10px;
 }
 			`,
@@ -194,40 +205,49 @@ testRule({
 	--a: 3;
 	--b: 1;
 	border: 1px solid green;
-	border-bottom-color: red;
+	border-bottom-color: red; /* border-color */
 
 	/* section*/
-	margin: 0;
-	margin-inline: 5px;
+	margin: 0; /* reset */
+	margin-inline: 5px; /* logical */
 	margin-left: 10px;
 
 	width: 10px;
-	height: 5px;
+	height: 5px; /* size */
 }
 			`,
 			description: "shorthand after longhand (7)",
 			warnings: [
 				{
-					message: rule.messages.expected('border'),
-					line: 7,
+					message: rule.messages.expected(
+						['border-bottom-color', 'border'],
+						['border', 'border-bottom-color']
+					),
+					line: 6,
 					column: 2,
 					endLine: 7,
-					endColumn: 8
+					endColumn: 26
 				},
 				{
-					message: rule.messages.expected('margin-inline'),
-					line: 12,
+					message: rule.messages.expected(
+						['margin', 'margin-left', 'margin-inline'],
+						['margin', 'margin-inline', 'margin-left']
+					),
+					line: 10,
 					column: 2,
 					endLine: 12,
-					endColumn: 15
+					endColumn: 21
 				},
 				{
-					message: rule.messages.expected('width'),
-					line: 15,
+					message: rule.messages.expected(
+						['height', 'width'],
+						['width', 'height']
+					),
+					line: 14,
 					column: 2,
 					endLine: 15,
-					endColumn: 7
-				}
+					endColumn: 14
+				},
 			]
 		},
 		{
@@ -236,44 +256,26 @@ testRule({
 	font-size: 0.875rem; /* 14px */
 	padding-top: 0.8125rem;
 	line-height: 0.875rem; /* 14px */
-	text-align: left;
+	text-align: left /* align */;
 }`,
 			fixed: `.class {
 	font-size: 0.875rem; /* 14px */
 	font-weight: 500;
 	line-height: 0.875rem; /* 14px */
 	padding-top: 0.8125rem;
-	text-align: left;
+	text-align: left /* align */;
 }`,
 			description: "shorthand after longhand (8)",
 			warnings: [
 				{
-					message: rule.messages.expected('font-size'),
-					line: 3,
-					column: 2,
-					endLine: 3,
-					endColumn: 11
-				},
-				{
-					message: rule.messages.expected('font-weight'),
+					message: rule.messages.expected(
+						['font-weight', 'font-size', 'padding-top', 'line-height', 'text-align'],
+						['font-size', 'font-weight', 'line-height', 'padding-top', 'text-align'],
+					),
 					line: 2,
 					column: 2,
-					endLine: 2,
-					endColumn: 13
-				},
-				{
-					message: rule.messages.expected('line-height'),
-					line: 5,
-					column: 2,
-					endLine: 5,
-					endColumn: 13
-				},
-				{
-					message: rule.messages.expected('padding-top'),
-					line: 4,
-					column: 2,
-					endLine: 4,
-					endColumn: 13
+					endLine: 6,
+					endColumn: 31
 				},
 			]
 		},

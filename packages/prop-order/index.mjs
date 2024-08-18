@@ -5,8 +5,8 @@ const orderSet = new Set(order);
 
 const ruleName = "@mrhenry/stylelint-mrhenry-prop-order";
 const messages = stylelint.utils.ruleMessages(ruleName, {
-	expected: (name) => {
-		return `Expected ${name} to appear at a different position.`;
+	expected: (names, orderedNames) => {
+		return `Expected ${names.join(', ')} to appear in ${orderedNames.join(', ')} order.`;
 	}
 });
 
@@ -63,6 +63,7 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 				}
 			});
 
+			/** @type {Array<Array<import('postcss').Node>>} */
 			let declarationsSections = [[]];
 			container.each((node) => {
 				if (matchedComments.has(node)) {
@@ -99,47 +100,60 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 				const firstNodeIndex = Math.min.apply(Math, section.map((x) => container.index(x)));
 				const originalFirstNode = container.nodes[firstNodeIndex];
 
-				if (!context.fix) {
-					sortedSection.forEach((decl, index) => {
-						const oldIndex = section.indexOf(decl);
-						if (index === oldIndex) {
-							return;
-						}
+				const sectionPropNames = section.map((decl) => decl.prop);
+				const sortedSectionPropNames = sortedSection.map((decl) => decl.prop);
 
-						if (index < section.length - 1) {
-							stylelint.utils.report({
-								message: messages.expected(decl.prop),
-								node: decl,
-								index: 0,
-								endIndex: decl.prop.length,
-								result: postcssResult,
-								ruleName,
-							});
-						}
-					});
-				}
+				/** @type {import('postcss').Node} */
+				const firstDecl = section.at(0);
+				/** @type {import('postcss').Node} */
+				const lastDecl = section.at(-1);
 
-				if (context.fix) {
-					sortedSection.reverse().forEach((decl) => {
-						container.insertBefore(firstNodeIndex, decl);
-						return;
-					});
-					
-					const finalFirstNode = container.nodes[firstNodeIndex];
-					if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
-						const originalRawBefore = originalFirstNode.raws.before;
-						originalFirstNode.raws.before = finalFirstNode.raws.before;
-						finalFirstNode.raws.before = originalRawBefore;
+				const containerStartOffset = container.source?.start.offset;
+				const index = firstDecl.source?.start.offset - containerStartOffset;
+				const endIndex = lastDecl.source?.end.offset - containerStartOffset;
+
+				for (let i = 0; i < sectionPropNames.length; i++) {
+					const original = sectionPropNames[i];
+					const sorted = sortedSectionPropNames[i];
+
+					if (original === sorted) {
+						continue;
 					}
+
+					stylelint.utils.report({
+						message: messages.expected(sectionPropNames, sortedSectionPropNames),
+						node: container,
+						index,
+						endIndex,
+						result: postcssResult,
+						ruleName,
+						fix: () => {
+							sortedSection.reverse().forEach((decl) => {
+								container.insertBefore(firstNodeIndex, decl);
+								return;
+							});
+
+							const finalFirstNode = container.nodes[firstNodeIndex];
+							if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
+								const originalRawBefore = originalFirstNode.raws.before;
+								originalFirstNode.raws.before = finalFirstNode.raws.before;
+								finalFirstNode.raws.before = originalRawBefore;
+							}
+
+							for (const [comment, prev] of matchedComments) {
+								if (!section.includes(prev)) {
+									continue;
+								}
+
+								comment.remove();
+								container.insertAfter(prev, comment);
+							}
+						}
+					});
+
+					break;
 				}
 			});
-
-			if (context.fix) {
-				for (const [comment, prev] of matchedComments) {
-					comment.remove();
-					container.insertAfter(prev, comment);
-				}
-			}
 		});
 	};
 };
