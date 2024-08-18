@@ -2,6 +2,10 @@
 
 ## 2.1.0
 
+- Add support for the `writingsuggestions` attribute
+
+## 2.1.0
+
 - Add `globalAttributes` secondary option
 - Add `attributesByTagName` secondary option
 
