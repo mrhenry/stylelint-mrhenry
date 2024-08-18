@@ -185,51 +185,16 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 				}
 
 				let nestingCounter = 0;
-				{
-					selectorAST.walkNesting(() => {
-						nestingCounter++;
-					});
-				}
+				selectorAST.walkNesting(() => {
+					nestingCounter++;
+				});
 
 				// .foo { .bar & {} }
 				if (
-					context.fix &&
 					nestingCounter === 1 &&
 					selectorAST.nodes[selectorAST.nodes.length - 1]?.type === 'nesting' &&
 					selectorAST.nodes[selectorAST.nodes.length - 2]?.type === 'combinator'
 				) {
-					fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
-					continue;
-				}
-
-				// .foo { :focus& {} }
-				if (
-					context.fix &&
-					selectorAST.nodes.length === 2 &&
-					selectorAST.nodes[0]?.type === 'pseudo' &&
-					selectorParser.isPseudoClass(selectorAST.nodes[0]) &&
-					selectorAST.nodes[1]?.type === 'nesting'
-				) {
-					const a = selectorAST.nodes[0];
-					const b = selectorAST.nodes[1];
-
-					selectorAST.replaceWith(selectorParser.selector({
-						nodes: [
-							b,
-							a,
-						]
-					}))
-					rule.selector = selectorsAST.toString();
-					continue;
-				}
-
-				// .foo { .bar {} }
-				if (selectorAST.nodes[0]?.type !== 'nesting') {
-					if (context.fix) {
-						fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector);
-						continue;
-					}
-
 					stylelint.utils.report({
 						message: messages.rejectedMustStartWithAmpersand(),
 						node: rule,
@@ -237,6 +202,58 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
+						fix: () => {
+							fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
+						}
+					});
+
+					continue;
+				}
+
+				// .foo { :focus& {} }
+				if (
+					selectorAST.nodes.length === 2 &&
+					selectorAST.nodes[0]?.type === 'pseudo' &&
+					selectorParser.isPseudoClass(selectorAST.nodes[0]) &&
+					selectorAST.nodes[1]?.type === 'nesting'
+				) {
+					stylelint.utils.report({
+						message: messages.rejectedMustStartWithAmpersand(),
+						node: rule,
+						index: 0,
+						endIndex: rule.selector.length,
+						result: postcssResult,
+						ruleName,
+						fix: () => {
+							const a = selectorAST.nodes[0];
+							const b = selectorAST.nodes[1];
+
+							selectorAST.replaceWith(selectorParser.selector({
+								nodes: [
+									b,
+									a,
+								]
+							}));
+
+							rule.selector = selectorsAST.toString();
+						}
+					});
+
+					continue;
+				}
+
+				// .foo { .bar {} }
+				if (selectorAST.nodes[0]?.type !== 'nesting') {
+					stylelint.utils.report({
+						message: messages.rejectedMustStartWithAmpersand(),
+						node: rule,
+						index: 0,
+						endIndex: rule.selector.length,
+						result: postcssResult,
+						ruleName,
+						fix: () => {
+							fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector);
+						}
 					});
 
 					continue;
@@ -244,22 +261,6 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 				// .foo { & + .bar {} }
 				if (selectorAST.nodes.length !== 2) {
-					if (context.fix) {
-
-						const firstPart = selectorAST.nodes[0];
-						const afterFirstPart = selectorAST.nodes[0]?.next();
-
-						if (firstPart && afterFirstPart?.type === 'combinator') {
-							selectorAST.nodes[0]?.replaceWith(selectorParser.nesting())
-							fixSelector(rule, selectorsAST, selectorAST);
-						} else {
-							selectorAST.nodes[0]?.remove();
-							fixSelector(rule, selectorsAST, selectorAST);
-						}
-						
-						continue;
-					}
-
 					stylelint.utils.report({
 						message: messages.rejectedNestingSelectorIncorrectShape(),
 						node: rule,
@@ -267,6 +268,18 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
+						fix: () => {
+							const firstPart = selectorAST.nodes[0];
+							const afterFirstPart = selectorAST.nodes[0]?.next();
+
+							if (firstPart && afterFirstPart?.type === 'combinator') {
+								selectorAST.nodes[0]?.replaceWith(selectorParser.nesting())
+								fixSelector(rule, selectorsAST, selectorAST);
+							} else {
+								selectorAST.nodes[0]?.remove();
+								fixSelector(rule, selectorsAST, selectorAST);
+							}
+						}
 					});
 
 					continue;
@@ -274,12 +287,6 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 
 				// .foo { &.bar {} }
 				if (selectorAST.nodes[1]?.type !== 'pseudo') {
-					if (context.fix) {
-						selectorAST.nodes[0]?.remove();
-						fixSelector(rule, selectorsAST, selectorAST);
-						continue;
-					}
-
 					stylelint.utils.report({
 						message: messages.rejectedMustEndWithPseudo(),
 						node: rule,
@@ -287,6 +294,10 @@ const ruleFunction = (primaryOption, secondaryOption, context) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
+						fix: () => {
+							selectorAST.nodes[0]?.remove();
+							fixSelector(rule, selectorsAST, selectorAST);
+						}
 					});
 
 					continue;
