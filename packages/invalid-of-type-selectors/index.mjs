@@ -19,8 +19,7 @@ const ofTypeSelectors = [
 	':nth-last-of-type',
 ];
 
-/** @type {import('stylelint').Rule<true|null>} */
-const ruleFunction = (primaryOption, secondaryOption, context) => {
+const ruleFunction = (primaryOption) => {
 	return (postcssRoot, postcssResult) => {
 		const validPrimary = stylelint.utils.validateOptions(postcssResult, ruleName, {
 			actual: primaryOption,

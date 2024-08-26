@@ -1,11 +1,12 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Warn when unknown attribute selectors are used",
   "type": "module",
   "main": "index.mjs",
   "scripts": {
-    "test": "c8 --100 node --test"
+    "test": "c8 --100 node --test",
+    "build": "node ./build.mjs"
   },
   "author": "Mr. Henry",
   "license": "MIT",
