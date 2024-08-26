@@ -29,8 +29,7 @@ const meta = {
 	fixable: true,
 };
 
-/** @type {import('stylelint').Rule<true|null, Array<string | RegExp>>} */
-const ruleFunction = (primaryOption, secondaryOption, context) => {
+const ruleFunction = (primaryOption, secondaryOption) => {
 	return (postcssRoot, postcssResult) => {
 		const validPrimary = stylelint.utils.validateOptions(postcssResult, ruleName, {
 			actual: primaryOption,

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.3
+
+- Remove the `JSDoc` type annotation for the plugin to avoid forwards compat issues with subtle upstream type changes.
+
 ## 3.0.2
 
 - Set minimum Stylelint version to `16.8.2`

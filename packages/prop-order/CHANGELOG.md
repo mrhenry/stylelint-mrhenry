@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.16
+
+- Remove the `JSDoc` type annotation for the plugin to avoid forwards compat issues with subtle upstream type changes.
+- Add new properties:
+  - `background-repeat-inline`
+  - `background-repeat-block`
+  - `background-repeat-x`
+  - `background-repeat-y`
+  - `line-fit-edge`
+  - `text-box`
+  - `view-transition-group`
+
 ## 3.0.15
 
 - Improved support for auto fixes
