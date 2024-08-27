@@ -10,7 +10,23 @@ const constituentPropertiesGraph = [];
 const logicalPropertyGroups = new Map();
 
 const parsedFiles = await css.listAll();
-for (const [shortname, data] of Object.entries(parsedFiles)) {
+const entries = Array.from(Object.entries(parsedFiles));
+
+entries.sort((a, b) => {
+	const name_a = a[0].replace(/-\d+$/, '');
+	const name_b = b[0].replace(/-\d+$/, '');
+
+	if (name_a !== name_b) {
+		return name_a.localeCompare(name_b);
+	}
+
+	const level_a = parseInt((a[0].match(/-(\d+)$/) ?? [])[1] ?? '0', 10);
+	const level_b = parseInt((b[0].match(/-(\d+)$/) ?? [])[1] ?? '0', 10);
+
+	return level_a - level_b;
+});
+
+for (const [, data] of entries) {
 	for (const property of data.properties) {
 		if (property.name.startsWith('-webkit-')) {
 			continue;
