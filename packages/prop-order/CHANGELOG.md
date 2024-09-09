@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.0.17
+
+- Add new properties:
+  - `masonry-auto-tracks`
+  - `masonry-direction`
+  - `masonry-fill`
+  - `masonry-flow`
+  - `masonry-template-areas`
+  - `masonry-template-tracks`
+  - `masonry-track`
+  - `masonry-track-end`
+  - `masonry-track-start`
+
 ## 3.0.16
 
 - Remove the `JSDoc` type annotation for the plugin to avoid forwards compat issues with subtle upstream type changes.
