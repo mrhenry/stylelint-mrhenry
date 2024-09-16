@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.18
+
+- Add new properties:
+  - `masonry`
+  - `masonry-slack`
+
 ## 3.0.17
 
 - Add new properties:
