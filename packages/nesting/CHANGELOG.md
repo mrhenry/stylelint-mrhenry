@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.4
+
+- Update dependencies
+
 ## 3.1.3
 
 - Remove the `JSDoc` type annotation for the plugin to avoid forwards compat issues with subtle upstream type changes.
