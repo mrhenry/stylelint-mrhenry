@@ -30,7 +30,7 @@
     "stylelint": "^16.10.0"
   },
   "devDependencies": {
-    "css-tree": "^3.0.0",
+    "css-tree": "^3.0.1",
     "stylelint": "^16.10.0"
   }
 }
