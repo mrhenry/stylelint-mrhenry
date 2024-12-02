@@ -32,9 +32,9 @@
     "postcss-selector-parser": "^7.0.0"
   },
   "peerDependencies": {
-    "stylelint": "^16.10.0"
+    "stylelint": "^16.11.0"
   },
   "devDependencies": {
-    "stylelint": "^16.10.0"
+    "stylelint": "^16.11.0"
   }
 }
