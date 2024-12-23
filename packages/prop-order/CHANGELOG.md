@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.0.19
+
+- Add new properties:
+  - `gap-rule`
+  - `gap-rule-width`
+  - `gap-rule-style`
+  - `gap-rule-color`
+  - `gap-rule-break`
+  - `gap-rule-outset`
+  - `gap-rule-paint-order`
+  - `row-rule`
+  - `row-rule-width`
+  - `row-rule-style`
+  - `row-rule-color`
+  - `row-rule-break`
+  - `row-rule-outset`
+  - `column-rule`
+  - `column-rule-width`
+  - `column-rule-style`
+  - `column-rule-color`
+  - `column-rule-break`
+  - `column-rule-outset`
+  - `scroll-initial-target`
+- Remove unknown properties:
+  - `scroll-start-target`
+
 ## 3.0.18
 
 - Add new properties:
