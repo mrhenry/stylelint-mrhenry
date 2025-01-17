@@ -96,6 +96,9 @@ export const order = [
 	"border-left-color",
 	"border-left-style",
 	"border-left-width",
+
+	"corners",
+	"border-radius",
 	// border radius logical shorthands
 	"border-inline-start-radius",
 	"border-inline-end-radius",
@@ -116,11 +119,9 @@ export const order = [
 	"border-top-right-radius",
 	"border-bottom-left-radius",
 	"border-bottom-right-radius",
+
 	"border-boundary",
 	"border-limit",
-
-	"corners",
-	"border-radius",
 
 	"border-spacing",
 	"border-clip",

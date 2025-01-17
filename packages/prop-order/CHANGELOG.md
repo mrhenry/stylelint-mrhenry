@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.20
+- Fix `border-radius`
+
 ## 3.0.19
 
 - Add new properties:
