@@ -166,6 +166,8 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						result: postcssResult,
 						ruleName,
 					});
+
+					return;
 				}
 			}
 
@@ -180,6 +182,21 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 			for (let i = 0; i < selectorsAST.nodes.length; i++) {
 				const selectorAST = selectorsAST.nodes[i];
 				if (!selectorAST.nodes || !selectorAST.nodes.length) {
+					continue;
+				}
+
+				// .foo { & {} }
+				// .foo { && {} }
+				if (selectorAST.nodes.every((x) => x.type === 'nesting' || x.type === 'comment')) {
+					stylelint.utils.report({
+						message: messages.rejectedNestingSelectorIncorrectShape(),
+						node: rule,
+						index: 0,
+						endIndex: rule.selector.length,
+						result: postcssResult,
+						ruleName,
+					});
+
 					continue;
 				}
 
@@ -201,8 +218,11 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
+						fix: {
+							apply: () => {
+								fixSelector_AncestorPattern(rule, selectorsAST, selectorAST);
+							},
+							node: rule
 						}
 					});
 
@@ -223,18 +243,21 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							const a = selectorAST.nodes[0];
-							const b = selectorAST.nodes[1];
+						fix: {
+							apply: () => {
+								const a = selectorAST.nodes[0];
+								const b = selectorAST.nodes[1];
 
-							selectorAST.replaceWith(selectorParser.selector({
-								nodes: [
-									b,
-									a,
-								]
-							}));
+								selectorAST.replaceWith(selectorParser.selector({
+									nodes: [
+										b,
+										a,
+									]
+								}));
 
-							rule.selector = selectorsAST.toString();
+								rule.selector = selectorsAST.toString();
+							},
+							node: rule
 						}
 					});
 
@@ -250,8 +273,11 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector);
+						fix: {
+							apply: () => {
+								fixSelector(rule, selectorsAST, selectorAST, isRelativeSelector);
+							},
+							node: rule
 						}
 					});
 
@@ -267,17 +293,20 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							const firstPart = selectorAST.nodes[0];
-							const afterFirstPart = selectorAST.nodes[0]?.next();
+						fix: {
+							apply: () => {
+								const firstPart = selectorAST.nodes[0];
+								const afterFirstPart = selectorAST.nodes[0]?.next();
 
-							if (firstPart && afterFirstPart?.type === 'combinator') {
-								selectorAST.nodes[0]?.replaceWith(selectorParser.nesting())
-								fixSelector(rule, selectorsAST, selectorAST);
-							} else {
-								selectorAST.nodes[0]?.remove();
-								fixSelector(rule, selectorsAST, selectorAST);
-							}
+								if (firstPart && afterFirstPart?.type === 'combinator') {
+									selectorAST.nodes[0]?.replaceWith(selectorParser.nesting())
+									fixSelector(rule, selectorsAST, selectorAST);
+								} else {
+									selectorAST.nodes[0]?.remove();
+									fixSelector(rule, selectorsAST, selectorAST);
+								}
+							},
+							node: rule
 						}
 					});
 
@@ -293,9 +322,12 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						endIndex: rule.selector.length,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							selectorAST.nodes[0]?.remove();
-							fixSelector(rule, selectorsAST, selectorAST);
+						fix: {
+							apply: () => {
+								selectorAST.nodes[0]?.remove();
+								fixSelector(rule, selectorsAST, selectorAST);
+							},
+							node: rule
 						}
 					});
 
