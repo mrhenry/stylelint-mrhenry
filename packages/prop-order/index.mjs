@@ -126,27 +126,30 @@ const ruleFunction = (primaryOption) => {
 						endIndex,
 						result: postcssResult,
 						ruleName,
-						fix: () => {
-							sortedSection.reverse().forEach((decl) => {
-								container.insertBefore(firstNodeIndex, decl);
-								return;
-							});
+						fix: {
+							apply: () => {
+								sortedSection.reverse().forEach((decl) => {
+									container.insertBefore(firstNodeIndex, decl);
+									return;
+								});
 
-							const finalFirstNode = container.nodes[firstNodeIndex];
-							if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
-								const originalRawBefore = originalFirstNode.raws.before;
-								originalFirstNode.raws.before = finalFirstNode.raws.before;
-								finalFirstNode.raws.before = originalRawBefore;
-							}
-
-							for (const [comment, prev] of matchedComments) {
-								if (!section.includes(prev)) {
-									continue;
+								const finalFirstNode = container.nodes[firstNodeIndex];
+								if (originalFirstNode.raws.before && finalFirstNode.raws.before) {
+									const originalRawBefore = originalFirstNode.raws.before;
+									originalFirstNode.raws.before = finalFirstNode.raws.before;
+									finalFirstNode.raws.before = originalRawBefore;
 								}
 
-								comment.remove();
-								container.insertAfter(prev, comment);
-							}
+								for (const [comment, prev] of matchedComments) {
+									if (!section.includes(prev)) {
+										continue;
+									}
+
+									comment.remove();
+									container.insertAfter(prev, comment);
+								}
+							},
+							node: container
 						}
 					});
 

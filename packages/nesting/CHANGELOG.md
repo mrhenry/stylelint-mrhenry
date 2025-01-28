@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.0
+
+- Add support for `EditInfo` in report warnings.
+
 ## 3.1.4
 
 - Update dependencies

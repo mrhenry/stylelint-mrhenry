@@ -9,6 +9,7 @@ testRule({
 	plugins: ["./index.mjs"],
 	ruleName: rule.ruleName,
 	config: true,
+	computeEditInfo: true,
 
 	accept: [
 		{
@@ -81,7 +82,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 12
+			endColumn: 12,
+			fix: { text: '&:has(> bar)', range: [6, 11] },
 		},
 		{
 			code: "div { .foo.bar { color: red } }",
@@ -90,7 +92,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 15
+			endColumn: 15,
+			fix: { text: '&:is(.foo.bar)', range: [6, 14] },
 		},
 		{
 			code: "div { &:focus, .foo.bar { color: red } }",
@@ -99,7 +102,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 24
+			endColumn: 24,
+			fix: { text: '&:is( .foo.bar)', range: [14, 23] },
 		},
 		{
 			code: "div { & { color: red } }",
@@ -108,7 +112,7 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 8
+			endColumn: 8,
 		},
 		{
 			code: "div { &.bar { color: red } }",
@@ -117,7 +121,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 12
+			endColumn: 12,
+			fix: { text: ':is(.bar)', range: [7, 11] },
 		},
 		{
 			code: "div { & :is(.bar) { color: red } }",
@@ -126,12 +131,13 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 18
+			endColumn: 18,
+			fix: { text: ':is(& :is(.bar)', range: [7, 16] },
 		},
 		{
 			code: "div { && { color: red } }",
 			description: "Multiple & top level",
-			message: rule.messages.rejectedMustEndWithPseudo(),
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
 			line: 1,
 			column: 7,
 			endLine: 1,
@@ -144,7 +150,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 12
+			endColumn: 12,
+			fix: { text: ':is(& + &)', range: [7, 11] },
 		},
 		{
 			code: "div { & &:focus { color: red } }",
@@ -153,7 +160,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 16
+			endColumn: 16,
+			fix: { text: ':is(& &:focus)', range: [7, 15] },
 		},
 		{
 			code: "div { & > bar + .bar { color: red } }",
@@ -162,7 +170,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 21
+			endColumn: 21,
+			fix: { text: ':is(& > bar + .bar)', range: [7, 20] },
 		},
 		{
 			code: "div { & > bar + :not(.bar) { color: red } }",
@@ -171,7 +180,8 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 27
+			endColumn: 27,
+			fix: { text: ':is(& > bar + :not(.bar)', range: [7, 25] },
 		},
 		{
 			code: "div { &:is(.foo) { &:is(.bar) { color: red } } }",
@@ -180,7 +190,7 @@ testRule({
 			line: 1,
 			column: 20,
 			endLine: 1,
-			endColumn: 30
+			endColumn: 30,
 		},
 		{
 			code: "div { @layer foo { color: red } }",
@@ -251,10 +261,20 @@ testRule({
 			endColumn: 25
 		},
 		{
-			code: ".bar { && { color: magenta; } }",
-			fixed: ".bar { &:is(&) { color: magenta; } }",
+			code: ".bar { & { color: magenta; } }",
+			unfixable: true,
 			description: "Must end with pseudo",
-			message: rule.messages.rejectedMustEndWithPseudo(),
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
+			line: 1,
+			column: 8,
+			endLine: 1,
+			endColumn: 9
+		},
+		{
+			code: ".bar { && { color: magenta; } }",
+			unfixable: true,
+			description: "Must end with pseudo",
+			message: rule.messages.rejectedNestingSelectorIncorrectShape(),
 			line: 1,
 			column: 8,
 			endLine: 1,

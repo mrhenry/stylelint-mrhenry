@@ -9,6 +9,248 @@ testRule({
 	plugins: ["./index.mjs"],
 	ruleName: rule.ruleName,
 	config: true,
+	computeEditInfo: true,
+
+	accept: [
+		{
+			code: ".class { margin: 0; margin-left: 10px; }",
+			description: "longhand after shorthand"
+		},
+		{
+			code: "@media screen { margin {} padding {} }",
+		},
+		{
+			code: "@import 'foo.css';",
+		},
+		{
+			code: ".class {}",
+			description: "empty rule"
+		},
+		{
+			code: `.class {
+	margin-left: 10px;
+	/* a comment */
+	margin: 0;
+}`,
+			description: "shorthand after longhand but separated by a comment"
+		},
+		{
+			code: `.class {
+	margin-left: 10px;
+
+	margin: 0;
+}`,
+			description: "shorthand after longhand but separated by an empty line"
+		},
+		{
+			code: `.class {
+	margin-left: 10px;
+	
+	margin: 0;
+}`,
+			description: "shorthand after longhand but separated by a line with only whitespace"
+		},
+		{
+			code: `.class {
+	margin-left: 10px;
+	--foo: 0;
+	margin: 0;
+	--bar: 0;
+}`,
+			description: "shorthand after longhand but separated by custom properties",
+		},
+		{
+			code: `@font-face {
+	margin-left: 10px;
+	margin: 0;
+}`,
+			description: "shorthand after longhand in ignored at-rule",
+		},
+	],
+
+	reject: [
+		{
+			code: ".class { margin-left: 10px; margin: 0; }",
+			description: "shorthand after longhand (1)",
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 1,
+			column: 10,
+			endLine: 1,
+			endColumn: 39,
+			fix: { text: ': 0; margin-left: 10px', range: [15, 37] },
+		},
+		{
+			code: "@media screen { margin-left: 10px; margin: 0; }",
+			description: "shorthand after longhand (2)",
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 1,
+			column: 17,
+			endLine: 1,
+			endColumn: 46,
+			fix: { text: ': 0; margin-left: 10px', range: [22, 44] },
+		},
+		{
+			code: ".class { margin-left: 5px; margin: 0; margin-bottom: 10px; }",
+			description: "shorthand after longhand (3)",
+			warnings: [
+				{
+					message: rule.messages.expected(
+						['margin-left', 'margin', 'margin-bottom'],
+						['margin', 'margin-bottom', 'margin-left'],
+					),
+					line: 1,
+					column: 10,
+					endLine: 1,
+					endColumn: 59,
+					fix: { text: ': 0; margin-bottom: 10px; margin-left: 5', range: [15, 55] },
+				}
+			]
+		},
+		{
+			code: `.class {
+	margin-left: 10px;
+	margin: 0;
+	--foo: 0;
+	--bar: 0;
+}`,
+			description: "shorthand after longhand (4)",
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 2,
+			column: 2,
+			endLine: 3,
+			endColumn: 12,
+			fix: { text: ': 0;\n\tmargin-left: 10px', range: [16, 39] },
+		},
+		{
+			code: `.class {
+	--foo: 0;
+	--bar: 0;
+	margin-left: 10px;
+	margin: 0;
+}`,
+			description: "shorthand after longhand (5)",
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 4,
+			column: 2,
+			endLine: 5,
+			endColumn: 12,
+			fix: { text: ': 0;\n\tmargin-left: 10px', range: [38, 61] },
+		},
+		{
+			code: `@keyframes FOO {
+	0% {
+		margin-left: 10px;
+		margin: 0;
+	}
+}`,
+			description: "shorthand after longhand (5)",
+			message: rule.messages.expected(
+				['margin-left', 'margin'],
+				['margin', 'margin-left']
+			),
+			line: 3,
+			column: 3,
+			endLine: 4,
+			endColumn: 13,
+			fix: { text: ': 0;\n\t\tmargin-left: 10px', range: [31, 55] },
+		},
+		{
+			code: `
+.class {
+	--c: 0;
+	--a: 3;
+	--b: 1;
+	border-bottom-color: red; /* border-color */
+	border: 1px solid green;
+
+	/* section*/
+	margin: 0; /* reset */
+	margin-left: 10px;
+	margin-inline: 5px; /* logical */
+
+	height: 5px; /* size */
+	width: 10px;
+}
+			`,
+			description: "shorthand after longhand (7)",
+			warnings: [
+				{
+					message: rule.messages.expected(
+						['border-bottom-color', 'border'],
+						['border', 'border-bottom-color']
+					),
+					line: 6,
+					column: 2,
+					endLine: 7,
+					endColumn: 26,
+					fix: { text: ': 1px solid green;\n\tborder-bottom-color: red; /* border-color */', range: [44, 108] },
+				},
+				{
+					message: rule.messages.expected(
+						['margin', 'margin-left', 'margin-inline'],
+						['margin', 'margin-inline', 'margin-left']
+					),
+					line: 10,
+					column: 2,
+					endLine: 12,
+					endColumn: 21,
+					fix: undefined,
+				},
+				{
+					message: rule.messages.expected(
+						['height', 'width'],
+						['width', 'height']
+					),
+					line: 14,
+					column: 2,
+					endLine: 15,
+					endColumn: 14,
+					fix: undefined,
+				},
+			]
+		},
+		{
+			code: `.class {
+	font-weight: 500;
+	font-size: 0.875rem; /* 14px */
+	padding-top: 0.8125rem;
+	line-height: 0.875rem; /* 14px */
+	text-align: left /* align */;
+}`,
+			description: "shorthand after longhand (8)",
+			warnings: [
+				{
+					message: rule.messages.expected(
+						['font-weight', 'font-size', 'padding-top', 'line-height', 'text-align'],
+						['font-size', 'font-weight', 'line-height', 'padding-top', 'text-align'],
+					),
+					line: 2,
+					column: 2,
+					endLine: 6,
+					endColumn: 31,
+					fix: { text: 'size: 0.875rem; /* 14px */\n\tfont-weight: 500;\n\tline-height: 0.875rem; /* 14px */\n\tpadding-top: 0.8125rem;', range: [15, 120] },
+				},
+			]
+		},
+	]
+});
+
+testRule({
+	plugins: ["./index.mjs"],
+	ruleName: rule.ruleName,
+	config: true,
 	fix: true,
 
 	accept: [
