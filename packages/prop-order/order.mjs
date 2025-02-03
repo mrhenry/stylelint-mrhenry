@@ -319,6 +319,7 @@ export const order = [
 	"inset-block",
 	"inset-block-start",
 	"inset-block-end",
+	"interactivity",
 	"interpolate-size",
 	"isolation",
 	"letter-spacing",
