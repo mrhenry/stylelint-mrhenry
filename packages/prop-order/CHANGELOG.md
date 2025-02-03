@@ -1,10 +1,16 @@
 # Changelog
 
+## 3.1.1
+
+- Add new properties:
+  - `interactivity`
+
 ## 3.1.0
 
 - Add support for `EditInfo` in report warnings.
 
 ## 3.0.20
+
 - Fix `border-radius`
 
 ## 3.0.19
