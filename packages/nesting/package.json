@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@csstools/selector-specificity": "^5.0.0",
-    "postcss-selector-parser": "^7.0.0"
+    "postcss-selector-parser": "^7.1.0"
   },
   "peerDependencies": {
     "stylelint": "^16.14.1"
