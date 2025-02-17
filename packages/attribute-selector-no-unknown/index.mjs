@@ -85,7 +85,7 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 						messageArgs: [attribute],
 						node: rule,
 						index: node.sourceIndex,
-						endIndex: node.sourceIndex + attribute.length,
+						endIndex: node.sourceIndex + node.toString().trim().length,
 						result: postcssResult,
 						ruleName,
 					});
@@ -112,7 +112,7 @@ const ruleFunction = (primaryOption, secondaryOption) => {
 					messageArgs: [attribute, tagName],
 					node: rule,
 					index: node.sourceIndex,
-					endIndex: node.sourceIndex + attribute.length,
+					endIndex: node.sourceIndex + node.toString().trim().length,
 					result: postcssResult,
 					ruleName,
 				});

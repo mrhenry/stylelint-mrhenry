@@ -106,7 +106,7 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 25
+			endColumn: 27
 		},
 		{
 			code: "mr-foo[bar] {}",
@@ -115,7 +115,16 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 10
+			endColumn: 12
+		},
+		{
+			code: ".something,\nmr-foo[bar] {}",
+			description: "Attribute selector without 'data-' prefix on a custom element",
+			message: rule.messages.expected('bar'),
+			line: 2,
+			column: 7,
+			endLine: 2,
+			endColumn: 12
 		},
 		{
 			code: "mr-foo[href] {}",
@@ -124,7 +133,7 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 11
+			endColumn: 13
 		},
 		{
 			code: "button[href] {}",
@@ -133,7 +142,7 @@ testRule({
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 11
+			endColumn: 13
 		},
 		{
 			code: "foo[href] {}",
@@ -142,7 +151,7 @@ testRule({
 			line: 1,
 			column: 4,
 			endLine: 1,
-			endColumn: 8
+			endColumn: 10
 		},
 	]
 });
@@ -190,7 +199,7 @@ testRule({
 			line: 1,
 			column: 4,
 			endLine: 1,
-			endColumn: 12
+			endColumn: 14
 		},
 		{
 			code: "elem-bar[attr-bar] {}",
@@ -199,7 +208,7 @@ testRule({
 			line: 1,
 			column: 9,
 			endLine: 1,
-			endColumn: 17
+			endColumn: 19
 		},
 	]
 });
