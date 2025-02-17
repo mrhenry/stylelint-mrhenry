@@ -1,5 +1,55 @@
 # Changelog
 
+## 3.1.2
+
+- Add new properties:
+  - `animation-trigger`
+  - `animation-trigger-type`
+  - `animation-trigger-timeline`
+  - `animation-trigger-exit-range`
+  - `animation-trigger-exit-range-end`
+  - `animation-trigger-exit-range-start`
+  - `animation-trigger-range`
+  - `animation-trigger-range-end`
+  - `animation-trigger-range-start`
+  - `border-shape`
+  - `corner-inline-start-shape`
+  - `corner-inline-end-shape`
+  - `corner-block-start-shape`
+  - `corner-block-end-shape`
+  - `corner-top-shape`
+  - `corner-top-right-shape`
+  - `corner-top-left-shape`
+  - `corner-right-shape`
+  - `corner-bottom-shape`
+  - `corner-bottom-right-shape`
+  - `corner-bottom-left-shape`
+  - `corner-left-shape`
+  - `corner-start-start-shape`
+  - `corner-start-end-shape`
+  - `corner-end-end-shape`
+  - `corner-end-start-shape`
+  - `item-flow`
+  - `item-direction`
+  - `item-track`
+  - `item-wrap`
+  - `item-cross`
+  - `item-pack`
+  - `item-slack`
+- Remove unknown properties:
+  - `corners`
+  - `masonry`
+  - `masonry-auto-tracks`
+  - `masonry-direction`
+  - `masonry-fill`
+  - `masonry-flow`
+  - `masonry-slack`
+  - `masonry-template-areas`
+  - `masonry-template-tracks`
+  - `masonry-track`
+  - `masonry-track-end`
+  - `masonry-track-start`
+
 ## 3.1.1
 
 - Add new properties:
