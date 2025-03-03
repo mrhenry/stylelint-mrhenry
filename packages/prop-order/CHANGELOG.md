@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.3
+
+- Add new properties:
+  - `column-height`
+  - `column-wrap`
+
 ## 3.1.2
 
 - Add new properties:
