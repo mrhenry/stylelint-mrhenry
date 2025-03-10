@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.1.4
+
+- Add new properties:
+  - `rule`
+  - `rule-break`
+  - `rule-color`
+  - `rule-outset`
+  - `rule-paint-order`
+  - `rule-style`
+  - `rule-width`
+- Remove unknown properties:
+  - `gap-rule`
+  - `gap-rule-break`
+  - `gap-rule-color`
+  - `gap-rule-outset`
+  - `gap-rule-paint-order`
+  - `gap-rule-style`
+  - `gap-rule-width`
+
 ## 3.1.3
 
 - Add new properties:
