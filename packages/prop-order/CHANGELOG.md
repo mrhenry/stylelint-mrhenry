@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.5
+
+- Add new properties:
+  - `slider-orientation`
+
 ## 3.1.4
 
 - Add new properties:

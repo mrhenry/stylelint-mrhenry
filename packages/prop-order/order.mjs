@@ -558,6 +558,7 @@ export const order = [
 	"shape-padding",
 	"shape-rendering",
 	"shape-subtract",
+	"slider-orientation",
 	"spatial-navigation-action",
 	"spatial-navigation-contain",
 	"spatial-navigation-function",
