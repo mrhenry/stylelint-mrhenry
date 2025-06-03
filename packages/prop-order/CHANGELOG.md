@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.6
+
+- Add new properties:
+  - `animation-trigger-behavior`
+  - `scroll-target-group`
+- Remove unknown properties:
+  - `animation-trigger-type`
+
 ## 3.1.5
 
 - Add new properties:
