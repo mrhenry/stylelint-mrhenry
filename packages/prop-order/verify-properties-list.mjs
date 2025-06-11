@@ -109,7 +109,8 @@ for (const [, data] of entries) {
 	}
 }
 
-{ 
+{
+	let hasIncorrectShorthandOrders;
 	for (let i = 0; i < constituentPropertiesGraph.length; i++) {
 		const [a, b] = constituentPropertiesGraph[i];
 
@@ -131,6 +132,11 @@ for (const [, data] of entries) {
 
 		if (i < shorthand) {
 			console.warn(`property ordered before a corresponding shorthand : "${thisProp[0]}" must come after "${thisProp[1]}"`);
+			hasIncorrectShorthandOrders = true;
 		}
+	}
+
+	if (hasIncorrectShorthandOrders) {
+		process.exit(1);
 	}
 }
