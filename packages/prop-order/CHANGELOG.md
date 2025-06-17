@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.7
+
+- Add new properties:
+  - `animation-range-center`
+  - `pointer-timeline`
+  - `pointer-timeline-axis`
+  - `pointer-timeline-name`
+- Remove unknown properties:
+  - `animation-trigger-type`
+
 ## 3.1.6
 
 - Add new properties:
