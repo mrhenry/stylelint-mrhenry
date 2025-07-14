@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.8
+
+- Add new properties:
+  - `interest-delay`
+  - `interest-delay-start`
+  - `interest-delay-end`
+
 ## 3.1.7
 
 - Add new properties:
