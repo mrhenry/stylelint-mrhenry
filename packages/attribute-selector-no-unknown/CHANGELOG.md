@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.5
+
+- Update dependencies
+
 ## 2.1.4
 
 - Fix report position
