@@ -294,7 +294,7 @@ export const order = [
 	"rule-color",
 	"rule-break",
 	"rule-outset",
-	"rule-paint-order",
+	"rule-overlap",
 	"row-gap",
 	"row-rule",
 	"row-rule-width",

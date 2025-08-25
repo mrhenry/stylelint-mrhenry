@@ -1,38 +1,45 @@
 # Changelog
 
+## 3.1.9
+
+- Add properties:
+  - `rule-overlap`
+- Remove properties:
+  - `rule-paint-order`
+
 ## 3.1.8
 
-- Add new properties:
+- Add properties:
   - `interest-delay`
   - `interest-delay-start`
   - `interest-delay-end`
 
 ## 3.1.7
 
-- Add new properties:
+- Add properties:
   - `animation-range-center`
   - `pointer-timeline`
   - `pointer-timeline-axis`
   - `pointer-timeline-name`
-- Remove unknown properties:
+- Remove properties:
   - `animation-trigger-type`
 
 ## 3.1.6
 
-- Add new properties:
+- Add properties:
   - `animation-trigger-behavior`
   - `scroll-target-group`
-- Remove unknown properties:
+- Remove properties:
   - `animation-trigger-type`
 
 ## 3.1.5
 
-- Add new properties:
+- Add properties:
   - `slider-orientation`
 
 ## 3.1.4
 
-- Add new properties:
+- Add properties:
   - `rule`
   - `rule-break`
   - `rule-color`
@@ -40,7 +47,7 @@
   - `rule-paint-order`
   - `rule-style`
   - `rule-width`
-- Remove unknown properties:
+- Remove properties:
   - `gap-rule`
   - `gap-rule-break`
   - `gap-rule-color`
@@ -51,13 +58,13 @@
 
 ## 3.1.3
 
-- Add new properties:
+- Add properties:
   - `column-height`
   - `column-wrap`
 
 ## 3.1.2
 
-- Add new properties:
+- Add properties:
   - `animation-trigger`
   - `animation-trigger-type`
   - `animation-trigger-timeline`
@@ -91,7 +98,7 @@
   - `item-cross`
   - `item-pack`
   - `item-slack`
-- Remove unknown properties:
+- Remove properties:
   - `corners`
   - `masonry`
   - `masonry-auto-tracks`
@@ -107,7 +114,7 @@
 
 ## 3.1.1
 
-- Add new properties:
+- Add properties:
   - `interactivity`
 
 ## 3.1.0
@@ -120,7 +127,7 @@
 
 ## 3.0.19
 
-- Add new properties:
+- Add properties:
   - `gap-rule`
   - `gap-rule-width`
   - `gap-rule-style`
@@ -141,18 +148,18 @@
   - `column-rule-break`
   - `column-rule-outset`
   - `scroll-initial-target`
-- Remove unknown properties:
+- Remove properties:
   - `scroll-start-target`
 
 ## 3.0.18
 
-- Add new properties:
+- Add properties:
   - `masonry`
   - `masonry-slack`
 
 ## 3.0.17
 
-- Add new properties:
+- Add properties:
   - `masonry-auto-tracks`
   - `masonry-direction`
   - `masonry-fill`
@@ -166,7 +173,7 @@
 ## 3.0.16
 
 - Remove the `JSDoc` type annotation for the plugin to avoid forwards compat issues with subtle upstream type changes.
-- Add new properties:
+- Add properties:
   - `background-repeat-inline`
   - `background-repeat-block`
   - `background-repeat-x`
@@ -186,10 +193,10 @@
 
 ## 3.0.13
 
-- Add new properties:
+- Add properties:
   - `interpolate-size`
   - `position-area`
-- Remove unknown properties:
+- Remove properties:
   - `inset-area`
   - `masonry-auto-flow`
   - `scroll-start`
@@ -204,10 +211,10 @@
 
 ## 3.0.11
 
-- Add new properties:
+- Add properties:
   - `position-try-fallbacks`
   - `scroll-marker-group`
-- Remove unknown properties:
+- Remove properties:
   - `position-try-options`
   - `scroll-start-target-block`
   - `scroll-start-target-inline`
@@ -216,67 +223,67 @@
 
 ## 3.0.10
 
-- Add new properties:
+- Add properties:
   - `reading-flow`
-- Remove unknown properties:
+- Remove properties:
   - `reading-order-items`
 
 ## 3.0.9
 
-- Add new properties:
+- Add properties:
   - `position-visibility`
 
 ## 3.0.8
 
-- Add new properties:
+- Add properties:
   - `position-anchor`
-- Remove unknown properties:
+- Remove properties:
   - `anchor-default`
 
 ## 3.0.7
 
-- Add new properties:
+- Add properties:
   - `anchor-scope`
-- Remove unknown properties:
+- Remove properties:
   - `position-animation`
 
 ## 3.0.6
 
-- Remove unknown properties:
+- Remove properties:
   - `position-fallback-bounds`
 
 ## 3.0.5
 
-- Add new properties:
+- Add properties:
   - `dynamic-range-limit`
 
 ## 3.0.4
 
-- Add new properties:
+- Add properties:
   - `caret-animation`
   - `position-animation`
   - `position-try`
   - `reading-order-items`
-- Remove unknown properties:
+- Remove properties:
   - `layout-order`
   - `reading-order`
 
 ## 3.0.3
 
-- Add new properties:
+- Add properties:
   - `view-transition-class`
-- Remove unknown properties:
+- Remove properties:
   - `position-try-final`
 
 ## 3.0.2
 
-- Add new properties:
+- Add properties:
   - `font-width`
   - `position-try-final`
   - `position-try-options`
   - `position-try-order`
   - `zoom`
-- Remove unknown properties:
+- Remove properties:
   - `position-fallback`
 
 ## 3.0.1
@@ -289,7 +296,7 @@
 
 ## 2.0.16
 
-- Add new properties:
+- Add properties:
   - `inset-area`
 
 ## 2.0.15
@@ -302,27 +309,27 @@
 
 ## 2.0.13
 
-- Add new properties:
+- Add properties:
   - `field-sizing`
-- Remove unknown properties:
+- Remove properties:
   - `align-tracks`
   - `justify-tracks`
 
 ## 2.0.12
 
-- Add new properties:
+- Add properties:
   - `font-synthesis-position`
   - `text-wrap-mode`
   - `text-wrap-style`
   - `transition-behavior`
   - `word-space-transform`
-- Remove unknown properties:
+- Remove properties:
   - `word-boundary-detection`
   - `word-boundary-expansion`
 
 ## 2.0.11
 
-- Remove unknown properties:
+- Remove properties:
   - `anchor-scroll`
 
 ## 2.0.10
@@ -331,16 +338,16 @@
 
 ## 2.0.9
 
-- Add new properties:
+- Add properties:
   - `position-fallback-bounds`
   - `timeline-scope`
-- Remove unknown properties:
+- Remove properties:
   - `scroll-timeline-attachment`
   - `view-timeline-attachment`
 
 ## 2.0.8
 
-- Add new properties:
+- Add properties:
   - `scroll-start`
   - `scroll-start-block`
   - `scroll-start-inline`
@@ -354,7 +361,7 @@
 
 ## 2.0.7
 
-- Remove unknown properties:
+- Remove properties:
   - `scroll-start`
   - `scroll-start-block`
   - `scroll-start-inline`
@@ -364,13 +371,13 @@
 
 ## 2.0.6
 
-- Add new properties:
+- Add properties:
   - `scroll-timeline-attachment`
   - `view-timeline-attachment`
 
 ## 2.0.5
 
-- Add new properties:
+- Add properties:
   - `overlay`
   - `text-box-edge`
   - `text-box-trim`
@@ -380,14 +387,14 @@
 
 ## 2.0.4
 
-- Add new properties:
+- Add properties:
   - `white-space-trim`
 - Removed unknown properties:
   - `text-space-trim`
 
 ## 2.0.3
 
-- Add new properties:
+- Add properties:
   - `box-shadow-color`
   - `box-shadow-offset`
   - `box-shadow-blur`
@@ -396,7 +403,7 @@
 
 ## 2.0.2
 
-- Add new properties:
+- Add properties:
   - `white-space-collapse`
 - Removed unknown properties:
   - `text-space-collapse`
@@ -418,7 +425,7 @@
 - Re-order `border-*` properties
 - Group `width` and `*-width` properties
 - Group `height` and `*-height` properties
-- Add new properties:
+- Add properties:
   - `border-block-end-radius`
   - `border-block-start-radius`
   - `border-bottom-radius`
@@ -434,7 +441,7 @@
 
 Add support for `stylelint` `15.0.0`
 
-- Add new properties:
+- Add properties:
   - `animation-range-start`
   - `animation-range-end`
 - Removed unknown properties:
@@ -443,12 +450,12 @@ Add support for `stylelint` `15.0.0`
 
 ## 1.0.7
 
-- Add new properties:
+- Add properties:
   - `anchor-default`
 
 ## 1.0.6
 
-- Add new properties:
+- Add properties:
   - `layout-order`
   - `reading-order`
 
@@ -458,7 +465,7 @@ Add support for `stylelint` `15.0.0`
 
 ## 1.0.4
 
-- Add new properties:
+- Add properties:
   - `link-parameters`
   - `overflow-clip-margin-block`
   - `overflow-clip-margin-block-end`
