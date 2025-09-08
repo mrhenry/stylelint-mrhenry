@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.1.10
+
+- Add properties:
+  - `corner`
+  - `corner-block-end`
+  - `corner-block-start`
+  - `corner-bottom`
+  - `corner-bottom-left`
+  - `corner-bottom-right`
+  - `corner-end-end`
+  - `corner-end-start`
+  - `corner-inline-end`
+  - `corner-inline-start`
+  - `corner-left`
+  - `corner-right`
+  - `corner-start-end`
+  - `corner-start-start`
+  - `corner-top`
+  - `corner-top-left`
+  - `corner-top-right`
+
 ## 3.1.9
 
 - Add properties:

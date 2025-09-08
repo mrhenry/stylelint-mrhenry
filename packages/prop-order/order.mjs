@@ -107,6 +107,28 @@ export const order = [
 	"border-left-style",
 	"border-left-width",
 
+	"corner",
+	// logical shorthands
+	"corner-inline-start",
+	"corner-inline-end",
+	"corner-block-start",
+	"corner-block-end",
+	// logical longhands
+	"corner-start-start",
+	"corner-start-end",
+	"corner-end-end",
+	"corner-end-start",
+	// physical shorthands
+	"corner-top",
+	"corner-right",
+	"corner-bottom",
+	"corner-left",
+	// physical longhands
+	"corner-top-left",
+	"corner-top-right",
+	"corner-bottom-left",
+	"corner-bottom-right",
+
 	"border-radius",
 	// border radius logical shorthands
 	"border-inline-start-radius",
