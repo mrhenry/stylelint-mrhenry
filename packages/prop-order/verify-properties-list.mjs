@@ -9,63 +9,46 @@ const properties = new Set();
 const constituentPropertiesGraph = [];
 const logicalPropertyGroups = new Map();
 
-const parsedFiles = await css.listAll();
-const entries = Array.from(Object.entries(parsedFiles));
+const listedProperties = (await css.listAll()).properties;
 
-entries.sort((a, b) => {
-	const name_a = a[0].replace(/-\d+$/, '');
-	const name_b = b[0].replace(/-\d+$/, '');
-
-	if (name_a !== name_b) {
-		return name_a.localeCompare(name_b);
+for (const property of listedProperties) {
+	if (property.name.startsWith('-webkit-')) {
+		continue;
 	}
 
-	const level_a = parseInt((a[0].match(/-(\d+)$/) ?? [])[1] ?? '0', 10);
-	const level_b = parseInt((b[0].match(/-(\d+)$/) ?? [])[1] ?? '0', 10);
+	if (property.name.startsWith('-moz-')) {
+		continue;
+	}
 
-	return level_a - level_b;
-});
+	if (property.name.startsWith('-ms-')) {
+		continue;
+	}
 
-for (const [, data] of entries) {
-	for (const property of data.properties) {
-		if (property.name.startsWith('-webkit-')) {
-			continue;
-		}
+	if (property.name.startsWith('-o-')) {
+		continue;
+	}
 
-		if (property.name.startsWith('-moz-')) {
-			continue;
-		}
+	if (property.name.startsWith('tbd-') || property.name.includes('-tbd-') || property.name.endsWith('-tbd')) {
+		continue;
+	}
 
-		if (property.name.startsWith('-ms-')) {
-			continue;
-		}
+	properties.add(property.name);
 
-		if (property.name.startsWith('-o-')) {
-			continue;
-		}
+	if (property.logicalPropertyGroup) {
+		const group = logicalPropertyGroups.get(property.logicalPropertyGroup) ?? new Set();
+		group.add(property.name);
+		logicalPropertyGroups.set(property.logicalPropertyGroup, group);
+	}
 
-		if (property.name.startsWith('tbd-') || property.name.includes('-tbd-') || property.name.endsWith('-tbd')) {
-			continue;
-		}
-
-		properties.add(property.name);
-
-		if (property.logicalPropertyGroup) {
-			const group = logicalPropertyGroups.get(property.logicalPropertyGroup) ?? new Set();
-			group.add(property.name);
-			logicalPropertyGroups.set(property.logicalPropertyGroup, group);
-		}
-
-		if (property.value || property.newValues) {
-			const ast = definitionSyntax.parse(property.value || property.newValues);
-			definitionSyntax.walk(ast, {
-				enter(node) {
-					if (node.type === 'Property') {
-						constituentPropertiesGraph.push([node.name, property.name]);
-					}
+	if (property.value || property.newValues) {
+		const ast = definitionSyntax.parse(property.value || property.newValues);
+		definitionSyntax.walk(ast, {
+			enter(node) {
+				if (node.type === 'Property') {
+					constituentPropertiesGraph.push([node.name, property.name]);
 				}
-			});
-		}
+			}
+		});
 	}
 }
 
