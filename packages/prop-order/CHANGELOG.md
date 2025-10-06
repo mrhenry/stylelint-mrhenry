@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.11
+
+- Add properties:
+  - `item-tolerance`
+- Remove properties:
+  - `item-slack`
+
 ## 3.1.10
 
 - Add properties:
