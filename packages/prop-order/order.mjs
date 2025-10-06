@@ -384,7 +384,7 @@ export const order = [
 	"item-wrap",
 	"item-cross",
 	"item-pack",
-	"item-slack",
+	"item-tolerance",
 	"letter-spacing",
 	"lighting-color",
 	"line-break",
