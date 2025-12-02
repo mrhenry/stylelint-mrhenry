@@ -1,5 +1,44 @@
 # Changelog
 
+## 3.1.12
+
+- Add properties:
+  - `border-block-end-clip`
+  - `border-block-start-clip`
+  - `border-inline-end-clip`
+  - `border-inline-start-clip`
+  - `border-bottom-clip`
+  - `border-left-clip`
+  - `border-right-clip`
+  - `border-top-clip`
+  - `event-trigger`
+  - `event-trigger-name`
+  - `event-trigger-source`
+  - `text-decoration-inset`
+  - `timeline-trigger`
+  - `timeline-trigger-exit-range`
+  - `timeline-trigger-exit-range-end`
+  - `timeline-trigger-exit-range-start`
+  - `timeline-trigger-name`
+  - `timeline-trigger-range`
+  - `timeline-trigger-range-end`
+  - `timeline-trigger-range-start`
+  - `timeline-trigger-source`
+Remove properties:
+  - `animation-trigger-behavior`
+  - `animation-trigger-exit-range-end`
+  - `animation-trigger-exit-range-start`
+  - `animation-trigger-exit-range`
+  - `animation-trigger-range-end`
+  - `animation-trigger-range-start`
+  - `animation-trigger-range`
+  - `animation-trigger-timeline`
+  - `border-clip-bottom`
+  - `border-clip-left`
+  - `border-clip-right`
+  - `border-clip-top`
+  - `text-decoration-trim`
+
 ## 3.1.11
 
 - Add properties:
