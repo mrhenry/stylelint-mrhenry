@@ -148,8 +148,10 @@ export const order = [
 
 	"border-spacing",
 	"border-clip",
+	"border-inline-clip",
 	"border-inline-start-clip",
 	"border-inline-end-clip",
+	"border-block-clip",
 	"border-block-start-clip",
 	"border-block-end-clip",
 	"border-top-clip",
