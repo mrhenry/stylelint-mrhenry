@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.13
+
+- Add properties:
+  - `border-block-clip`
+  - `border-block-clip`
+
 ## 3.1.12
 
 - Add properties:
