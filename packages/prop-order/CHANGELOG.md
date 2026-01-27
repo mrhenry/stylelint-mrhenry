@@ -1,5 +1,39 @@
 # Changelog
 
+## 4.0.1
+
+- Add properties:
+  - `column-rule-edge-inset`
+  - `column-rule-edge-inset-end`
+  - `column-rule-edge-inset-start`
+  - `column-rule-inset`
+  - `column-rule-inset-end`
+  - `column-rule-inset-start`
+  - `column-rule-interior-inset`
+  - `column-rule-interior-inset-end`
+  - `column-rule-interior-inset-start`
+  - `flow-tolerance`
+  - `row-rule-edge-inset`
+  - `row-rule-edge-inset-end`
+  - `row-rule-edge-inset-start`
+  - `row-rule-inset`
+  - `row-rule-inset-end`
+  - `row-rule-inset-start`
+  - `row-rule-interior-inset`
+  - `row-rule-interior-inset-end`
+  - `row-rule-interior-inset-start`
+  - `rule-edge-inset`
+  - `rule-inset`
+  - `rule-inset-end`
+  - `rule-inset-start`
+  - `rule-interior-inset`
+  - `trigger-scope`
+- Remove properties:
+  - `column-rule-outset`
+  - `item-tolerance`
+  - `row-rule-outset`
+  - `rule-outset`
+
 ## 4.0.0
 
 - Set minimum Stylelint version to `17.0.0`
@@ -34,7 +68,7 @@
   - `timeline-trigger-range-end`
   - `timeline-trigger-range-start`
   - `timeline-trigger-source`
-Remove properties:
+- Remove properties:
   - `animation-trigger-behavior`
   - `animation-trigger-exit-range-end`
   - `animation-trigger-exit-range-start`
