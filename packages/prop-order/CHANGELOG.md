@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.2
+
+- Add properties:
+  - `view-transition-scope`
+
 ## 4.0.1
 
 - Add properties:
