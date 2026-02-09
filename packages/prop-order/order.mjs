@@ -719,6 +719,7 @@ export const order = [
 	"view-transition-class",
 	"view-transition-group",
 	"view-transition-name",
+	"view-transition-scope",
 	"visibility",
 	"voice-balance",
 	"voice-duration",
