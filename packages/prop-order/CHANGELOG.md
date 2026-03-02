@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.0.3
+
+- Add properties:
+  - `column-rule-visibility-items`
+  - `row-rule-visibility-items`
+  - `rule-visibility-items`
+- Remove properties:
+  - `item-cross`
+  - `item-direction`
+  - `item-flow`
+  - `item-pack`
+  - `item-track`
+  - `item-wrap`
+
 ## 4.0.2
 
 - Add properties:
