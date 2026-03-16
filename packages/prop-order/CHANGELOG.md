@@ -1,5 +1,23 @@
 # Changelog
 
+# 4.0.4
+
+- Add properties:
+  - `image-animation`
+  - `timeline-trigger-activation-range`
+  - `timeline-trigger-activation-range-end`
+  - `timeline-trigger-activation-range-start`
+  - `timeline-trigger-active-range`
+  - `timeline-trigger-active-range-end`
+  - `timeline-trigger-active-range-start`
+- Remove properties:
+  - `timeline-trigger-exit-range`
+  - `timeline-trigger-exit-range-end`
+  - `timeline-trigger-exit-range-start`
+  - `timeline-trigger-range`
+  - `timeline-trigger-range-end`
+  - `timeline-trigger-range-start`
+
 ## 4.0.3
 
 - Add properties:
