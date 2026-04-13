@@ -1,5 +1,10 @@
 # Changelog
 
+# 4.0.5
+
+- Add properties:
+  - `frame-sizing`
+
 # 4.0.4
 
 - Add properties:
