@@ -198,6 +198,7 @@ export const order = [
 	
 	"box-sizing",
 	"box-snap",
+	"frame-sizing",
 	"break-before",
 	"break-after",
 	"break-inside",
