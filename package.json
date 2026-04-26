@@ -18,7 +18,7 @@
     "c8": "^11.0.0",
     "html-element-attributes": "^3.5.0",
     "stylelint-test-rule-node": "^1.1.0",
-    "stylelint": "^17.7.0",
+    "stylelint": "^17.8.0",
     "svg-element-attributes": "^2.1.0"
   },
   "volta": {
