@@ -1,11 +1,49 @@
 # Changelog
 
-# 4.0.5
+## 4.0.6
+
+- Add properties:
+  - `column-rule-inset-cap`
+  - `column-rule-inset-cap-end`
+  - `column-rule-inset-cap-start`
+  - `column-rule-inset-junction`
+  - `column-rule-inset-junction-end`
+  - `column-rule-inset-junction-start`
+  - `flex-line-count`
+  - `path-length`
+  - `row-rule-inset-cap`
+  - `row-rule-inset-cap-end`
+  - `row-rule-inset-cap-start`
+  - `row-rule-inset-junction`
+  - `row-rule-inset-junction-end`
+  - `row-rule-inset-junction-start`
+  - `rule-inset-cap`
+  - `rule-inset-junction`
+  - `text-fit`
+  - `window-drag`
+- Remove properties:
+  - `column-rule-edge-inset`
+  - `column-rule-edge-inset-end`
+  - `column-rule-edge-inset-start`
+  - `column-rule-interior-inset`
+  - `column-rule-interior-inset-end`
+  - `column-rule-interior-inset-start`
+  - `row-rule-edge-inset`
+  - `row-rule-edge-inset-end`
+  - `row-rule-edge-inset-start`
+  - `row-rule-interior-inset`
+  - `row-rule-interior-inset-end`
+  - `row-rule-interior-inset-start`
+  - `rule-edge-inset`
+  - `rule-interior-inset`
+  - `shape-subtract`
+
+## 4.0.5
 
 - Add properties:
   - `frame-sizing`
 
-# 4.0.4
+## 4.0.4
 
 - Add properties:
   - `image-animation`
