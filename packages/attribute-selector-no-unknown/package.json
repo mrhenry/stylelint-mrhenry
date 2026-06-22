@@ -28,7 +28,7 @@
     "stylelint-plugin"
   ],
   "dependencies": {
-    "postcss-selector-parser": "^7.1.1"
+    "postcss-selector-parser": "^7.1.4"
   },
   "peerDependencies": {
     "stylelint": "^17.13.0"
