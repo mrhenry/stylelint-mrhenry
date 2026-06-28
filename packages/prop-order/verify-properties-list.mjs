@@ -8,7 +8,6 @@ const properties = new Set();
 
 const constituentPropertiesGraph = [];
 const shorthands = new Map();
-const longhands = new Map();
 const logicalPropertyGroups = new Map();
 
 const listedProperties = (await css.listAll()).properties;
@@ -74,16 +73,6 @@ for (const property of listedProperties) {
 		list.add(property.name);
 
 		shorthands.set(property.logicalPropertyGroup, list);
-	}
-}
-
-for (const [shorthand, longhandsForShorthand] of shorthands) {
-	for (const longhandForShorthand of longhandsForShorthand) {
-		let list = longhands.get(longhandForShorthand) ?? new Set();
-
-		list.add(shorthand);
-
-		longhands.set(longhandForShorthand, list);
 	}
 }
 
