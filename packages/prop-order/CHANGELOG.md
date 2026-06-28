@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.7
+
+- Fix some orders for longhands and logical properties
+
 ## 4.0.6
 
 - Add properties:

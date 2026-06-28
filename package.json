@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@webref/css": "^8.5.8",
+    "@webref/css": "^8.6.0",
     "aria-attributes": "^2.0.1",
     "c8": "^11.0.0",
     "html-element-attributes": "^3.5.0",
@@ -22,6 +22,6 @@
     "svg-element-attributes": "^2.1.0"
   },
   "volta": {
-    "node": "22.16.0"
+    "node": "26.4.0"
   }
 }

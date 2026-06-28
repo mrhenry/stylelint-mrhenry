@@ -7,6 +7,8 @@ const existingProperties = new Set(order);
 const properties = new Set();
 
 const constituentPropertiesGraph = [];
+const shorthands = new Map();
+const longhands = new Map();
 const logicalPropertyGroups = new Map();
 
 const listedProperties = (await css.listAll()).properties;
@@ -40,15 +42,48 @@ for (const property of listedProperties) {
 		logicalPropertyGroups.set(property.logicalPropertyGroup, group);
 	}
 
-	if (property.value || property.newValues) {
-		const ast = definitionSyntax.parse(property.value || property.newValues);
-		definitionSyntax.walk(ast, {
-			enter(node) {
-				if (node.type === 'Property') {
-					constituentPropertiesGraph.push([node.name, property.name]);
-				}
-			}
-		});
+	if (property.longhands?.length) {
+		property.longhands.forEach((x) => {
+			constituentPropertiesGraph.push([x, property.name])
+		})
+	}
+
+	if (property.resetLonghands?.length) {
+		property.resetLonghands.forEach((x) => {
+			constituentPropertiesGraph.push([x, property.name])
+		})
+	}
+
+	if (property.longhands?.length || property.resetLonghands?.length) {
+		let list = shorthands.get(property.name) ?? new Set();
+
+		if (property.longhands?.length) {
+			property.longhands.forEach((x) => list.add(x));
+		}
+
+		if (property.resetLonghands?.length) {
+			property.resetLonghands.forEach((x) => list.add(x));
+		}
+
+		shorthands.set(property.name, list);
+	}
+
+	if (property.logicalPropertyGroup) {
+		let list = shorthands.get(property.logicalPropertyGroup) ?? new Set();
+
+		list.add(property.name);
+
+		shorthands.set(property.logicalPropertyGroup, list);
+	}
+}
+
+for (const [shorthand, longhandsForShorthand] of shorthands) {
+	for (const longhandForShorthand of longhandsForShorthand) {
+		let list = longhands.get(longhandForShorthand) ?? new Set();
+
+		list.add(shorthand);
+
+		longhands.set(longhandForShorthand, list);
 	}
 }
 
@@ -94,28 +129,19 @@ for (const property of listedProperties) {
 
 {
 	let hasIncorrectShorthandOrders;
-	for (let i = 0; i < constituentPropertiesGraph.length; i++) {
-		const [a, b] = constituentPropertiesGraph[i];
-
-		for (const [groupName, group] of logicalPropertyGroups) {
-			if (group.has(a) && group.has(b)) {
-				const removed = constituentPropertiesGraph.splice(i, 1);
-				i--;
-			}
-		}
-	}
-
 	for (let i = 0; i < order.length; i++) {
-		const thisProp = constituentPropertiesGraph.find((x) => x[0] === order[i]);
-		if (!thisProp) {
+		const longhandsForShorthand = shorthands.get(order[i]);
+		if (!longhandsForShorthand) {
 			continue;
 		}
 
-		const shorthand = order.findIndex((x) => x === thisProp[1]);
+		for (const longhandForShorthand of longhandsForShorthand) {
+			const longhandIndex = order.findIndex((x) => x === longhandForShorthand);
 
-		if (i < shorthand) {
-			console.warn(`property ordered before a corresponding shorthand : "${thisProp[0]}" must come after "${thisProp[1]}"`);
-			hasIncorrectShorthandOrders = true;
+			if (i > longhandIndex) {
+				console.warn(`property ordered before a corresponding shorthand : "${longhandForShorthand}" must come after "${order[i]}"`);
+				hasIncorrectShorthandOrders = true;
+			}
 		}
 	}
 
