@@ -1,5 +1,11 @@
 # Changelog
 
+# 4.0.8
+
+- Add properties:
+	- `animation-delay-start`
+	- `animation-delay-end`
+
 ## 4.0.7
 
 - Fix some orders for longhands and logical properties
