@@ -100,13 +100,13 @@ testRule({
 
 	reject: [
 		{
-			code: "mr-foo[alignment-baseline] {}",
+			code: "mr-foo[nav-down-right] {}",
 			description: "Non-global attribute selector on a custom element",
-			message: rule.messages.expected('alignment-baseline', 'mr-foo'),
+			message: rule.messages.expected('nav-down-right', 'mr-foo'),
 			line: 1,
 			column: 7,
 			endLine: 1,
-			endColumn: 27
+			endColumn: 23
 		},
 		{
 			code: "mr-foo[bar] {}",

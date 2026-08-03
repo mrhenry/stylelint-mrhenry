@@ -6,6 +6,8 @@ export const order = [
 	"animation",
 	"animation-composition",
 	"animation-delay",
+	"animation-delay-start",
+	"animation-delay-end",
 	"animation-direction",
 	"animation-duration",
 	"animation-fill-mode",

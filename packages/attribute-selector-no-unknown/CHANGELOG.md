@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+
+- Update dependencies
+
 ## 3.0.0
 
 - Set minimum Stylelint version to `17.0.0`
