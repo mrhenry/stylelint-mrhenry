@@ -1,5 +1,10 @@
 # Changelog
 
+# 4.0.9
+
+- Add properties:
+	- `scroll-axis-lock`
+
 # 4.0.8
 
 - Add properties:

@@ -1,6 +1,6 @@
 export const order = [
-	"accent-color",
 	"all",
+	"accent-color",
 	"anchor-name",
 	"anchor-scope",
 	"animation",
@@ -569,6 +569,7 @@ export const order = [
 	"rx",
 	"ry",
 	"scale",
+	"scroll-axis-lock",
 	"scroll-behavior",
 	"scroll-margin",
 	"scroll-margin-inline",
