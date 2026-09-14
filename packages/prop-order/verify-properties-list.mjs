@@ -64,6 +64,44 @@ for (const property of listedProperties) {
 			property.resetLonghands.forEach((x) => list.add(x));
 		}
 
+		// https://github.com/mdn/content/pull/45683
+		if (property.name === 'animation') {
+			list.add('animation-range-end');
+			list.add('animation-range-start');
+			list.add('animation-delay-end');
+			list.add('animation-composition');
+			list.add('animation-trigger');
+		} else if (property.name === 'background') {
+			list.add('background-blend-mode');
+		} else if (property.name === 'border') {
+			list.add('border-image-outset');
+			list.add('border-image-repeat');
+			list.add('border-image-slice');
+			list.add('border-image-source');
+			list.add('border-image-width');
+		} else if (property.name === 'font') {
+			list.add('font-feature-settings');
+			list.add('font-kerning');
+			list.add('font-language-override');
+			list.add('font-optical-sizing');
+			list.add('font-size-adjust');
+			list.add('font-variant-alternates');
+			list.add('font-variant-caps');
+			list.add('font-variant-east-asian');
+			list.add('font-variant-emoji');
+			list.add('font-variant-ligatures');
+			list.add('font-variant-numeric');
+			list.add('font-variant-position');
+			list.add('font-variation-settings');
+		} else if (property.name === 'mask') {
+			list.add('mask-border-mode');
+			list.add('mask-border-outset');
+			list.add('mask-border-repeat');
+			list.add('mask-border-slice');
+			list.add('mask-border-source');
+			list.add('mask-border-width');
+		}
+
 		shorthands.set(property.name, list);
 	}
 
