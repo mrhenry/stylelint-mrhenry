@@ -1,5 +1,12 @@
 # Changelog
 
+# 4.0.10
+
+- Add properties:
+	- `size`
+	- `min-size`
+	- `max-size`
+
 # 4.0.9
 
 - Add properties:
