@@ -22,6 +22,6 @@
     "svg-element-attributes": "^2.1.0"
   },
   "volta": {
-    "node": "26.4.0"
+    "node": "26.12.1"
   }
 }
