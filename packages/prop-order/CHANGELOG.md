@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.11
+
+- Add properties:
+  - `fit-tolerance`
+  - `timeline-trigger-range`
+- Remove properties:
+  - `flow-tolerance`
+
 # 4.0.10
 
 - Add properties:
