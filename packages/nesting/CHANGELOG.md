@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.0
+
+- Set minimum Stylelint version to `18.0.0`
+
 ## 4.0.0
 
 - Set minimum Stylelint version to `17.0.0`
