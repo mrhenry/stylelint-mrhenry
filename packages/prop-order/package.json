@@ -27,10 +27,10 @@
     "stylelint-plugin"
   ],
   "peerDependencies": {
-    "stylelint": "^17.16.0"
+    "stylelint": "^18.0.0"
   },
   "devDependencies": {
     "css-tree": "^3.2.1",
-    "stylelint": "^17.16.0"
+    "stylelint": "^18.0.0"
   }
 }

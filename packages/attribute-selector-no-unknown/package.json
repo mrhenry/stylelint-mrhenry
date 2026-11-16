@@ -1,6 +1,6 @@
 {
   "name": "@mrhenry/stylelint-mrhenry-attribute-selector-no-unknown",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Warn when unknown attribute selectors are used",
   "type": "module",
   "main": "index.mjs",
@@ -28,12 +28,12 @@
     "stylelint-plugin"
   ],
   "dependencies": {
-    "postcss-selector-parser": "^7.1.5"
+    "postcss-selector-parser": "^7.1.8"
   },
   "peerDependencies": {
-    "stylelint": "^17.16.0"
+    "stylelint": "^18.0.0"
   },
   "devDependencies": {
-    "stylelint": "^17.16.0"
+    "stylelint": "^18.0.0"
   }
 }
